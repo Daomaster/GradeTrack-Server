@@ -1,9 +1,12 @@
 {
   "name": "tempPro",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "bower": "^1.7.7"
+  },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "postinstall": "node node_modules/bower/bin/bower install"
   },
   "devDependencies": {
     "estraverse": "~4.1.0",
