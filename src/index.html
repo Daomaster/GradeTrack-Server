@@ -24,8 +24,90 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-view></div>
 
+    <div ng-controller="MainController as vm">
+      <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav" ng-repeat="course in vm.courses">
+              <li class="{{course.classText}}"><a href="" ng-click="vm.changeActiveCourse(course)">{{course.name}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li> <a href="#/">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+
+      <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li>
+              <a href="#/" ng-click="vm.changeActiveTab(0)" class="{{vm.tabs[0].classText}}">Information</a>
+            </li>
+            <li>
+              <a href="" ng-click="vm.changeActiveTab(1); vm.tabs[1].expanded = !vm.tabs[1].expanded" class="{{vm.tabs[1].classText}}">
+                Assignments
+                <span ng-if="vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-down"></span>
+                <span ng-if="!vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-left"></span></a>
+
+              <div ng-hide="!vm.tabs[1].expanded" class="slideDown">
+                <ul class="sidebar-assignments" ng-repeat="assignment in vm.activeCourse.assignments">
+                  <li><a href="">{{assignment.name}}</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a ng-click="vm.changeActiveTab(2)"  class="{{vm.tabs[2].classText}}" href="#/grades">Grades</a>
+            </li>
+            <li>
+              <a ng-click="vm.changeActiveTab(3)" class="{{vm.tabs[3].classText}}" href="#/students">Students</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="mainView">
+                  <div ng-view></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+      </div>
+
+        </div>
+      </div>
+    <!--<div class="wrapper">
+      <div ng-controller="NavController">
+        <ul class="topbar">
+          <li>CS472</li>
+          <li>CS473</li>
+          <li>CS474</li>
+          <li>Name</li>
+        </ul>
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li><a href="#/information">info</a></li>
+            <li><a href="#/students">students</a></li>
+            <li><a href="#/grades">grades</a></li>
+            <li><a href="#/assignments">assignments</a></li>
+            <li><a href="#/">main</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+    </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
