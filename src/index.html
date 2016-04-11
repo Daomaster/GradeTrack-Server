@@ -30,10 +30,10 @@
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
             <ul class="nav navbar-nav" ng-repeat="course in vm.courses">
-              <li class="{{course.classText}}"><a href="#" ng-click="vm.changeActiveCourse(course)">{{course.name}}</a></li>
+              <li class="{{course.classText}}"><a href="" ng-click="vm.changeActiveCourse(course)">{{course.name}}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li> <a href="#">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+              <li> <a href="#/">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
             </ul>
           </div>
         </nav>
@@ -46,16 +46,25 @@
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
             <li>
-              <a href="#/information">Information</a>
+              <a href="#/" ng-click="vm.changeActiveTab(0)" class="{{vm.tabs[0].classText}}">Information</a>
             </li>
             <li>
-              <a href="#/assignments">Assignments</a>
+              <a href="" ng-click="vm.changeActiveTab(1); vm.tabs[1].expanded = !vm.tabs[1].expanded" class="{{vm.tabs[1].classText}}">
+                Assignments
+                <span ng-if="vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-down"></span>
+                <span ng-if="!vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-left"></span></a>
+
+              <div ng-hide="!vm.tabs[1].expanded" class="slideDown">
+                <ul class="sidebar-assignments" ng-repeat="assignment in vm.activeCourse.assignments">
+                  <li><a href="">{{assignment.name}}</a></li>
+                </ul>
+              </div>
             </li>
             <li>
-              <a href="#/grades">Grades</a>
+              <a ng-click="vm.changeActiveTab(2)"  class="{{vm.tabs[2].classText}}" href="#/grades">Grades</a>
             </li>
             <li>
-              <a href="#/students">Students</a>
+              <a ng-click="vm.changeActiveTab(3)" class="{{vm.tabs[3].classText}}" href="#/students">Students</a>
             </li>
           </ul>
         </div>

@@ -8,11 +8,6 @@
   function routeConfig($routeProvider) {      //navbar, information, grades, assignments, students
     $routeProvider
       .when('/', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .when('/information', {
         templateUrl: 'app/information/information.html',
         controller: 'InformationController',
         controllerAs: 'information'

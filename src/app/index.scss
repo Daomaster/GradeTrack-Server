@@ -90,8 +90,30 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   display: block;
   text-decoration: none;
   color: #000000;
+  border: thin solid #e7e7e7;
+}
+.sidebar-arrow
+{
+  float:right;
+  padding-top:10px;
+  padding-right:10px;
+}
+.sidebar-assignments
+{
+  list-style: none;
+  padding:0;
+
+}
+.sidebar-assignments li a
+{
+  border:none;
 }
 
+.activeTab, .activeTab:hover
+{
+
+  background:#c7c7c7;
+}
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #111111;
@@ -101,7 +123,6 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;
-  background:#c7c7c7;
 }
 
 .sidebar-nav > .sidebar-brand {

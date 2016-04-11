@@ -9,8 +9,39 @@
   function MainController() {
     var vm = this;
 
-    vm.activeTab = 0;
 
+
+    vm.tabs = [
+      {
+        label: "Information",
+        url: "/",
+        classText:"activeTab"
+      },
+      {
+        label: "Assignments",
+        url: "#/",
+        classText:"",
+        expanded: false
+      },
+      {
+        label: "Grades",
+        url: "#/Grades",
+        classText:""
+      },
+      {
+        label: "Students",
+        url: "#/students",
+        classText:""
+      }
+    ];
+
+    vm.activeTab = vm.tabs[0];
+    vm.changeActiveTab = function(tabID)
+    {
+      vm.activeTab.classText = "";
+      vm.activeTab = vm.tabs[tabID];
+      vm.activeTab.classText = "activeTab"
+    };
 
     vm.lastName = "Name";
     vm.firstName = "Prof";
