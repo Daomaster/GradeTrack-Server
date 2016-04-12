@@ -5,7 +5,7 @@
     .module('GradeTrack')
     .config(routeConfig);
 
-  function routeConfig($routeProvider) {      //navbar, information, grades, assignments, students
+  function routeConfig($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'app/information/information.html',

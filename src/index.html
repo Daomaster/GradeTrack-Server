@@ -31,7 +31,7 @@
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="">
-                <span class="glyphicon glyphicon-signal"></span> GradeTrack</a>
+                <span class="glyphicon glyphicon-signal"></span> GradeTrack </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
               <li> <a href="">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
@@ -46,16 +46,16 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
           <ul class="sidebar-courses">
-              <li ng-repeat="course in vm.courses">
+              <li ng-repeat="course in vm.courses()">
                 <a class="sidebar-header" href="" ng-click="course.expanded = !course.expanded">
                   {{course.name}}
                   <span class ="sidebar-arrow" ng-class="course.expanded ? 'glyphicon glyphicon-menu-down' : 'glyphicon glyphicon-menu-right'"></span>
                 </a>
-                  <div ng-class="course.expanded ? 'sidebar-courses-expanded' : ''" ng-hide="!course.expanded">
-                    <ul class="sidebar-tabs">
-                      <li ng-class="vm.isActiveTab(course, tab) ? 'activeTab' : ''" ng-repeat="tab in vm.tabs"><a href="{{tab.url}}" ng-click="vm.clickTab(course,tab)" >{{tab.label}}</a></li>
-                    </ul>
-                  </div>
+                    <div class="sidebar-slideout" ng-class="course.expanded ? 'sidebar-courses-expanded' : ''" ng-hide="!course.expanded" style="clear:both">
+                     <ul class="sidebar-tabs">
+                       <li ng-class="vm.isActiveTab(course, tab) ? 'activeTab' : ''" ng-repeat="tab in vm.tabs"><a href="{{tab.url}}" ng-click="vm.clickTab(course,tab)" >{{tab.label}}</a></li>
+                     </ul>
+                   </div>
               </li>
           </ul>
         </div>

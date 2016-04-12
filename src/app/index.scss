@@ -121,7 +121,22 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 .activeTab
 {
   background: #e7e7e7;
-  border: thin dotted #000000;
+}
+
+.animTestOff
+{
+  transition:all linear 1.1s;
+  background:#FF0000;
+  width:100px;
+  height:100px;
+
+}
+.animTestOn
+{
+  transition:all linear 1.1s;
+  background:#000000;
+  width:100px;
+  height:100px;
 }
 
 .sidebar-tabs li {
@@ -138,6 +153,58 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   padding-top:10px;
   padding-right:10px;
 }
+
+.sidebar-slideout {
+  transition:all linear 0.1s;
+  height:161px;
+  overflow:hidden;
+}
+
+.sidebar-slideout.ng-hide {
+  height:0px;
+}
+.test-area
+{
+  background:#000000;
+}
+
+.assignments-leftside {
+  transition:all linear 0.1s;
+  width:100%;
+  background:#000000;
+
+}
+.assignments-leftside-small {
+  transition:all linear 0.1s;
+  width:50%;
+  background:#FF0000;
+}
+.assignments-rightside-off {
+  position:relative;
+  transition:all linear 0.1s;
+  left: 120%;
+  background:#000000;
+
+}
+.assignments-full-right-area {
+  overflow:hidden;
+  position:absolute;
+  transition:all linear 0.1s;
+  left:50%;
+  width:50%;
+}
+.assignments-rightside-on {
+  position:relative;
+  transition:all linear 0.1s;
+  left:0;
+  background:#FF0000;
+}
+
+
+
+
+
+
 
   #wrapper {
     padding-left: 250px;
