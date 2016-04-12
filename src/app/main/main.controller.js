@@ -15,27 +15,23 @@
       {
         active: true,
         label: "Information",
-        url: "#/",
-        classText:"activeTab"
+        url: "#/"
 
       },
       {
         active: false,
         label: "Assignments",
-        url: "#/assignments",
-        classText:"",
+        url: "#/assignments"
       },
       {
         active: false,
         label: "Grades",
-        url: "#/grades",
-        classText:""
+        url: "#/grades"
       },
       {
         active: false,
         label: "Students",
-        url: "#/students",
-        classText:""
+        url: "#/students"
       }
     ];
 
