@@ -21,31 +21,13 @@ var Field = Object.freeze( {
     "TOTAL" : 0x0080,
     "ASSIGNMENT" : 0x0100,
     "GRADE" : 0x0200,
-    "BLANK" : 0x0400,
+    "BLANK" : 0x0400/*,
     "REQUIRED" : 0x0800,
-    "BLACKBOARD" : 0x1000/*,
+    "BLACKBOARD" : 0x1000,
     "" : 0x2000,
     "" : 0x4000,
     "" : 0x8000,*/
 } );
-
-
-function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-    for (var i = 0, f; f = files[i]; i++) {
-        output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-        f.size, ' bytes, last modified: ',
-        f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
-        '</li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-}
-
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
 
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
@@ -62,7 +44,12 @@ function handleFileSelect(evt) {
 
         reader.onload = function( e ) {
             var contents = e.target.result;
-            document.getElementById( "output" ).innerHTML = JSON.stringify( csvToJson( contents ), null, 2 );
+            if( contents[ contents.length - 1 ] == "\n" ) {
+                contents = contents.slice( 0, -1 );
+            }
+            var csv = csvToJson( contents );
+            document.getElementById( "output" ).innerHTML = JSON.stringify( csv, null, 2 );
+            console.log( JSON.stringify( csv, null, 2 ) );
         };
 
         reader.readAsText(f);
