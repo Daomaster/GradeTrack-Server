@@ -29,11 +29,12 @@
       <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
-            <ul class="nav navbar-nav" ng-repeat="course in vm.courses">
-              <li class="{{course.classText}}"><a href="" ng-click="vm.changeActiveCourse(course)">{{course.name}}</a></li>
-            </ul>
+            <div class="navbar-header">
+              <a class="navbar-brand" href="">
+                <span class="glyphicon glyphicon-signal"></span> GradeTrack</a>
+            </div>
             <ul class="nav navbar-nav navbar-right">
-              <li> <a href="#/">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+              <li> <a href="">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
             </ul>
           </div>
         </nav>
@@ -44,28 +45,18 @@
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-          <ul class="sidebar-nav">
-            <li>
-              <a href="#/" ng-click="vm.changeActiveTab(0)" class="{{vm.tabs[0].classText}}">Information</a>
-            </li>
-            <li>
-              <a href="" ng-click="vm.changeActiveTab(1); vm.tabs[1].expanded = !vm.tabs[1].expanded" class="{{vm.tabs[1].classText}}">
-                Assignments
-                <span ng-if="vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-down"></span>
-                <span ng-if="!vm.tabs[1].expanded" class="sidebar-arrow glyphicon glyphicon-menu-left"></span></a>
-
-              <div ng-hide="!vm.tabs[1].expanded" class="slideDown">
-                <ul class="sidebar-assignments" ng-repeat="assignment in vm.activeCourse.assignments">
-                  <li><a href="">{{assignment.name}}</a></li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a ng-click="vm.changeActiveTab(2)"  class="{{vm.tabs[2].classText}}" href="#/grades">Grades</a>
-            </li>
-            <li>
-              <a ng-click="vm.changeActiveTab(3)" class="{{vm.tabs[3].classText}}" href="#/students">Students</a>
-            </li>
+          <ul class="sidebar-courses">
+              <li ng-repeat="course in vm.courses">
+                <a class="sidebar-header" href="" ng-click="course.expanded = !course.expanded">
+                  {{course.name}}
+                  <span class ="sidebar-arrow" ng-class="course.expanded ? 'glyphicon glyphicon-menu-down' : 'glyphicon glyphicon-menu-right'"></span>
+                </a>
+                  <div ng-class="course.expanded ? 'sidebar-courses-expanded' : ''" ng-hide="!course.expanded">
+                    <ul class="sidebar-tabs">
+                      <li ng-class="vm.isActiveTab(course, tab) ? 'activeTab' : ''" ng-repeat="tab in vm.tabs"><a href="{{tab.url}}" ng-click="vm.clickTab(course,tab)" >{{tab.label}}</a></li>
+                    </ul>
+                  </div>
+              </li>
           </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -85,9 +76,7 @@
         <!-- /#page-content-wrapper -->
 
       </div>
-
-        </div>
-      </div>
+    </div>
     <!--<div class="wrapper">
       <div ng-controller="NavController">
         <ul class="topbar">

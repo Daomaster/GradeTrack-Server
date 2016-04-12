@@ -13,22 +13,26 @@
 
     vm.tabs = [
       {
+        active: true,
         label: "Information",
-        url: "/",
-        classText:"activeTab"
-      },
-      {
-        label: "Assignments",
         url: "#/",
-        classText:"",
-        expanded: false
+        classText:"activeTab"
+
       },
       {
+        active: false,
+        label: "Assignments",
+        url: "#/assignments",
+        classText:"",
+      },
+      {
+        active: false,
         label: "Grades",
-        url: "#/Grades",
+        url: "#/grades",
         classText:""
       },
       {
+        active: false,
         label: "Students",
         url: "#/students",
         classText:""
@@ -36,20 +40,14 @@
     ];
 
     vm.activeTab = vm.tabs[0];
-    vm.changeActiveTab = function(tabID)
-    {
-      vm.activeTab.classText = "";
-      vm.activeTab = vm.tabs[tabID];
-      vm.activeTab.classText = "activeTab"
-    };
-
     vm.lastName = "Name";
     vm.firstName = "Prof";
     vm.courses = [
       {
         id: 0,
+        expanded:false,
+        active:true,
         name : "CS470",
-        classText: "active",
         assignments: [
           {
             name: "Assignment 1"
@@ -70,8 +68,9 @@
       },
       {
         id: 1,
+        expanded:false,
+        active:false,
         name : "CS471",
-        classText: "",
         assignments: [
           {
             name: "Assignment 1b"
@@ -92,8 +91,9 @@
       },
       {
         id: 2,
+        expanded:false,
+        active:false,
         name : "CS472",
-        classText: "",
         assignments: [
           {
             name: "Assignment 1c"
@@ -115,11 +115,25 @@
     ];
     vm.activeCourse = vm.courses[0];
 
+    vm.clickTab = function(course,tab)
+    {
+      vm.changeActiveCourse(course);
+      vm.activeTab.active=false;
+      vm.activeTab = tab;
+      vm.activeTab.active=true;
+    };
+
+    vm.isActiveTab = function(course,tab) {
+      return (course == vm.activeCourse && tab.active);
+    };
+
     vm.changeActiveCourse = function(course)
     {
-      vm.activeCourse.classText = "";
+      if (course == vm.activeCourse) //already done
+        return;
+      vm.activeCourse.active=false;
       vm.activeCourse = course;
-      vm.activeCourse.classText = "active";
+      course.active=true;
     }
 
   }
