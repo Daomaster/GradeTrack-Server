@@ -210,8 +210,7 @@ function arrayToJson( csv, header ) {
             }
         }
 
-        // If the row length and the header length are unequal then produce the 
-        // error message
+        // If the row length and the header length are unequal
         if( rowLength < headerLength ) {
             for( var col = column; col < headerLength; ++col ) {
                 var e = "Blank cell at row " + row + " and column " + col;
