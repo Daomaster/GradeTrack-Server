@@ -29,6 +29,48 @@ var Field = Object.freeze( {
     "" : 0x8000,*/
 } );
 
+
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+    var output = [];
+    for (var i = 0, f; f = files[i]; i++) {
+        output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+        f.size, ' bytes, last modified: ',
+        f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+        '</li>');
+    }
+    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+}
+
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // Loop through the FileList and render image files as thumbnails.
+    for (var i = 0, f; f = files[i]; i++) {
+
+        // Only process image files.
+        if (!f.type.match('csv.*')) {
+            continue;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = function( e ) {
+            var contents = e.target.result;
+            document.getElementById( "output" ).innerHTML = JSON.stringify( csvToJson( contents ), null, 2 );
+        };
+
+        reader.readAsText(f);
+    }
+}
+
+document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
 ////////////////////////////////////////////////////////////////////////////////
 function getType( cell ) {
     var type = 0;
@@ -110,12 +152,19 @@ function getHeader( csv ) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-function csvToJson() {
-    var output = document.getElementById( "output" );
-    var textBox = document.getElementById( "textBox" );
-    var lines = textBox.value;
+function csvfileToJson() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        return csvToJson();
+    } else {
+        document.getElementById( "output" ).innerHTML = 'The File APIs are not fully supported in this browser.';
+    }
+}
 
-    var csv = textToArray( lines );
+////////////////////////////////////////////////////////////////////////////////
+function csvToJson( csv ) {
+    var output = document.getElementById( "output" );
+
+    var csv = textToArray( csv );
     getTypes( csv );
 
     var header = getHeader( csv )
@@ -124,10 +173,6 @@ function csvToJson() {
     var temp = arrayToJson( csv, header );
     var json = temp.json;
     var errors = temp.errors;
-    console.log( "errors: " + errors );
-
-    console.log( JSON.stringify( json, null, 2 ) );
-    output.innerHTML = JSON.stringify( json, null, 2 );
 
     return json;
 }
