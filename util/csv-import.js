@@ -23,31 +23,31 @@ var Field = Object.freeze( {
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
 
-    // Loop through the FileList and render image files as thumbnails.
-    for (var i = 0, f; f = files[i]; i++) {
+    var f = files[ 0 ];
 
-        // Only process image files.
-        if (!f.type.match('csv.*')) {
-            continue;
+        // Only process csv files.
+        if (f.type.match('csv.*')) {
+            var reader = new FileReader();
+
+            reader.onload = function( e ) {
+                var contents = e.target.result;
+                if( contents[ contents.length - 1 ] == "\n" ) {
+                    contents = contents.slice( 0, -1 );
+                }
+                var csv = csvToJson( contents );
+                document.getElementById( "output" ).innerHTML = JSON.stringify( csv, null, 2 );
+                console.log( JSON.stringify( csv, null, 2 ) );
+            };
+
+            reader.readAsText(f);
+        } else {
+            var e = "File must be of type csv.";
+            document.getElementById( "output" ).innerHTML = e;
+            console.log( e );
         }
-
-        var reader = new FileReader();
-
-        reader.onload = function( e ) {
-            var contents = e.target.result;
-            if( contents[ contents.length - 1 ] == "\n" ) {
-                contents = contents.slice( 0, -1 );
-            }
-            var csv = csvToJson( contents );
-            document.getElementById( "output" ).innerHTML = JSON.stringify( csv, null, 2 );
-            console.log( JSON.stringify( csv, null, 2 ) );
-        };
-
-        reader.readAsText(f);
-    }
 }
 
-document.getElementById('files').addEventListener('change', handleFileSelect, false);
+document.getElementById('import').addEventListener('change', handleFileSelect, false);
 
 ////////////////////////////////////////////////////////////////////////////////
 function getType( cell ) {
@@ -99,7 +99,7 @@ function getTypes( csv ) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-function getHeader( csv ) {
+function getHeadersRow( csv ) {
     var header = undefined;
 
     // Search all the row and columns for the first name, last name and id 
@@ -142,7 +142,7 @@ function csvfileToJson() {
 function csvToJson( csv ) {
     var csv = textToArray( csv );
     getTypes( csv );
-    var header = getHeader( csv )
+    var header = getHeadersRow( csv )
 
     var temp = arrayToJson( csv, header );
     var json = temp.json;

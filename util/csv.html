@@ -5,8 +5,11 @@
     </head>
 
     <body>
-        <input type="button" id="export" value = "export" disabled  >
-        <input type="file" id="files" name="files[]" multiple accept = "text/csv"/>
+        <textarea type="textbox" id="data" placeholder="Place text here" rows="10", cols="80"></textarea>
+        <br>
+        <input type="button" id="export" name="export" value="Download" onclick="textToJsonToCsv()" ></input>
+        <br>
+        <input type="file" id="import" name="imports" accept = "text/csv"/>
         <div id = "output" ></div>
     </body>
 
