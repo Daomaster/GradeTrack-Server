@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+    <head>
+        <title>csv import and export</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    </head>
+
+    <body>
+        <textarea type="textbox" id="data" placeholder="Place text here" rows="10", cols="80"></textarea>
+        <br>
+        <input type="button" id="export" name="export" value="Download" onclick="textToJsonToCsv()" ></input>
+        <br>
+        <input type="file" id="import" name="imports" accept = "text/csv"/>
+        <div id = "output" ></div>
+    </body>
+
+    <script src="csv-import.js"></script>
+    <script src="csv-export.js"></script>
+</html>
