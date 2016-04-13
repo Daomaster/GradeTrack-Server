@@ -26,7 +26,145 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
     width: 50px;
   }
 }
+#wrapper {
+  padding-left: 0;
+  padding-top: 51px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
 
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #f8f8f8;
+  border-right: thin solid #e7e7e7;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
+}
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 10em;
+}
+
+.sidebar-courses {
+  position:absolute;
+  top:0;
+  width:250px;
+  margin:0;
+  padding:0;
+  list-style:none;
+  text-decoration:none;
+}
+.sidebar-courses li {
+  text-indent:20px;
+  line-height:40px;
+}
+.sidebar-courses-expanded {
+  color:#ffffff;
+}
+.sidebar-courses li a {
+  display:block;
+  color:#000000;
+  text-decoration:none;
+  border: thin solid #e7e7e7;
+}
+.sidebar-courses li a:hover {
+  background:#f0f0f0;
+  text-decoration:none;
+}
+.sidebar-tabs {
+  list-style:none;
+  padding:0;
+  margin:0;
+  top:0;
+  width:250px;
+  background: #FBFBFB;
+  border: thin solid #e7e7e7;
+}
+
+.activeTab
+{
+  background: #e7e7e7;
+  border: thin dotted #000000;
+}
+
+.sidebar-tabs li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-tabs li a {
+  border:none;
+}
+
+.sidebar-arrow
+{
+  float:right;
+  padding-top:10px;
+  padding-right:10px;
+}
+
+  #wrapper {
+    padding-left: 250px;
+
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

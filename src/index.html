@@ -24,8 +24,79 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-view></div>
 
+    <div ng-controller="MainController as vm">
+      <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="">
+                <span class="glyphicon glyphicon-signal"></span> GradeTrack</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li> <a href="">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+
+      <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-courses">
+              <li ng-repeat="course in vm.courses">
+                <a class="sidebar-header" href="" ng-click="course.expanded = !course.expanded">
+                  {{course.name}}
+                  <span class ="sidebar-arrow" ng-class="course.expanded ? 'glyphicon glyphicon-menu-down' : 'glyphicon glyphicon-menu-right'"></span>
+                </a>
+                  <div ng-class="course.expanded ? 'sidebar-courses-expanded' : ''" ng-hide="!course.expanded">
+                    <ul class="sidebar-tabs">
+                      <li ng-class="vm.isActiveTab(course, tab) ? 'activeTab' : ''" ng-repeat="tab in vm.tabs"><a href="{{tab.url}}" ng-click="vm.clickTab(course,tab)" >{{tab.label}}</a></li>
+                    </ul>
+                  </div>
+              </li>
+          </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="mainView">
+                  <div ng-view></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+      </div>
+    </div>
+    <!--<div class="wrapper">
+      <div ng-controller="NavController">
+        <ul class="topbar">
+          <li>CS472</li>
+          <li>CS473</li>
+          <li>CS474</li>
+          <li>Name</li>
+        </ul>
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li><a href="#/information">info</a></li>
+            <li><a href="#/students">students</a></li>
+            <li><a href="#/grades">grades</a></li>
+            <li><a href="#/assignments">assignments</a></li>
+            <li><a href="#/">main</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+    </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
