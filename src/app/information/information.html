@@ -1,1 +1,24 @@
-Information Area
+<!-- Information Area -->
+
+<div ng-controller="InformationController">
+  <section>
+    <h2> {{classInfo.id}} - {{classInfo.name}}</h2>
+    <b> {{classInfo.info}} </b>
+    <br>
+    <br>
+    <b> Prerequisites: {{classInfo.pre}} </b>
+  </section>
+
+  <section>
+    <h1> Instructor: {{profile.firstName}} {{profile.lastName}}<h1>
+      <h2> Id: {{profile.id}} </h2>
+  </section>
+
+  <section>
+    <h1> Syllabus </h1>
+    <div ng-repeat="item in syllabus">
+      {{item.classSection}}
+      {{item.classHour}}
+    </div>
+  </section>
+</div>
