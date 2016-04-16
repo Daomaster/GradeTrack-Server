@@ -1,0 +1,55 @@
+
+.assignments-leftside {
+  transition:all linear 0.1s;
+  width:100%;
+  height:100%;
+
+}
+.assignments-leftside-small {
+  transition:all linear 0.1s;
+  width:50%;
+  height:100%;
+}
+.assignments-wrapper {
+  top:0;
+  left:0;
+  height:100%;
+  width:100%;
+  background: #0000ee;
+}
+.assignments-rightside-off {
+  position:relative;
+  transition:all linear 0.1s;
+  left: 120%;
+  height:100%;
+}
+.assignments-full-right-area {
+  overflow:hidden;
+  position:absolute;
+  transition:all linear 0.1s;
+  left:calc((100vw - 220px)/2);
+  width:calc((100vw - 220px)/2);
+  height:100%;
+}
+.assignments-full-right-area-off
+{
+  overflow:hidden;
+  position:absolute;
+  transition:all linear 0.1s;
+  left:100%;
+  width:50%;
+  height:100%;
+}
+.assignments-full-left-area {
+  position:absolute;
+  transition:all linear 0.1s;
+  left:0;
+  width:calc((100vw - 220px));
+  height:100%;
+}
+.assignments-rightside-on {
+  position:relative;
+  transition:all linear 0.1s;
+  left:0;
+  height:100%;
+}

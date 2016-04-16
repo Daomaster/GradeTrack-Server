@@ -1,11 +1,62 @@
-<div ng-controller="AssignmentsController as vm">
-
-
-  <h1>{{vm.activeCourse()}}</h1>
+<div ng-controller="AssignmentsController as vm" style="height:100%; width:100%">
 
 
 
 
+  <div class="assignments-wrapper">
+    <div class="assignments-full-left-area">
+      <div ng-class="!vm.showDetails ? 'assignments-leftside' : 'assignments-leftside-small'">
+
+        <div style="border-radius:10px; padding-left:20px; padding-right:20px; background:#73AD21; position:relative; left:5%; width:90%; top:5%; height:90%; overflow-y:auto">
+          <h2>{{vm.activeCourse().name}}</h2>
+          <button class="btn btn-positive" ng-click="vm.addAssignment('temp')">Add Assignment</button>
+          <ul style="list-style: none; margin:0; padding:0;">
+            <li style="border-bottom: thin solid #000000" ng-repeat="assignment in vm.activeCourse().assignments" >
+              <div style="margin: 0; height:40px">
+                <div style="display:inline-block; text-align:center;">
+
+                  <label for="assignmentInput"></label>
+                  <input maxlength="20" size="20" id="assignmentInput" type="text" style="margin-top: 5px; font-size:20px; background:none; border:none;" ng-model="assignment.name" ng-click="vm.clickAssignment(assignment.id)" />
+                </div>
+
+                <div style=" float:right; display:inline-block; margin-top:3px;">
+                  <button type="button" class="btn btn-default" ng-click="assignment.datepickerOpen=true"><i class="glyphicon glyphicon-calendar"></i></button>
+                </div>
+                <div style=" float:right; display:inline-block; margin-top:3px;">
+                  <input style="width:200px;" type="text" class="form-control" uib-datepicker-popup="fullDate" ng-model="assignment.dueDate" is-open="assignment.datepickerOpen" datepicker-options="dateOptions" datepicker-append-to-body="true" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="assignments-full-right-area" ng-show="vm.showDetails">
+      <div ng-class="vm.showDetails ? 'assignments-rightside-on' : 'assignments-rightside-off'">
+        <div style="border-radius:10px; background:#73AD21; position:relative; left:5%; width:90%; top:5%; height:90%; padding-left:10px; overflow-y:auto;">
 
 
+          <input maxlength="20" size="20" id="assignmentInput" type="text" style="margin-top:0; font-size:20px; background:none; border:none;" ng-model="vm.activeAssignment().name" />
+          <a href="" ng-click="vm.showDetails=false" style="position:absolute; right:10px; top:4px; font-size:16px; font-weight: bold; text-decoration: none; color:#000000;">x</a>
+          <hr style="width:100%; left:0; margin-left:-5px; margin-top:2px;" />
+          <div>
+          <h4 style="display:inline">Description</h4></div>
+          <div><textarea ng-model="vm.activeAssignment().description" maxlength="1000" style="margin-top:5px; display:inline; width:99%; resize:none; height:100px;"></textarea></div>
+          <hr style="width:100%; left:0; margin-left:-5px; margin-top:2px;" />
+          <span>Points <input type="number" min="0" ng-model="vm.activeAssignment().points"> </span>
+          <hr style="width:100%; left:0; margin-left:-5px; margin-top:2px;" />
+          <h4>Grades</h4>
+          <ul  style="list-style:none; margin:0; padding:0;">
+            <li style="border-bottom:thin solid #000000; height:30px;" ng-repeat="student in vm.activeCourse().students">
+              <span style="float:left; position:absolute; margin-top:6px;">{{student.name}}</span>
+              <div style="float:right; margin-right:10px; ">
+                <span style="display:inline-block; margin-top:6px; position:absolute;right:74px;">{{student.assignmentGrades[vm.activeAssignment().id] / vm.activeAssignment().points * 100 | number:2}}%</span>
+                <input style="display:inline-block; margin-top:2px; width:60px;right:0 ;" type="number" min="0" ng-model="student.assignmentGrades[vm.activeAssignment().id]" >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

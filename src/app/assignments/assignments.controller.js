@@ -7,10 +7,21 @@
 
   /** @ngInject */
   function AssignmentsController(GradeService) {
-    var vm =this;
+    var vm = this;
 
-    vm.test = false;
-    vm.activeCourse = function() { return GradeService.getActiveCourse().name };
+    vm.showDetails = true;
+    vm.activeCourse = function() { return GradeService.getActiveCourse()};
+    vm.addAssignment = function(assignmentName) { GradeService.addAssignment(vm.activeCourse(), "Enter Description", assignmentName)};
+
+
+    vm.activeAssignment = function() { return GradeService.getActiveAssignment(); };
+    vm.setActiveAssignment = function(id) { GradeService.setActiveAssignment(id); };
+
+    vm.clickAssignment = function(id)
+    {
+        GradeService.setActiveAssignment(id);
+        vm.showDetails = true;
+    };
 
     vm.courses = GradeService.courses;
 
