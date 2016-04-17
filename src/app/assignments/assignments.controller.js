@@ -9,7 +9,7 @@
   function AssignmentsController(GradeService) {
     var vm = this;
 
-    vm.showDetails = true;
+    vm.showDetails = false;
     vm.activeCourse = function() { return GradeService.getActiveCourse()};
     vm.addAssignment = function(assignmentName) { GradeService.addAssignment(vm.activeCourse(), "Enter Description", assignmentName)};
 

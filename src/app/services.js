@@ -20,7 +20,21 @@
           expanded : false,
           id : this.courses.length,
           assignments: [],
-          students: []
+          students: [],
+          weights: [
+            {
+              name: "Test",
+              weight: 40
+            },
+            {
+              name: "Quiz",
+              weight: 30
+            },
+            {
+              name: "Homework",
+              weight: 30
+            }
+          ]
         };
         this.courses.push(c);
         return c;
@@ -58,7 +72,9 @@
           description: description_,
           datepickerOpen: false,    // assignment menu usage
           id: course.assignments.length,
-          points: 500
+          points: 500,
+          type: "Test",
+          dueDate: new Date()
         };
         course.assignments.push(t);
       };
@@ -70,7 +86,7 @@
         var c = this.addCourse("CS" + (460+i).toString());
         for (var j = 0; j < 5; ++j)
         {
-          this.addAssignment(c, "text","Assignment " + j.toString());
+          this.addAssignment(c, "Enter Description","Assignment " + j.toString());
         }
 
         for (var k = 0; k < 30; ++k)
