@@ -1,1 +1,66 @@
-Students Area
+<head>
+  <style>
+    table, th , td {
+       border: 2px solid black;
+       border-collapse: collapse;
+       padding: 5px;
+    }
+
+    table tr:nth-child(odd) {
+       background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(even) {
+       background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <div ng-controller="StudentsController as vm" style="height:100%; width:100%">
+    <table border="0"; style="width:80%">
+      <tr>
+        <td width="5%"><b>Last Name</b></td>
+        <td width="5%"><b>First Name</b></td>
+        <td width="3%"><b>Grade</b></td>
+        <td width="5%"><b>E-mail</b></td>
+        <td width="3%"><b>ID</b></td>
+      </tr>
+      <tr>
+        <td>Smith</td>
+        <td>John</td>
+        <td>80%</td>
+        <td>SmithJ@unlv.nevada.edu</td>
+        <td>11223344</td>
+      </tr>
+      <tr>
+        <td>Williams</td>
+        <td>Rebecca</td>
+        <td>85%</td>
+        <td>WilliamsR@unlv.nevada.edu</td>
+        <td>2244553322</td>
+      </tr>
+      <tr>
+        <td>Aster</td>
+        <td>Billy</td>
+        <td>66%</td>
+        <td>AsterB@unlv.nevada.edu</td>
+        <td>43233333</td>
+      </tr>
+      <tr>
+        <td>Bills</td>
+        <td>Derek</td>
+        <td>90%</td>
+        <td>BillsD@unlv.nevada.edu</td>
+        <td>1010101010</td>
+      </tr>
+      <tr>
+        <td>Dillan</td>
+        <td>Ben</td>
+        <td>45%</td>
+        <td>DillanB@unlv.nevada.edu</td>
+        <td>3428237420</td>
+      </tr>
+    </table>
+  </div>
+</body>
