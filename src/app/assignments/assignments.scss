@@ -1,0 +1,87 @@
+
+
+
+.assignments-assignmentlist
+{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.assignments-assignmentlist li
+{
+  overflow:hidden;
+  border-bottom: thin solid #000000;
+}
+
+
+
+
+
+
+
+//----------------------------
+//  left/right side containers
+//----------------------------
+
+
+.assignments-leftside {
+  padding: 10px 10px 10px 25px;
+  transition:all linear 0.1s;
+  width:100%;
+  left:0;
+  height:100%;
+
+}
+.assignments-leftside-small {
+  padding: 10px 10px 10px 25px;
+  transition:all linear 0.1s;
+  width:50%;
+  height:100%;
+}
+.assignments-wrapper {
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:calc(100vw - 235px);
+  background: #FFFFFF;
+}
+.assignments-rightside-off {
+  position:relative;
+  transition:all linear 0.1s;
+  left: 120%;
+  height:100%;
+}
+.assignments-full-right-area {
+  overflow:hidden;
+  position:absolute;
+  transition:all linear 0.1s;
+  left:calc((100vw - 235px)/2);
+  width:calc((100vw - 235px)/2);
+  height:100%;
+}
+.assignments-full-right-area-off
+{
+  padding: 10px 10px 10px 20px;
+  overflow:hidden;
+  position:absolute;
+  transition:all linear 0.1s;
+  left:100%;
+  width:50%;
+  height:100%;
+}
+.assignments-full-left-area {
+  position:absolute;
+  transition:all linear 0.1s;
+  left:0;
+  width:calc((100vw - 235px));
+  height:100%;
+}
+.assignments-rightside-on {
+  padding: 10px 10px 10px 10px;
+  position:absolute;
+  transition:all linear 0.1s;
+  width:100%;
+  left:0;
+  height:100%;
+}
