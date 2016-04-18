@@ -1,24 +1,44 @@
 <!-- Information Area -->
 
-<div ng-controller="InformationController">
+<div ng-controller="InformationController" style="height:100%; width:100%">
+
+<!-- Section of class information  -->
   <section>
-    <h2> {{classInfo.id}} - {{classInfo.name}}</h2>
-    <b> {{classInfo.info}} </b>
     <br>
+    <h2> Class {{classInfo.id}} - {{classInfo.name}}</h2>
+    <label>Description:</label>
     <br>
-    <b> Prerequisites: {{classInfo.pre}} </b>
+    <textarea id = "classInfo" rows = "3" cols = "80"></textarea>
+    <br>
   </section>
 
-  <section>
-    <h1> Instructor: {{profile.firstName}} {{profile.lastName}}<h1>
-      <h2> Id: {{profile.id}} </h2>
-  </section>
+<!-- Section for Instructor -->
 
   <section>
+    <h2> Professor
+    <lable>
+      <button type="button" class="btn btn-default" ng-click="toggleDisable()">
+        <span class="glyphicon glyphicon-edit"></span>
+      </button>
+    </lable>
+    </h2>
+
+    <label>
+      Name: <input type="text" ng-disabled="!editInfo"><br>
+      Email: <input type="text" ng-disabled="!editInfo"><br>
+      Phone: <input type="text" ng-disabled="!editInfo"><br>
+      Office Houes: <input type="text" ng-disabled="!editInfo"><br>
+                    <input type="text" ng-disabled="!editInfo">
+    </label>
+  </section>
+
+<!-- Section for syllabus -->
+  <!-- <section id="section">
     <h1> Syllabus </h1>
     <div ng-repeat="item in syllabus">
       {{item.classSection}}
       {{item.classHour}}
     </div>
-  </section>
+  </section> -->
+
 </div>
