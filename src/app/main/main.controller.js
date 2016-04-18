@@ -23,11 +23,6 @@
       },
       {
         active: false,
-        label: "Grades",
-        url: "#/grades"
-      },
-      {
-        active: false,
         label: "Students",
         url: "#/students"
       }
