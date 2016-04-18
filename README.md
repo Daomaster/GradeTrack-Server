@@ -1,4 +1,5 @@
 Grade Tracker Server
+=====================
 
 Project which is for UNLV CS 472, the purpose to build a easier tool to help students and instructors to keep track of their grades.
 
