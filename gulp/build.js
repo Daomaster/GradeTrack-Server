@@ -95,3 +95,4 @@ gulp.task('clean', function () {
 });
 
 gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('heroku', ['html', 'fonts', 'other']);
