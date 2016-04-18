@@ -1,5 +1,4 @@
 Grade Tracker Server
-=====================
 
 Project which is for UNLV CS 472, the purpose to build a easier tool to help students and instructors to keep track of their grades.
 
@@ -35,8 +34,19 @@ Go to the repo directory then install all the dependency:
 $ npm install
 ```
 
-Then you could start the project by using (use localhost for now!):
+## Run only the front end
 
 ```bash
 $ gulp serve
+```
+## Run with full on production (with server)
+
+Build the production version
+```bash
+$ gulp build
+```
+
+Run it on the local node server
+```bash
+$ npm start
 ```
