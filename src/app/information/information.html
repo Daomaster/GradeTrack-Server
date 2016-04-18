@@ -4,18 +4,19 @@
 
 <!-- Section of class information  -->
   <section>
-    <br>
+    <button type="button" class="btn btn-default" ng-click="toggleDisable()">
+      <span class="glyphicon glyphicon-edit"></span>
+    </button>
     <h2> Class {{classInfo.id}} - {{classInfo.name}}</h2>
     <label>Description:</label>
     <br>
     <textarea id = "classInfo" rows = "3" cols = "80"></textarea>
-    <br>
   </section>
 
 <!-- Section for Instructor -->
 
   <section>
-    <h2> Professor
+    <h2> Instructor Information
     <lable>
       <button type="button" class="btn btn-default" ng-click="toggleDisable()">
         <span class="glyphicon glyphicon-edit"></span>
@@ -24,11 +25,15 @@
     </h2>
 
     <label>
+      <form action="">
       Name: <input type="text" ng-disabled="!editInfo"><br>
       Email: <input type="text" ng-disabled="!editInfo"><br>
       Phone: <input type="text" ng-disabled="!editInfo"><br>
       Office Houes: <input type="text" ng-disabled="!editInfo"><br>
-                    <input type="text" ng-disabled="!editInfo">
+                    <input type="text" ng-disabled="!editInfo"><br>
+    <input type="submit" ng-disabled="!editInfo">
+    </form>
+
     </label>
   </section>
 
