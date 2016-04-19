@@ -4,37 +4,76 @@
 
 <!-- Section of class information  -->
   <section>
-    <button type="button" class="btn btn-default" ng-click="toggleDisable()">
-      <span class="glyphicon glyphicon-edit"></span>
-    </button>
-    <h2> Class {{classInfo.id}} - {{classInfo.name}}</h2>
-    <label>Description:</label>
-    <br>
-    <textarea id = "classInfo" rows = "3" cols = "80"></textarea>
+  <div class="col-xs-9">
+    <div class="col-xs-9" style = "background-color:#b4e0ea; border: 2px solid gray; color:gray;">
+      <h3> Class {{classInfo.id}} - {{classInfo.name}}</h3>
+    </div>
+
+    <div class="col-xs-9" style = "background-color:#e6f3ff; border: 2px solid #e6e6e6;">
+      <label>Description:</label>
+        <button type="button" class="btn btn-default" ng-click="toggleDisable1()">
+          <span class="glyphicon glyphicon-edit"></span>
+        </button>
+        <br>
+      <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
+      <br>
+      <br>
+      <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()"> -->
+    </div>
+  </div>
   </section>
 
 <!-- Section for Instructor -->
-
-  <section>
-    <h2> Instructor Information
-    <lable>
-      <button type="button" class="btn btn-default" ng-click="toggleDisable()">
+  <section class="col-xs-9">
+    <div class="col-xs-9" style = "background-color:#b4e0ea; border: 2px solid gray; color:gray;">
+      <h3> Instructor Information
+      <lable>
+        <button type="button" class="btn btn-default" ng-click="toggleDisable2()">
         <span class="glyphicon glyphicon-edit"></span>
-      </button>
-    </lable>
-    </h2>
+        </button>
+      </lable>
+    </h3>
+    </div>
 
-    <label>
-      <form action="">
-      Name: <input type="text" ng-disabled="!editInfo"><br>
-      Email: <input type="text" ng-disabled="!editInfo"><br>
-      Phone: <input type="text" ng-disabled="!editInfo"><br>
-      Office Houes: <input type="text" ng-disabled="!editInfo"><br>
-                    <input type="text" ng-disabled="!editInfo"><br>
-    <input type="submit" ng-disabled="!editInfo">
-    </form>
+    <div class="col-xs-9" style = "background-color:#e6f3ff; border: 2px solid #e6e6e6;" margin-bottom:10;>
+      <label>
+        <ul class="list-group">
+          <br>
+          <li class="list-group-item">
+            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Phone: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo"><br>
+                    Mon: <input type="text" value="{{profile.hours[0]}}" ng-disabled="!editInfo"><br>
+                    Tue: <input type="text" value="{{profile.hours[1]}}" ng-disabled="!editInfo"><br>
+                    Wed: <input type="text" value="{{profile.hours[2]}}" ng-disabled="!editInfo"><br>
+                    Thu: <input type="text" value="{{profile.hours[3]}}" ng-disabled="!editInfo"><br>
+                    Fri: <input type="text" value="{{profile.hours[4]}}" ng-disabled="!editInfo"><br>
+          </li>
+                    <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
+      </label>
+    </div>
+  </section>
 
-    </label>
+
+  <!-- Section for TA -->
+  <section>
+  <div class="col-xs-9">
+      <h3> Teacher's Assistant </h3>
+      <div ng-repeat="item in syllabus">
+        {{item.classSection}}
+        {{item.classHour}}
+      </div>
+  </div>
   </section>
 
 <!-- Section for syllabus -->

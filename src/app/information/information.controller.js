@@ -12,15 +12,20 @@ angular
     $scope.profile = {
       firstName:' Lawrence ',
       lastName:' Larmore ',
-      // id: ' 1244444 ',
       phone: '702-895-1096',
       email:' larmore@egr.unlv.edu',
-      office: ' TBEB378B '
+      office: ' TBEB 378B ',
+      hours:['11:00~11:00','','','3:00~4:00',""]
     }
 
     $scope.editInfo = false;
 
-    $scope.toggleDisable = function()
+    $scope.toggleDisable1 = function()
+    {
+      $scope.editDes = !$scope.editDes;
+    }
+
+    $scope.toggleDisable2 = function()
     {
       $scope.editInfo = !$scope.editInfo;
     }

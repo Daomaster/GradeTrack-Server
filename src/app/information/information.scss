@@ -1,24 +1,17 @@
 
-information.section {
-  border-radius: 25px;
-  border: 2px solid #80aaff;
+.info-header{
+  border: 2px solid gray;
+  background-color:#b4e0ea;
+  color:gray;
+  text-align:center;
+  margin-bottom: 20px;
+}
+
+.infoSection {
+  background-color: #e6f3ff;
+  border: 2px solid #e6e6e6;
   width:75%;
   float:left;
   padding:10px;
-}
-
-.information.header{
-  border-radius: 25px;
-  background-color:#0066cc;
-  color:white;
-  text-align:center;
-}
-
-#nav {
-  line-height:30px;
-  background-color:#eeeeee;
-  height:300px;
-  width:15%;
-  float:left;
-  padding:5px;
+  margin-bottom:10px;
 }
