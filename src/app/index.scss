@@ -5,9 +5,7 @@
 $navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
-
-
-
+@import 'information/information.scss';
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
