@@ -5,15 +5,16 @@
 <!-- Section of class information  -->
   <section>
   <div class="col-xs-9">
-    <div class="col-xs-9" style = "background-color:#b4e0ea; border: 2px solid gray; color:gray;">
-      <h3> Class {{classInfo.id}} - {{classInfo.name}}</h3>
-    </div>
-
-    <div class="col-xs-9" style = "background-color:#e6f3ff; border: 2px solid #e6e6e6;">
-      <label>Description:</label>
-        <button type="button" class="btn btn-default" ng-click="toggleDisable1()">
+    <div class="infoHeader">
+      <h3> Class {{classInfo.id}} - {{classInfo.name}}
+        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
           <span class="glyphicon glyphicon-edit"></span>
         </button>
+      </h3>
+    </div>
+
+    <div class="infoSection">
+      <label>Description:</label>
         <br>
       <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
       <br>
@@ -25,17 +26,17 @@
 
 <!-- Section for Instructor -->
   <section class="col-xs-9">
-    <div class="col-xs-9" style = "background-color:#b4e0ea; border: 2px solid gray; color:gray;">
+    <div class="infoHeader">
       <h3> Instructor Information
       <lable>
-        <button type="button" class="btn btn-default" ng-click="toggleDisable2()">
+        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable2()">
         <span class="glyphicon glyphicon-edit"></span>
         </button>
       </lable>
-    </h3>
+      </h3>
     </div>
 
-    <div class="col-xs-9" style = "background-color:#e6f3ff; border: 2px solid #e6e6e6;" margin-bottom:10;>
+    <div class="infoSection">
       <label>
         <ul class="list-group">
           <br>
@@ -52,12 +53,8 @@
           </li>
           <br>
           <li class="list-group-item">
-            Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo"><br>
-                    Mon: <input type="text" value="{{profile.hours[0]}}" ng-disabled="!editInfo"><br>
-                    Tue: <input type="text" value="{{profile.hours[1]}}" ng-disabled="!editInfo"><br>
-                    Wed: <input type="text" value="{{profile.hours[2]}}" ng-disabled="!editInfo"><br>
-                    Thu: <input type="text" value="{{profile.hours[3]}}" ng-disabled="!editInfo"><br>
-                    Fri: <input type="text" value="{{profile.hours[4]}}" ng-disabled="!editInfo"><br>
+            Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo">
+                     <input type="text" value="{{profile.hours}}" ng-disabled="!editInfo"><br>
           </li>
                     <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
       </label>
@@ -66,15 +63,23 @@
 
 
   <!-- Section for TA -->
-  <section>
-  <div class="col-xs-9">
-      <h3> Teacher's Assistant </h3>
-      <div ng-repeat="item in syllabus">
-        {{item.classSection}}
-        {{item.classHour}}
-      </div>
-  </div>
+  <section class="col-xs-9">
+
+    <div class="infoHeader">
+      <h3> Teacher's Assistant
+        <lable>
+        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+        <span class="glyphicon glyphicon-plus"></span>
+        </button>
+        </lable>
+    </h3>
+    </div>
   </section>
+
+
+
+
+
 
 <!-- Section for syllabus -->
   <!-- <section id="section">
@@ -84,5 +89,3 @@
       {{item.classHour}}
     </div>
   </section> -->
-
-</div>
