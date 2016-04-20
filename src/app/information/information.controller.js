@@ -15,7 +15,7 @@ angular
       phone: '702-895-1096',
       email:' larmore@egr.unlv.edu',
       office: ' TBEB 378B ',
-      hours: 'Mon & Wed  2:00~2:30 '
+      hours: 'Mon & Wed:  2:00~2:30 '
     }
 
     $scope.editInfo = false;
