@@ -13,7 +13,7 @@
           <button style="margin-top:10px;" class="btn btn-positive" ng-click="vm.addAssignment('Enter Name')">Add Assignment</button>
           <div style="margin-top:10px; margin-bottom:10px; height:calc(100vh - 170px); overflow:auto; background:#FFFFFF;">
             <ul class="assignments-assignmentlist">
-              <li ng-repeat="assignment in vm.activeCourse().assignments">
+              <li ng-repeat="assignment in assignments.activeCourse().assignments">
                 <div style="margin: 0; height:40px;">
                   <div style=" float:left; display:inline-block; text-align:center;">
 

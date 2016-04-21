@@ -9,11 +9,13 @@
   function MainController(GradeService) {
     var vm = this;
 
+    vm.loggedIn = false;
+
     vm.tabs = [
       {
         active: true,
         label: "Information",
-        url: "#/"
+        url: "#/information"
 
       },
       {

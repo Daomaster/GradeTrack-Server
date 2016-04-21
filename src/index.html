@@ -25,15 +25,46 @@
     <![endif]-->
 
     <div ng-controller="MainController as vm" style="height:100%; width:100%; margin:0;">
+      <span style="background:#FF0000;" ng-hide="vm.loggedIn">
+        <!-- Dashboard -->
+
       <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="">
+              <a class="navbar-brand" href="#/">
                 <span class="glyphicon glyphicon-signal"></span> GradeTrack </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li> <a href="">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+
+              <buttom class="btn btn-primary" style="margin-right:10px; margin-top:8px;" ng-click="vm.loggedIn=true">Log in</buttom>
+
+
+            </ul>
+          </div>
+        </nav>
+      </div>
+      </span>
+      <span ng-hide="!vm.loggedIn">
+
+      <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#/">
+                <span class="glyphicon glyphicon-signal"></span> GradeTrack </a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+
+              <div class="" dropdown style="margin-top:14px; margin-right:10px; font-size:18px; text-decoration:none;">
+                <a href="" class="dropdown-toggle" style="color:darkgray; text-decoration:none;" dropdown-toggle>
+                  {{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span>
+                </a>
+                <ul class="dropdown-menu" style="z-index:-1;" role="menu">
+                  <li><a href="" ng-click="vm.loggedIn=false;">Sign out</a></li>
+                </ul>
+              </div>
+
             </ul>
           </div>
         </nav>
@@ -75,6 +106,7 @@
         <!-- /#page-content-wrapper -->
 
       </div>
+    </span>
     </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
