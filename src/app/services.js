@@ -6,10 +6,12 @@
     .module('GradeTrack')
     .service('GradeService', function(){
 
-      this.loggedIn = false;
+      this.loggedIn = true;
       this.lastName = "Prof";
       this.firstName = "name";
 
+      this.gradeAverageArray = []; // needed for dashboard graphing
+      this.courseNameArray = [];
 
       this.courses=[];
 
@@ -19,6 +21,7 @@
         {
           name : name_,
           expanded : false,
+          average: Math.round((Math.random() * 50 + 50) * 100) / 100, //random 50-100, 2 decimals
           id : this.courses.length,
           assignments: [],
           students: [],
@@ -38,6 +41,8 @@
           ]
         };
         this.courses.push(c);
+        this.gradeAverageArray.push(c.average);
+        this.courseNameArray.push(c.name);
         return c;
       };
 
