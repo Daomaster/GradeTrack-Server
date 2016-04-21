@@ -1,16 +1,16 @@
-<div ng-controller="AssignmentsController as vm" style="height:100%; width:100%">
+<div style="height:100%; width:100%">
 
 
 
 
   <div class="assignments-wrapper">
     <div class="assignments-full-left-area">
-      <div ng-class="!vm.showDetails ? 'assignments-leftside' : 'assignments-leftside-small'">
+      <div ng-class="!assignments.showDetails ? 'assignments-leftside' : 'assignments-leftside-small'">
         <div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
           <div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
-            <div style="padding-top:4px; padding-left:10px;font-size:20px;">{{vm.activeCourse().name}}</div>
+            <div style="padding-top:4px; padding-left:10px;font-size:20px;">{{assignments.activeCourse().name}}</div>
           </div>
-          <button style="margin-top:10px;" class="btn btn-positive" ng-click="vm.addAssignment('Enter Name')">Add Assignment</button>
+          <button style="margin-top:10px;" class="btn btn-positive" ng-click="assignments.addAssignment('Enter Name')">Add Assignment</button>
           <div style="margin-top:10px; margin-bottom:10px; height:calc(100vh - 170px); overflow:auto; background:#FFFFFF;">
             <ul class="assignments-assignmentlist">
               <li ng-repeat="assignment in assignments.activeCourse().assignments">
@@ -18,7 +18,7 @@
                   <div style=" float:left; display:inline-block; text-align:center;">
 
                     <label for="assignmentInput"></label>
-                    <input maxlength="20" id="assignmentInput" type="text" style="position:absolute; width:calc(100% - 260px); vertical-align:middle; height:40px; margin-top:0px;  background:none; border:none;" ng-model="assignment.name" ng-click="vm.clickAssignment(assignment.id)" />
+                    <input maxlength="20" id="assignmentInput" type="text" style="position:absolute; width:calc(100% - 260px); vertical-align:middle; height:40px; margin-top:0px;  background:none; border:none;" ng-model="assignment.name" ng-click="assignments.clickAssignment(assignment.id)" />
                   </div>
 
                   <div style=" float:right; margin-top:3px;">
@@ -34,34 +34,34 @@
         </div>
       </div>
     </div>
-    <div class="assignments-full-right-area" ng-show="vm.showDetails">
-      <div ng-class="vm.showDetails ? 'assignments-rightside-on' : 'assignments-rightside-off'">
+    <div class="assignments-full-right-area" ng-show="assignments.showDetails">
+      <div ng-class="assignments.showDetails ? 'assignments-rightside-on' : 'assignments-rightside-off'">
         <div style="overflow-x:hidden; border-radius:10px; border:thin solid #000000; background:#e9eef5; position:relative; left:0; width:100%; top:0; height:100%; padding-left:10px; overflow-y:hidden;">
 
 
           <div style="background:#d4e4fa; border-bottom:thin solid #000000; height:35px; margin-left:-10px; margin-right:-10px;">
-            <input maxlength="20" size="20" id="assignmentInput" type="text" style="margin-left:10px; margin-top:2px; font-size:20px; background:none; border:none;" ng-model="vm.activeAssignment().name" />
-            <a href="" ng-click="vm.showDetails=false" style="position:absolute; right:10px; top:4px; font-size:16px; font-weight: bold; text-decoration: none; color:#000000;">x</a>
+            <input maxlength="20" size="20" id="assignmentInput" type="text" style="margin-left:10px; margin-top:2px; font-size:20px; background:none; border:none;" ng-model="assignments.activeAssignment().name" />
+            <a href="" ng-click="assignments.showDetails=false" style="position:absolute; right:10px; top:4px; font-size:16px; font-weight: bold; text-decoration: none; color:#000000;">x</a>
           </div>
 
           <div style="padding-top:10px;">
           <h4 style="display:inline">Description</h4></div>
-          <div style="margin-right:160px;"><textarea ng-model="vm.activeAssignment().description" maxlength="1000" style="margin-top:5px; display:inline; width:100%; resize:none; height:100px;"></textarea></div>
+          <div style="margin-right:160px;"><textarea ng-model="assignments.activeAssignment().description" maxlength="1000" style="margin-top:5px; display:inline; width:100%; resize:none; height:100px;"></textarea></div>
           <div style="position:absolute; top:45px; right:10px; width:140px;">
             <canvas height="100%" width="100%" id="pie" class="chart chart-pie"
-                    chart-data="vm.activeAssignment().gradeArray" chart-labels="vm.labelArray">
+                    chart-data="assignments.activeAssignment().gradeArray" chart-labels="assignments.labelArray">
             </canvas>
           </div>
           <hr style="width:100%; left:0; margin-left:-5px; margin-top:2px;" />
           <div style="height:35px; margin-left:-15px; margin-right:-15px; border:thin solid #000000;">
             <span style="height:30px; float:left; margin-top:4px; margin-left:18px;">
               Points:
-              <input type="number" min="0" ng-model="vm.activeAssignment().points">
+              <input type="number" min="0" ng-model="assignments.activeAssignment().points">
             </span>
             <span style="margin-top:6px; float:right; margin-right:32px;">
               Type:
-              <select ng-model="vm.activeAssignment().type">
-                <option ng-repeat="weight in vm.activeCourse().weights">{{weight.name}}</option>
+              <select ng-model="assignments.activeAssignment().type">
+                <option ng-repeat="weight in assignments.activeCourse().weights">{{weight.name}}</option>
               </select>
             </span>
           </div>
@@ -70,14 +70,14 @@
           <h4 style="margin-bottom:10px;">Grades</h4>
           <div style="width:99%; margin-bottom:10px; background:#FFFFFF; height:calc(100vh - 380px); overflow:auto;">
             <ul  style="list-style:none; margin:0; padding:0;">
-              <li style="border-bottom:thin solid #000000; height:30px;" ng-repeat="student in vm.activeCourse().students">
+              <li style="border-bottom:thin solid #000000; height:30px;" ng-repeat="student in assignments.activeCourse().students">
                 <span style="float:left; margin-top:6px;">{{student.name}}</span>
                 <div style="float:right; margin-right:10px; ">
-                  <span style="display:inline-block; margin-top:6px; right:85px;">{{student.assignmentGrades[vm.activeAssignment().id] / vm.activeAssignment().points * 100 | number:2}}%</span>
+                  <span style="display:inline-block; margin-top:6px; right:85px;">{{student.assignmentGrades[assignments.activeAssignment().id] / assignments.activeAssignment().points * 100 | number:2}}%</span>
                   <input style="display:inline-block; margin-top:2px; width:60px;right:0 ;" type="number" min="0"
-                         ng-model="student.assignmentGrades[vm.activeAssignment().id]",
-                         ng-focus="student.oldAssignmentGrades[vm.activeAssignment().id] = student.assignmentGrades[vm.activeAssignment().id]"
-                         ng-blur="vm.changeGradeArray(vm.activeAssignment(), student)">
+                         ng-model="student.assignmentGrades[assignments.activeAssignment().id]",
+                         ng-focus="student.oldAssignmentGrades[assignments.activeAssignment().id] = student.assignmentGrades[assignments.activeAssignment().id]"
+                         ng-blur="assignments.changeGradeArray(assignments.activeAssignment(), student)">
                 </div>
               </li>
             </ul>
