@@ -6,10 +6,17 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController(GradeService) {
+  function MainController(GradeService, $uibModal) {
     var vm = this;
 
-    vm.loggedIn = false;
+    vm.isLoggedIn = function() { return GradeService.loggedIn;  };
+    vm.login = function() {
+      GradeService.loggedIn = true;};
+
+    vm.logout = function()
+    {
+      GradeService.loggedIn = false;
+    };
 
     vm.tabs = [
       {
@@ -29,6 +36,17 @@
         url: "#/students"
       }
     ];
+
+    vm.openLogin = function (size) {
+
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'app/login/LoginModal.html',
+        controller: 'LoginModalController',
+        controllerAs: 'LoginModalController',
+        size: size
+      });
+    };
 
     vm.activeTab = vm.tabs[0];
     vm.lastName = GradeService.firstName;
