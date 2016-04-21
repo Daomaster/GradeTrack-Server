@@ -144,8 +144,20 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 }
 
 
+.grad {
+  background: #70798c; /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient(#70798c,  #001427); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(#70798c,  #001427); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(#70798c,  #001427); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(#70798c, #001427);
 
-
+}
+.outlineText
+{
+  -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-color: darkgray;
+  color:white;
+}
 
 
 
