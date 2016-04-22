@@ -1,24 +1,26 @@
 <div class="modal-header">
-  <h1 style="text-align:center;">Log In</h1>
+  <h1 style="margin-top:10px; text-align:center;">Log In</h1>
+  <a href="" class="modal-closebutton" ng-click="LoginModalController.close()">x</a>
 </div>
 <div class="modal-body">
   <ul style="list-style:none;">
-    <li style="text-align:center;">
-      <button class="btn btn-positive">Log In Using Google</button>
+    <li style="">
+      <button class="btn btn-danger btn modal-googlebutton">Log In Using Google</button>
     </li>
     <li>
-      <hr>
+      <hr class="modal-breaker">
+      <span class="modal-overlay-text">OR</span>
     </li>
-    <li>
-      <div style="text-align:left;">EMAIL ADDRESS</div>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">EMAIL ADDRESS</div>
       <div>
-        <input type="text">
+        <input class="modal-username-input" type="text" placeholder="name@company.com">
       </div>
     </li>
-    <li>
-      <div style="text-align:left;">PASSWORD</div>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">PASSWORD</div>
       <div>
-        <input type="password">
+        <input class="modal-password-input" type="password" placeholder="Password">
       </div>
     </li>
     <li style="height:20px;">

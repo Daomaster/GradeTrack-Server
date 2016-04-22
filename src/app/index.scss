@@ -48,6 +48,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 /* Sidebar Styles */
 
+
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -148,13 +149,50 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   text-align: center;
   padding: 0!important;
 }
-
+.modal-googlebutton
+{
+  margin-bottom:10px;
+  margin-top:13px;
+  margin-left:15px;
+}
+.modal-closebutton
+{
+  position:absolute;
+  text-decoration:none;
+  color:darkgray;
+  right:10px;
+  font-size:1.5em;
+  top:0;
+}
+.modal-closebutton:hover
+{
+  text-decoration:none;
+}
+.modal-breaker
+{
+  margin-left:-40px;
+  padding-bottom:15px;
+}
+.modal-overlay-text
+{
+  color:darkgray;
+  text-align:center;
+  left:calc(50% - 10px);
+  position:absolute;
+  margin-top:-45px;
+  background:white;
+}
 .modal:before {
+  text-align: center;
   content: '';
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   margin-right: -4px; /* Adjusts for spacing */
+}
+.modal-inputwrapper
+{
+  padding-bottom:10px;
 }
 
 .modal-dialog {
@@ -162,6 +200,26 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   text-align: left;
   vertical-align: middle;
 }
+
+.modal-infoheader
+{
+  color:darkgray;
+  font-size:0.75em;
+  margin-left:-40px;
+}
+.modal-username-input
+{
+  margin-left:-40px;
+  width:calc(100% + 40px);
+
+}
+.modal-password-input
+{
+  margin-left:-40px;
+  width:calc(100% + 40px);
+}
+
+
 
 
   #wrapper {

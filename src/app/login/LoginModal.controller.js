@@ -12,7 +12,11 @@
     {
       GradeService.loggedIn = true;
       $uibModalInstance.dismiss('cancel');
-    }
+    };
+    vm.close = function()
+    {
+      $uibModalInstance.dismiss('cancel');
+    };
 
   }
 })();
