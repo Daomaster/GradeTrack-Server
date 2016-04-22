@@ -6,7 +6,7 @@
     .module('GradeTrack')
     .service('GradeService', function(){
 
-      this.loggedIn = true;
+      this.loggedIn = false;
       this.lastName = "Prof";
       this.firstName = "name";
 

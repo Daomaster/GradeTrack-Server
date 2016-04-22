@@ -93,7 +93,7 @@
       <div id="wrapper" style="height:100%; width:100%; margin:0;">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div ng-class="vm.isLoggedIn() ? 'sidebar-wrapper' : 'sidebar-wrapper-loggedout'">
           <ul class="sidebar-courses">
               <li ng-repeat="course in vm.courses()">
                 <a class="sidebar-header" href="" ng-click="course.expanded = !course.expanded">
