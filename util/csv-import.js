@@ -1,15 +1,3 @@
-/*
-student name, quiz 1, Homework 2, Quiz 2,, final
-Jason Diaz, 12.3, 34.5, 67.8, asdf , 90.1
-Jason Allen, 23.4, 56.7, 89.0,, 24.6
-Betty J. Rodriguez, 81.3, 57.9, 98.7,, 65.4
-Matthew j. Johnson-Johnson, 32.1, 09.8, 76.5,, 43.2
-Bobby k. kit kat, 32.1, 09.8, 76.5,, 43.2
-123456, 10.9, 87.6, 54.3,, 21.0
-
-Last Name, First Name, Username, Student ID, Last Access, Availability, Weighted Total [Total Pts: up to 0], Total [Total Pts: up to 0]
-*/
-
 var Field = Object.freeze( {
     "FIRST_NAME" : 0x0001,
     "LAST_NAME" : 0x0002,
@@ -21,13 +9,45 @@ var Field = Object.freeze( {
     "TOTAL" : 0x0080,
     "ASSIGNMENT" : 0x0100,
     "GRADE" : 0x0200,
-    "BLANK" : 0x0400,
+    "BLANK" : 0x0400/*,
     "REQUIRED" : 0x0800,
-    "BLACKBOARD" : 0x1000/*,
+    "BLACKBOARD" : 0x1000,
     "" : 0x2000,
     "" : 0x4000,
     "" : 0x8000,*/
 } );
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////////////Stolen from the Internet///////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    var f = files[ 0 ];
+
+        // Only process csv files.
+        if (f.type.match('csv.*')) {
+            var reader = new FileReader();
+
+            reader.onload = function( e ) {
+                var contents = e.target.result;
+                if( contents[ contents.length - 1 ] == "\n" ) {
+                    contents = contents.slice( 0, -1 );
+                }
+                var csv = csvToJson( contents );
+                document.getElementById( "output" ).innerHTML = JSON.stringify( csv, null, 2 );
+                console.log( JSON.stringify( csv, null, 2 ) );
+            };
+
+            reader.readAsText(f);
+        } else {
+            var e = "File must be of type csv.";
+            document.getElementById( "output" ).innerHTML = e;
+            console.log( e );
+        }
+}
+
+document.getElementById('import').addEventListener('change', handleFileSelect, false);
 
 ////////////////////////////////////////////////////////////////////////////////
 function getType( cell ) {
@@ -79,7 +99,7 @@ function getTypes( csv ) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-function getHeader( csv ) {
+function getHeadersRow( csv ) {
     var header = undefined;
 
     // Search all the row and columns for the first name, last name and id 
@@ -110,24 +130,23 @@ function getHeader( csv ) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-function csvToJson() {
-    var output = document.getElementById( "output" );
-    var textBox = document.getElementById( "textBox" );
-    var lines = textBox.value;
+function csvfileToJson() {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        return csvToJson();
+    } else {
+        document.getElementById( "output" ).innerHTML = 'The File APIs are not fully supported in this browser.';
+    }
+}
 
-    var csv = textToArray( lines );
+////////////////////////////////////////////////////////////////////////////////
+function csvToJson( csv ) {
+    var csv = textToArray( csv );
     getTypes( csv );
-
-    var header = getHeader( csv )
-    output.innerHTML += header;
+    var header = getHeadersRow( csv )
 
     var temp = arrayToJson( csv, header );
     var json = temp.json;
     var errors = temp.errors;
-    console.log( "errors: " + errors );
-
-    console.log( JSON.stringify( json, null, 2 ) );
-    output.innerHTML = JSON.stringify( json, null, 2 );
 
     return json;
 }
@@ -223,7 +242,6 @@ function arrayToJson( csv, header ) {
                 console.log( e );
             }
         }
-
 
         if( hasFirst && hasLast && hasId ) {
             json[ temp.id ] = temp;

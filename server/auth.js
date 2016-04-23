@@ -7,7 +7,7 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/signin', function(req, res, next) {
-  res.send("auth/signip");
+  res.send("auth/signin");
 });
 
 module.exports = router;
