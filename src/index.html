@@ -25,15 +25,65 @@
     <![endif]-->
 
     <div ng-controller="MainController as vm" style="height:100%; width:100%; margin:0;">
+
+
+
+      <span style="position:absolute; width:100%; height:100%;" ng-hide="vm.isLoggedIn()">
+        <!-- Dashboard -->
+         <div class="navbar-wrapper">
+           <nav class="navbar navbar-default navbar-fixed-top">
+             <div class="container-fluid">
+               <div class="navbar-header">
+                 <a class="navbar-brand" href="">
+                   <span class="glyphicon glyphicon-signal"></span> GradeTrack </a>
+               </div>
+               <ul class="nav navbar-nav navbar-right">
+               <li>
+                 <button class="btn btn-primary" style="margin-right:10px; margin-top:10px;" ng-click="vm.openLogin('sm')">Log in</button>
+                 </li>
+
+               </ul>
+             </div>
+           </nav>
+         </div>
+        <div class="grad" style="margin-top:52px; width:100%; height:calc(100% - 52px);">
+
+          <div style="position:absolute; width:100%;text-align:center; top:35%;">
+            <h1 class="outlineText" style="font-size:6em;">Stay on track</h1>
+            <h2 class="outlineText" style="font-size:2.5em">GradeTrack is the best way to keep track of your grades</h2>
+
+            <button style="margin-top:10px;" class="btn btn-primary btn-lg">Sign up</button>
+          </div>
+        </div>
+
+
+
+
+      </span>
+
+
+
+      <span ng-hide="!vm.isLoggedIn()">
+
       <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="">
+              <a class="navbar-brand" href="#/">
                 <span class="glyphicon glyphicon-signal"></span> GradeTrack </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-              <li> <a href="">{{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span></a></li>
+              <li>
+              <div class="" dropdown style="margin-top:14px; margin-right:10px; font-size:18px; text-decoration:none;">
+                <a href="" class="dropdown-toggle" style="color:darkgray; text-decoration:none;" dropdown-toggle>
+                  {{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span>
+                </a>
+                <ul class="dropdown-menu" style="z-index:-1;" role="menu">
+                  <li><a href="#/" ng-click="vm.logout();">Sign out</a></li>
+                </ul>
+              </div>
+              </li>
+
             </ul>
           </div>
         </nav>
@@ -43,7 +93,7 @@
       <div id="wrapper" style="height:100%; width:100%; margin:0;">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        <div ng-class="vm.isLoggedIn() ? 'sidebar-wrapper' : 'sidebar-wrapper-loggedout'">
           <ul class="sidebar-courses">
               <li ng-repeat="course in vm.courses()">
                 <a class="sidebar-header" href="" ng-click="course.expanded = !course.expanded">
@@ -75,6 +125,7 @@
         <!-- /#page-content-wrapper -->
 
       </div>
+    </span>
     </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
