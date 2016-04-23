@@ -22,11 +22,6 @@
         controller: 'StudentsController',
         controllerAs: 'students'
       })
-      .when('/grades', {
-        templateUrl: 'app/grades/grades.html',
-        controller: 'GradesController',
-        controllerAs: 'grades'
-      })
       .otherwise({
         redirectTo: '/'
       });

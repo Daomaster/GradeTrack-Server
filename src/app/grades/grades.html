@@ -1,1 +1,38 @@
-Grades Area
+<head>
+  <style>
+    table, th, td{
+      border: 1px solid grey;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+
+    table tr:nth-child(odd){
+      background-color: #f2f2f2;
+    }
+
+    table tr:nth-child(even){
+      background-color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Grades for Students</h2>
+  <div ng-controller="GradesController" as vm style="100%; width:100%">
+
+    <table border = "0">
+      <tr>
+        <td>Last Name</td>
+        <td>First Name</td>
+        <td>Grade Percentage</td>
+        <td>Grade Letter</td>
+      </tr>
+      <tr ng-repeat="course in courses.student460">
+        <td>{{student46.first}}</td>
+        <td>{{student46.last}}</td>
+        <td>{{student46.percent}}</td>
+        <td>{{student46.letter}}</td>
+      </tr>
+    </table>
+
+<div class="grades-wrapper">

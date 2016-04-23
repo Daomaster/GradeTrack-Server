@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="GradeTrack">
+<html ng-app="GradeTrack" style="height:100%; width:100%; margin:0;">
   <head>
     <meta charset="utf-8">
     <title>tempPro</title>
@@ -19,13 +19,12 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body style="height:100%; width:100%; margin:0;">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-
-    <div ng-controller="MainController as vm">
+    <div ng-controller="MainController as vm" style="height:100%; width:100%; margin:0;">
       <div class="navbar-wrapper">
         <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container-fluid">
@@ -41,7 +40,7 @@
       </div>
 
 
-      <div id="wrapper">
+      <div id="wrapper" style="height:100%; width:100%; margin:0;">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -62,12 +61,12 @@
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
-        <div id="page-content-wrapper">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="mainView">
-                  <div ng-view></div>
+        <div id="page-content-wrapper" style="height:100%; width:100%; margin:0;">
+          <div class="container-fluid" style="height:100%; width:100%; margin:0;">
+            <div class="row" style="height:100%; width:100%; margin:0;">
+              <div class="col-lg-12" style="height:100%; width:100%; margin:0;">
+                <div class="mainView" style="height:100%; width:100%; margin:0;">
+                  <div ng-view style="height:100%; width:calc(100vw - 250px);  margin:0;"></div>
                 </div>
               </div>
             </div>
@@ -76,26 +75,6 @@
         <!-- /#page-content-wrapper -->
 
       </div>
-    </div>
-    <!--<div class="wrapper">
-      <div ng-controller="NavController">
-        <ul class="topbar">
-          <li>CS472</li>
-          <li>CS473</li>
-          <li>CS474</li>
-          <li>Name</li>
-        </ul>
-        <div id="sidebar-wrapper">
-          <ul class="sidebar-nav">
-            <li><a href="#/information">info</a></li>
-            <li><a href="#/students">students</a></li>
-            <li><a href="#/grades">grades</a></li>
-            <li><a href="#/assignments">assignments</a></li>
-            <li><a href="#/">main</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>-->
     </div>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

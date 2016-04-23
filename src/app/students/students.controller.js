@@ -6,7 +6,7 @@
     .controller('StudentsController', StudentsController);
 
   /** @ngInject */
-  function StudentsController() {
+  function StudentsController(GradeService) {
 
   }
 })();
