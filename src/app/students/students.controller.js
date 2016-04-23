@@ -7,10 +7,9 @@
 
   /** @ngInject */
   function StudentsController(StudentService) {
-	var vm = this;
-	
-	vm.list = function() {
-		return StudentService.list();
-	};
+    var vm = this;
+
+    vm.list = function() { return StudentService.list(); };
+    vm.activeCourse = function() { return GradeService.getActiveCourse() };
   }
 })();
