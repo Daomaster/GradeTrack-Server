@@ -40,6 +40,7 @@
             }
           ]
         };
+        
         this.courses.push(c);
         this.gradeAverageArray.push(c.average);
         this.courseNameArray.push(c.name);
