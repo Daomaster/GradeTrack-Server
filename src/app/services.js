@@ -6,7 +6,7 @@
     .module('GradeTrack')
     .service('GradeService', function(){
 
-      this.loggedIn = false;
+      this.loggedIn = true;
       this.lastName = "Prof";
       this.firstName = "name";
 
@@ -40,7 +40,7 @@
             }
           ]
         };
-        
+
         this.courses.push(c);
         this.gradeAverageArray.push(c.average);
         this.courseNameArray.push(c.name);

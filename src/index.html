@@ -41,7 +41,6 @@
                <li>
                  <button class="btn btn-primary" style="margin-right:10px; margin-top:10px;" ng-click="vm.openLogin('sm')">Log in</button>
                  </li>
-
                </ul>
              </div>
            </nav>
@@ -105,6 +104,9 @@
                        <li ng-class="vm.isActiveTab(course, tab) ? 'activeTab' : ''" ng-repeat="tab in vm.tabs"><a href="{{tab.url}}" ng-click="vm.clickTab(course,tab)" >{{tab.label}}</a></li>
                      </ul>
                    </div>
+              </li>
+              <li>
+                <a href="" ng-click="vm.openAddClass('lg')">Add Course</a>
               </li>
           </ul>
         </div>

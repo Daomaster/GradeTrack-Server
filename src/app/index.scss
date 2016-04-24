@@ -168,6 +168,17 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 {
   text-decoration:none;
 }
+
+.modal-removestudent
+{
+  text-decoration:none;
+  color:darkgray;
+  font-size:1.5em;
+}
+.modal-removestudent:hover
+{
+  text-decoration:none;
+}
 .modal-breaker
 {
   margin-left:-40px;
@@ -210,7 +221,6 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 .modal-username-input
 {
   margin-left:-40px;
-  width:calc(100% + 40px);
 
 }
 .modal-password-input
