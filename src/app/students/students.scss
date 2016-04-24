@@ -1,22 +1,17 @@
 // change to students
 // fix table styling here to match assignments
 
-.assignments-assignmentlist
+.students-studentlist table, th, td
 {
-  list-style:none;
-  margin:0;
-  padding:0;
+  border: 2px solid black;
+	border-collapse: collapse;
+	padding: 5px;
 }
-.assignments-assignmentlist li
+
+.students-studentlist td
 {
   overflow:hidden;
   border-bottom: thin solid #000000;
-}
-
-table, th , td {
-	border: 2px solid black;
-	border-collapse: collapse;
-	padding: 5px;
 }
 
 table tr:nth-child(odd) {
@@ -31,7 +26,7 @@ table tr:nth-child(even) {
 //  main container
 //----------------------------
 
-.assignments-leftside {
+.students-main {
   padding: 10px 10px 10px 25px;
   transition:all linear 0.1s;
   width:100%;

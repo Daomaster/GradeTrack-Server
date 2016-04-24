@@ -6,7 +6,7 @@
     .controller('StudentsController', StudentsController);
 
   /** @ngInject */
-  function StudentsController(StudentService) {
+  function StudentsController(StudentService, GradeService) {
     var vm = this;
 
     vm.list = function() { return StudentService.list(); };
