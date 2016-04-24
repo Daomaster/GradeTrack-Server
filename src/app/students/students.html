@@ -9,23 +9,27 @@
 		</div>
 
 <div style="margin-top:10px; margin-bottom:10px; height:calc(100vh - 170px); overflow:auto; background:#FFFFFF;">
-	<!--Thinking about changing this to list (maybe with expand/collapse)-->
-	<table class="students-studenttable">
-		<tr>
-			<td width="5%"><b>Last Name</b></td>
-			<td width="5%"><b>First Name</b></td>
-			<td width="3%"><b>Grade</b></td>
-			<td width="5%"><b>E-mail</b></td>
-			<td width="3%"><b>ID</b></td>
-		</tr>
+	<!--Switching to BS table-->
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Last Name</th>
+				<th>First Name</th>
+				<th>Grade</th>
+				<th>E-mail</th>
+				<th>ID</th>
+			</tr>
+		</thead>
 
-		<tr ng-repeat="student in students.list()">
-			<td>{{student.last}}</td>
-			<td>{{student.first}}</td>
-			<td>{{student.grade}}</td>
-			<td>{{student.email}}</td>
-			<td>{{student.id}}</td>
-		</tr>
+		<tbody>
+			<tr ng-repeat="student in students.list()">
+				<td>{{student.last}}</td>
+				<td>{{student.first}}</td>
+				<td>{{student.grade}}</td>
+				<td>{{student.email}}</td>
+				<td>{{student.id}}</td>
+			</tr>
+		</tbody>
 	</table>
  </div>
 
