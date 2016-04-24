@@ -9,9 +9,11 @@ router.post('/user', function(req, res, next) {
 router.post('/addStudents', function(req, res, next) {
   res.send("info/addStudents");
 
-  var receivers = ["daoyun.zeng@gmail.com","stenen@unlv.nevada.edu"];
-  var title = "CS 135";
-  var insName = "Lee Mishe";
+  var receivers = req.body.students;
+  var title = req.body.title;
+  var insName = req.body.insName;
+
+  console.log(receivers);
 
   mail.transporter.sendMail({
        from: "Gradetrack Team <noreply@gradetrack.com>",
@@ -31,29 +33,6 @@ router.post('/addStudents', function(req, res, next) {
 
 router.post('/addclass', function(req, res, next) {
   res.send("info/addclass");
-});
-
-router.post('/addstudents', function(req, res, next) {
-  res.send("info/addclass");
-  var receivers = ["daoyun.zeng@gmail.com","stenen@unlv.nevada.edu"];
-  var title = "CS 135";
-  var insName = "Lee Misch";
-
-  var mailOptions = {
-    from: 'Grade Track Team <gradetrack.noreply@gmail.com>',
-    bcc: receivers,
-    subject: title+' Registration',
-    html: "<b>Your instructor "+insName+" Inivited you to join "+title+" </b><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here to join</a><br />"
-  };
-
-  mail.transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        return console.log(error);
-    }
-    console.log('Message sent: ' + info.response);
-});
-
-
 });
 
 router.post('/storesyl', function(req, res, next) {

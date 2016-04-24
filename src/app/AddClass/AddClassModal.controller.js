@@ -5,7 +5,7 @@
     .module('GradeTrack')
     .controller('AddClassModalController', AddClassModalController);
   /** @ngInject */
-  function AddClassModalController(GradeService, $scope, $uibModalInstance) {
+  function AddClassModalController(GradeService, $http, $scope, $uibModalInstance) {
     var vm = this;
 
     vm.close = function()
@@ -38,6 +38,11 @@
       c.instructor = GradeService.firstName + " " + GradeService.lastName;
 
       // do stuff
+      $http.post("http://localhost:3000/api/info/addstudents", {
+        title: c.title,
+        students: c.students,
+        insName: c.instructor
+      });
 
 
     };
@@ -52,9 +57,6 @@
       }
       vm.addCourseServerPackage();
       vm.close();
-
-      
-
     };
     vm.addStudent = function(name_)
     {
