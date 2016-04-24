@@ -47,6 +47,16 @@
         size: size
       });
     };
+    vm.openAddClass = function (size) {
+
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'app/AddClass/AddClassModal.html',
+        controller: 'AddClassModalController',
+        controllerAs: 'AddClassModalController',
+        size: size
+      });
+    };
 
     vm.activeTab = vm.tabs[0];
     vm.lastName = GradeService.firstName;
