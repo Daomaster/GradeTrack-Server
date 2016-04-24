@@ -9,13 +9,16 @@ router.post('/user', function(req, res, next) {
 router.post('/addStudents', function(req, res, next) {
   res.send("info/addStudents");
 
+  var receivers = ["daoyun.zeng@gmail.com","stenen@unlv.nevada.edu"];
+  var title = "CS 135";
+  var insName = "Lee Mishe";
+
   mail.transporter.sendMail({
-       from: "Gradetrack Team <noreply@gradetrack.com>", // sender address
-       to: "Daoyun <daoyun.zeng@gmail.com>", // comma separated list of receivers
-       subject: "Class Registration", // Subject line
-       text: "Please click the link blow to add this class to your Gradetrack account:",
+       from: "Gradetrack Team <noreply@gradetrack.com>",
+       bcc: receivers,
+       subject: title + " Registration",
        html:
-       "<b>Signup Confirmation ✔</b><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a>"
+       "<b>Signup Confirmation</b><br /><br /><p>Your teacher "+insName+" invite your to join "+title+" :</p><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a><br />"
     }, function(error, response){
        if(error){
            console.log(error);
