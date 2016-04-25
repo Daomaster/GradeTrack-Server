@@ -30,6 +30,11 @@ angular
       $scope.editInfo = !$scope.editInfo;
     }
 
+    $scope.toggleDisable3 = function()
+    {
+      $scope.show = true; 
+    }
+
     // $scope.syllabus = [{
     //   classSection: '1001',
     //   classHour:'MW 2:30 ~ 3:45'

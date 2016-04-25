@@ -8,13 +8,13 @@
     <div class="infoHeader">
       <h3> Class {{classInfo.id}} - {{classInfo.name}}
         <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="glyphicon glyphicon-edit"> </span>
         </button>
       </h3>
     </div>
 
     <div class="infoSection">
-      <label>Description:</label>
+      <label>Desption:</label>
         <br>
       <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
       <br>
@@ -67,10 +67,20 @@
     <div class="infoHeader">
       <h3> Teacher's Assistant
         <lable>
-        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
-        <span class="glyphicon glyphicon-plus"></span>
-        </button>
-        </lable>
-    </h3>
+          <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </h3>
+
+        <div ng-show="ShowTab" >
+          <div class="infoSection">
+            <label>Description:</label>
+            <br>
+            <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
+            <br>
+            <br>
+          </div>
+        </div>
+      </lable>
     </div>
   </section>
