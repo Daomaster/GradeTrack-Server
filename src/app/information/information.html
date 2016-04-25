@@ -67,10 +67,36 @@
     <div class="infoHeader">
       <h3> Teacher's Assistant
         <lable>
-        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+        <button type="button" class="btn btn-default infoButton" ng-click="toggleShow()">
         <span class="glyphicon glyphicon-plus"></span>
         </button>
         </lable>
-    </h3>
+      </h3>
     </div>
+
+
+    <div class="infoSection" ng-disabled="!show">
+      <label>
+        <ul class="list-group">
+          <br>
+          <li class="list-group-item">
+            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}}" ><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Email: <input type="text" value="{{profile.email}}"><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Phone: <input type="text" value="{{profile.email}}"><br>
+          </li>
+          <br>
+          <li class="list-group-item">
+            Office Houes: <input type="text" value="{{profile.office}}">
+                     <input type="text" value="{{profile.hours}}"><br>
+          </li>
+                    <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
+      </label>
+    </div>
+
   </section>

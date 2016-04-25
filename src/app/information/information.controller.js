@@ -29,6 +29,10 @@ angular
     {
       $scope.editInfo = !$scope.editInfo;
     }
+    $scope.toggleShow3 = function()
+    {
+      $scope.show = true;
+    }
 
     // $scope.syllabus = [{
     //   classSection: '1001',
