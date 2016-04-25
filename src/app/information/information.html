@@ -8,13 +8,13 @@
     <div class="infoHeader">
       <h3> Class {{classInfo.id}} - {{classInfo.name}}
         <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
-          <span class="glyphicon glyphicon-edit"></span>
+          <span class="glyphicon glyphicon-edit"> </span>
         </button>
       </h3>
     </div>
 
     <div class="infoSection">
-      <label>Description:</label>
+      <label>Desption:</label>
         <br>
       <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
       <br>
@@ -61,42 +61,31 @@
     </div>
   </section>
 
-  <!-- Section for TA -->
+  <!-- Section for TA   (the bottom not works yet)-->
   <section class="col-xs-9">
 
     <div class="infoHeader">
       <h3> Teacher's Assistant
         <lable>
-        <button type="button" class="btn btn-default infoButton" ng-click="toggleShow()">
-        <span class="glyphicon glyphicon-plus"></span>
-        </button>
+          <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
         </lable>
       </h3>
     </div>
 
-
-    <div class="infoSection" ng-disabled="!show">
-      <label>
+    <div class="infoSection" ng-show="!ShowTab">
+      <lable>
         <ul class="list-group">
           <br>
           <li class="list-group-item">
-            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}}" ><br>
+            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
           </li>
           <br>
           <li class="list-group-item">
-            Email: <input type="text" value="{{profile.email}}"><br>
+            Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
           </li>
-          <br>
-          <li class="list-group-item">
-            Phone: <input type="text" value="{{profile.email}}"><br>
-          </li>
-          <br>
-          <li class="list-group-item">
-            Office Houes: <input type="text" value="{{profile.office}}">
-                     <input type="text" value="{{profile.hours}}"><br>
-          </li>
-                    <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
-      </label>
+        </lable>
+      </div>
     </div>
-
   </section>

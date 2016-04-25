@@ -6,7 +6,10 @@
     .controller('StudentsController', StudentsController);
 
   /** @ngInject */
-  function StudentsController() {
+  function StudentsController(StudentService, GradeService) {
+    var vm = this;
 
+    vm.list = function() { return StudentService.list(); };
+    vm.activeCourse = function() { return GradeService.getActiveCourse() };
   }
 })();

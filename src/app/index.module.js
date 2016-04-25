@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('GradeTrack', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'toastr']);
+    .module('GradeTrack', ['ngRoute', 'ngAnimate', 'chart.js', 'ui.bootstrap', 'toastr']);
 
 })();

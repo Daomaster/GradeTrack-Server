@@ -1,0 +1,29 @@
+//----------------------------
+//  main container
+//----------------------------
+
+.students-main {
+  padding: 10px 10px 10px 25px;
+  transition:all linear 0.1s;
+  width:100%;
+  left:0;
+  height:100%;
+
+}
+
+.students-wrapper {
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:calc(100vw - 235px);
+  background: #FFFFFF;
+}
+
+.students-full-main-area {
+  position:absolute;
+  transition:all linear 0.1s;
+  left:0;
+  width:calc((100vw - 235px));
+  height:100%;
+}

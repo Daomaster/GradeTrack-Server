@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h1 style="margin-top:10px; text-align:center;">Log In</h1>
+  <a href="" class="modal-closebutton" ng-click="LoginModalController.close()">x</a>
+</div>
+<div class="modal-body">
+  <ul style="list-style:none;">
+    <li style="">
+      <button class="btn btn-danger btn modal-googlebutton">Log In Using Google</button>
+    </li>
+    <li>
+      <hr class="modal-breaker">
+      <span class="modal-overlay-text">OR</span>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">EMAIL ADDRESS</div>
+      <div>
+        <input class="modal-username-input" type="text" placeholder="name@company.com">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">PASSWORD</div>
+      <div>
+        <input class="modal-password-input" type="password" placeholder="Password">
+      </div>
+    </li>
+    <li style="height:20px;">
+      <button class="btn btn-primary" style="float:right;" ng-click="LoginModalController.login()">Log In</button>
+    </li>
+  </ul>
+</div>

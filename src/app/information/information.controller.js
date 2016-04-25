@@ -31,15 +31,8 @@ angular
     }
     $scope.toggleShow3 = function()
     {
-      $scope.show = true;
-    }
 
-    // $scope.syllabus = [{
-    //   classSection: '1001',
-    //   classHour:'MW 2:30 ~ 3:45'
-    // },{
-    //   classSection: '1002',
-    //   classHour:'TT 10:00 ~ 11:15'
-    // }]
+      $scope.showTab = !$scope.showTab;
+    }
 
   }])
