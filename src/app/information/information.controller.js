@@ -6,7 +6,12 @@
     .controller('InformationController', InformationController);
 
   /** @ngInject */
-  function InformationController() {
+  function InformationController(InfoService, GradeService) {
+    var vm = this;
+
+    vm.activeCourse = function() { return GradeService.getActiveCourse() };
+
+    // TODO: Connections to service
 
   }
 })();
