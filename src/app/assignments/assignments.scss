@@ -7,13 +7,214 @@
   margin:0;
   padding:0;
 }
+.assignments-addassignmentbutton
+{
+  margin-top:10px;
+}
 .assignments-assignmentlist li
 {
   overflow:hidden;
   border-bottom: thin solid #000000;
 }
+.assignment-assignlistwrapper
+{
+  margin: 0;
+  height:40px;
+}
+.calendarWrapper
+{
+  float:right;
+  margin-top:3px;
+}
+.calendarWrapper button
+{
+  height:34px;
+}
+.calendarInput
+{
+  float:right;
+  margin-top:3px;
+}
+.calendarInput input
+{
+  width:auto;
+}
+.rightbox-Header
+{
+  background:#d4e4fa;
+  border-bottom:thin solid #000000;
+  height:35px;
+  margin-left:-10px;
+  margin-right:-10px;
+}
+.rightbox-piechart
+{
+  position:absolute;
+  top:45px;
+  right:10px;
+  width:140px;
+}
+.rightbox-studentname
+{
+  float:left;
+  margin-top:6px;
+}
+.rightbox-studentGradeWrapper
+{
+  float:right;
+  margin-right:10px;
+}
+.rightbox-studentGradeWrapper span
+{
+  display:inline-block;
+  margin-top:6px;
+  right:85px;
+}
+.rightbox-studentGradeWrapper input
+{
+  display:inline-block;
+  margin-top:2px;
+  width:60px;
+  right:0;
+}
+.rightbox-gradesarea
+{
+  width:99%;
+  margin-bottom:10px;
+  background:#FFFFFF;
+  height:calc(100vh - 380px);
+  overflow:auto;
+}
+.rightbox-gradesarea ul
+{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.rightbox-gradesarea ul li
+{
+  border-bottom:thin solid #000000;
+  height:30px;
+}
+.rightbox-divider
+{
+  width:100%;
+  left:0;
+  margin-left:-5px;
+  margin-top:2px;
+}
+.rightbox-pointswrapper
+{
+  height:35px;
+  margin-left:-15px;
+  margin-right:-15px;
+  border:thin solid #000000;
+}
+.rightbox-pointswrapper span
+{
+  height:30px;
+  float:left;
+  margin-top:4px;
+  margin-left:18px;
+}
+.rightbox-gradesheader
+{
+  margin-bottom:10px;
+}
+.rightbox-descriptionTitle
+{
+  padding-top:10px;
+}
+.rightbox-descriptionTitle h4
+{
+  display:inline
+}
+.rightbox-descriptioninput
+{
+  margin-right:160px;
+}
+.rightbox-descriptioninput textarea
+{
+  margin-top:5px;
+  display:inline;
+  width:100%;
+  resize:none;
+  height:100px;
+}
+.rightbox-Header input
+{
+  margin-left:10px;
+  margin-top:2px;
+  font-size:20px;
+  background:none;
+  border:none;
+}
+.rightbox-Header a
+{
+  position:absolute;
+  right:10px; top:4px;
+  font-size:16px;
+  font-weight: bold;
+  text-decoration: none;
+  color:#000000;
+}
+.assignments-rightbox
+{
+  overflow-x:hidden;
+  border-radius:10px;
+  border:thin solid #000000;
+  background:#e9eef5;
+  position:relative;
+  left:0;
+  width:100%;
+  top:0;
+  height:100%;
+  padding-left:10px;
+  overflow-y:hidden;
+}
+.assignments-assignmentname
+{
+  float:left;
+  display:inline-block;
+  text-align:center;
+}
+.assignmentName-background
+{
+  margin-top:10px;
+  margin-bottom:10px;
+  height:calc(100vh - 170px);
+  overflow:auto;
+  background:#FFFFFF;
+}
+.assignments-coursename
+{
+  padding-top:4px;
+  padding-left:10px;
+  font-size:20px;
+}
 
-
+.assignments-leftbox
+{
+  overflow:hidden;
+  border-radius:10px;
+  padding-left:10px;
+  padding-right:10px;
+  background:#e9eef5;
+  border:thin solid #000000;
+  position:relative;
+  left:0;
+  width:100%;
+  top:0;
+  height:100%;
+}
+.assignments-header
+{
+  background:#d4e4fa;
+  border-bottom:thin solid #000000;
+  height:35px;
+  margin-left:-10px;
+  margin-right:-10px;
+}
 
 .assignments-fullArea
 {

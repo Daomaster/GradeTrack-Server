@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h1 style="margin-top:10px; text-align:center;">Add Class</h1>
+  <h1 class="modal-addClassHeader">Add Class</h1>
   <a href="" class="modal-closebutton" ng-click="AddClassModalController.close()">x</a>
 </div>
 <div class="modal-body">
@@ -22,7 +22,7 @@
             </li>
             <li ng-repeat="student in AddClassModalController.students">
 
-              <input style="width:calc(100% - 20px);" placeholder="name@institution.edu" ng-model = student.name>
+              <input class="modal-studentnameinput" placeholder="name@institution.edu" ng-model = student.name>
               <a href="" class="modal-removestudent" ng-click="AddClassModalController.removeStudent(student)">x</a>
             </li>
           </ul>
