@@ -1,0 +1,120 @@
+.modal-googlebutton
+{
+  margin-bottom:10px;
+  margin-top:13px;
+  margin-left:15px;
+}
+.modal-closebutton
+{
+  position:absolute;
+  text-decoration:none;
+  color:darkgray;
+  right:10px;
+  font-size:1.5em;
+  top:0;
+}
+
+.modal-addClassHeader
+{
+  margin-top:10px;
+  text-align:center;
+}
+.modal-addStudentsInput
+{
+  width:calc(100% - 120px);
+}
+.modal-addStudentsButton
+{
+  height:26px;
+  width:120px;
+  padding-top:3px;
+  float:right;
+  border-radius: 0;
+}
+.modal-studentbox
+{
+  border: thin solid darkgray;
+  width:calc(100% + 40px);
+  height:200px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  margin-left:-40px;
+}
+.modal-studentnameinput
+{
+  width:calc(100% - 20px);
+}
+.modal-studentbox ul
+{
+  list-style:none; padding-left:0; margin-left:0;
+}
+.modal-studentbox ul li
+{
+  height:26px;
+}
+
+.modal-closebutton:hover
+{
+  text-decoration:none;
+}
+
+.modal-removestudent
+{
+  text-decoration:none;
+  color:darkgray;
+  font-size:1.5em;
+}
+.modal-removestudent:hover
+{
+  text-decoration:none;
+}
+.modal-breaker
+{
+  margin-left:-40px;
+  padding-bottom:15px;
+}
+.modal-overlay-text
+{
+  color:darkgray;
+  text-align:center;
+  left:calc(50% - 10px);
+  position:absolute;
+  margin-top:-45px;
+  background:white;
+}
+.modal:before {
+  text-align: center;
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
+}
+.modal-inputwrapper
+{
+  padding-bottom:10px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.modal-infoheader
+{
+  color:darkgray;
+  font-size:0.75em;
+  margin-left:-40px;
+}
+.modal-username-input
+{
+  margin-left:-40px;
+
+}
+.modal-password-input
+{
+  margin-left:-40px;
+  width:calc(100% + 40px);
+}
+

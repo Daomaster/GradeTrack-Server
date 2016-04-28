@@ -24,6 +24,7 @@
 
     vm.addCourseServerPackage = function()
     {
+
       var c =
       {
         title: vm.courseName,
