@@ -28,8 +28,8 @@
 
 
 
+      <!-- logged out screen -->
       <span style="position:absolute; width:100%; height:100%;" ng-hide="vm.isLoggedIn()">
-        <!-- Dashboard -->
          <div class="navbar-wrapper">
            <nav class="navbar navbar-default navbar-fixed-top">
              <div class="container-fluid">
@@ -54,14 +54,10 @@
             <button style="margin-top:10px;" class="btn btn-primary btn-lg">Sign up</button>
           </div>
         </div>
-
-
-
-
       </span>
 
 
-
+      <!-- logged in screen -->
       <span ng-hide="!vm.isLoggedIn()">
 
       <div class="navbar-wrapper">
@@ -73,11 +69,11 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
               <li>
-              <div class="" dropdown style="margin-top:14px; margin-right:10px; font-size:18px; text-decoration:none;">
-                <a href="" class="dropdown-toggle" style="color:darkgray; text-decoration:none;" dropdown-toggle>
+              <div class="" uib-dropdown style="margin-top:14px; margin-right:10px; font-size:18px; text-decoration:none;">
+                <a href="" class="dropdown-toggle" style="color:darkgray; text-decoration:none;" uib-dropdown-toggle>
                   {{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span>
                 </a>
-                <ul class="dropdown-menu" style="z-index:-1;" role="menu">
+                <ul class="uib-dropdown-menu" style="z-index:-1;" role="menu">
                   <li><a href="#/" ng-click="vm.logout();">Sign out</a></li>
                 </ul>
               </div>

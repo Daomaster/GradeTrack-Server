@@ -15,6 +15,14 @@
 
       this.courses=[];
 
+      this.postLogin = function()
+      {
+        this.currentCourseID = 0;
+        this.currentAssignmentID = 0;
+        if (this.courses.length > 0)
+          this.activeCourse = this.courses[0];
+      };
+
       this.addCourse = function(name_)             // add data as it becomes needed
       {
         var c =
@@ -50,13 +58,21 @@
       this.currentCourseID = 0;
       this.getActiveCourse = function() { return this.courses[this.currentCourseID]};
       this.setActiveCourse = function(id) {
-        this.currentCourseID = id;
-        this.currentAssignmentID = 0; // reset for safety
+      this.currentCourseID = id;
+      this.currentAssignmentID = 0; // reset for safety
       };
       this.currentAssignmentID = 0;
       this.getActiveAssignment = function() { return this.getActiveCourse().assignments[this.currentAssignmentID]; };
       this.setActiveAssignment = function(id) { this.currentAssignmentID = id; };
 
+      this.purgeData = function() // for use on logout
+      {
+        this.lastName = "";
+        this.firstName = "";
+        this.courses = [];
+        this.gradeAverageArray = [];
+        this.courseNameArray = [];
+      };
 
 
       this.addStudent = function(course, name_, id_) {

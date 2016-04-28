@@ -178,6 +178,16 @@
   display:inline-block;
   text-align:center;
 }
+.leftside-assignmentname-input
+{
+  position:absolute;
+  width:calc(100% - 260px);
+  vertical-align:middle;
+  height:40px;
+  margin-top:0;
+  background:none;
+  border:none;
+}
 .assignmentName-background
 {
   margin-top:10px;

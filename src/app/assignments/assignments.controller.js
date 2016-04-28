@@ -22,6 +22,33 @@
         vm.showDetails = true;
     };
 
+    vm.SendModifiedDueDate = function(assignment)
+    {
+      //$$placeholder - due date for assignment has been changed
+      console.log("SendModifiedDueDate: " + assignment.name + " - " + assignment.dueDate);
+    };
+
+    vm.SendModifiedGrade = function(assignment, student)
+    {
+      //$$placeholder - grade for student on assignment has been changed
+      console.log("SendModifiedGrade: " + student.name + " on " + assignment.name + " " + student.assignmentGrades[assignment.id]);
+    };
+    vm.SendModifiedPoints = function(assignment)
+    {
+      //$$placeholder - points for assignment have been modified
+      console.log("SendModifiedPoints: " + assignment.name + " - " + assignment.points);
+    };
+    vm.SendModifiedDescription = function(assignment)
+    {
+      //$$placeholder - descriptions of assignment has been modified
+      console.log("SendModifiedDescription: " + assignment.name + " - " + assignment.description);
+    };
+    vm.SendModifiedAssignmentName = function(assignment)
+    {
+      //$$placeholder - name of assignment has been modified
+      console.log("SendModifiedAssignmentName: " + assignment.name);
+    };
+
     vm.getGradeIndex = function(percent)
     {
       if (percent >= 0.9)
