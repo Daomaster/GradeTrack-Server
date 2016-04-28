@@ -19,8 +19,8 @@ router.post('/signup', function(req, res, next) {
   // Then push the username to the firebase
 
   config.baseRef.child("users").on("value", function(snapshot) {
-    var b = snapshot.child("davism").exists();
-    if (b) {
+    var userExist = snapshot.child("davism").exists();
+    if (userExist) {
       res.send("User exists");
     }
     else {
