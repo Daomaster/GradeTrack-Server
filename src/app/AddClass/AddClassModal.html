@@ -11,16 +11,15 @@
         <input class="modal-username-input" ng-model="AddClassModalController.courseName" type="text" placeholder="Class Name">
       </div>
     </li>
-    <li style="height:20px;">
-      <input style="right:0; margin-right:95px; position:absolute; width:400px;" type="text" ng-model="AddClassModalController.studentString" placeholder="Enter students, separated by commas">
-      <button class="btn btn-primary" style="margin-bottom:10px;float:right;" ng-click="AddClassModalController.addMultipleStudents()">Import</button>
-    </li>
     <li class="modal-inputwrapper">
       <div class="modal-infoheader">STUDENTS</div>
       <div>
-        <div class="modal-username-input" style="border: thin solid darkgray; width:100%; height:200px; overflow-y:auto;">
-          <ul style="list-style:none; padding-left:0; margin-left:0;">
-            <li><button class="btn btn-block" href="" ng-click="AddClassModalController.addStudent('')">Add Student</button></li>
+        <div class="modal-studentbox">
+          <ul>
+            <li>
+              <input class="modal-addStudentsInput" type="text" ng-model="AddClassModalController.studentString" placeholder="Enter students, separated by commas">
+              <button class="btn btn-block modal-addStudentsButton" ng-click="AddClassModalController.addMultipleStudents()">Add Student(s)</button>
+            </li>
             <li ng-repeat="student in AddClassModalController.students">
 
               <input style="width:calc(100% - 20px);" placeholder="name@institution.edu" ng-model = student.name>

@@ -24,6 +24,7 @@
 
     vm.addCourseServerPackage = function()
     {
+
       var c =
       {
         title: vm.courseName,
@@ -55,7 +56,7 @@
       {
         GradeService.addStudent(course, vm.students[i].name, 0);
       }
-      vm.addCourseServerPackage();
+      //vm.addCourseServerPackage();
       vm.close();
     };
     vm.addStudent = function(name_)
