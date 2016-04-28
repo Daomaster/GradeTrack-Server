@@ -1,6 +1,7 @@
 var nodemailer = require('nodemailer');
+var config = require('./config.js');
 
-var transporter = nodemailer.createTransport('smtps://gradetrack.noreply%40gmail.com:unlv@123@smtp.gmail.com');
+var transporter = nodemailer.createTransport(config.transporterUrl);
 
 var mail = {
   transporter: transporter
