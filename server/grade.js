@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 require( 'firebase' );
 require( 'async' );
-var ref = new Firebase( "https://grade-track.firebaseio.com/" );
+var config = require('./config.js');
+var ref = config.baseRef;
 
 var Field = Object.freeze( {
   FirstName : "FirstName",
