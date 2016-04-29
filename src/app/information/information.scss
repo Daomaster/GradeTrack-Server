@@ -1,0 +1,54 @@
+//----------------------------
+//  main container
+//----------------------------
+
+.information-main {
+  padding: 10px 10px 10px 25px;
+  transition:all linear 0.1s;
+  width:100%;
+  left:0;
+  height:100%;
+
+}
+
+.information-wrapper {
+  position:absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width:calc(100vw - 235px);
+  background: #FFFFFF;
+}
+
+.information-full-main-area {
+  position:absolute;
+  transition:all linear 0.1s;
+  left:0;
+  width:calc((100vw - 235px));
+  height:100%;
+}
+
+// wrap header and sectionand
+.infoHeader{
+  border: 2px solid gray;
+  width:80%;
+  background-color:#b4e0ea;
+  color:gray;
+  text-align:left;
+}
+
+.infoSection {
+  background-color: #e6f3ff;
+  border: 2px solid #e6e6e6;
+  width:80%;
+  float:left;
+  text-align: center;
+  padding:10px;
+  margin-top: 0;
+  margin-bottom:30px;
+}
+
+.infoButton {
+  float: right;
+  margin-right: 10px;
+}
