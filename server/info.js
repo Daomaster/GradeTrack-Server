@@ -42,6 +42,7 @@ router.post('/user', function(req, res, next) {
           if( course[ "public" ].instructor.id == user.schoolId ) {
             var temp = course[ "public" ];
             temp.students = course[ "private" ];
+            temp.courseid = courseId;
             data.courses.push( temp );
             callback( null, null );
           } else {
@@ -54,7 +55,7 @@ router.post('/user', function(req, res, next) {
                 assignments[ key ].grade = grade;
               }
             }
-
+            course[ "public" ].courseid = courseId;
             data.courses.push( course[ "public" ] );
             callback( null, null );
           }
