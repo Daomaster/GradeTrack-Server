@@ -31,7 +31,7 @@ router.post('/update', function(req, res, next) {
 
     // Checks if the course exists
     if( course == null ) {
-      res.send( "invalid courseid" );
+      res.status( 500 ).send( "invalid courseid" );
     }
 
     // Check if student exists
@@ -39,7 +39,7 @@ router.post('/update', function(req, res, next) {
     if( studentId in course[ "private" ] ) {
       student = course[ "private" ][ studentId ];
     } else {
-      res.send( "invalid studentid" );
+      res.status( 500 ).send( "invalid studentid" );
     }
 
     // Checks if the assignment exists
@@ -47,7 +47,7 @@ router.post('/update', function(req, res, next) {
     if( assignmentId in course[ "public" ].assignments ) {
       assignment = course[ "public" ].assignments[ assignmentId ];
     } else {
-      res.send( "invalid assignmentid" );
+      res.status( 500 ).send( "invalid assignmentid" );
     }
 
     // Gets the assignments oldvalue
@@ -104,7 +104,7 @@ router.post('/update', function(req, res, next) {
       courseRef.child( "public/earned" ).set( parseInt( course[ "public" ].earned ) + difference );
     }
     
-    res.send( "success" );
+    res.status( 200 ).send( "Success" );
   });
 });
 
@@ -336,25 +336,25 @@ var getType = function( cell ) {
 
   getDbCourseJson( courseId ).then( function( course ){ 
     if( course === undefined ) {
-      res.send( "Course does not exist" );
+      res.status( 500 ).send( "Course does not exist" );
       return;
     }
 
     csvArray = getCsvArray( csv );
     validCsv = isValidCsv( course, csvArray );
     if( validCsv.valid == false ) {
-      res.send( validCsv.error );
+      res.status( 500 ).send( validCsv.error );
       return;
     } else {
       updateDatabase( course, csvArray, validCsv.header, validCsv.ids );
-      res.send( "success" );
+      res.status( 200 ).send( "success" );
     }
   });
   
 });
 
 router.post('/exportcsv', function(req, res, next) {
-  res.send("grade/exportcsv");
+  res.status( 200 ).send("grade/exportcsv");
 });
 
 module.exports = router;

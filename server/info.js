@@ -10,11 +10,10 @@ router.post('/user', function(req, res, next) {
 
   ref.child( "users/" + username ).once( "value" ).then( function( userSnapshot ) {
     var user = userSnapshot.val();
-    var genError = "Error";
 
     // Error handling for failure to find user
     if( user == null ) {
-      res.send( genError );
+      res.status( 500 ).send( "Failure" );
     }
 
     var data = {};
@@ -28,7 +27,7 @@ router.post('/user', function(req, res, next) {
 
     // If courses is empty then just return now
     if( user.courses == null ) {
-      res.send( data );
+      res.status( 200 ).send( data );
     }
 
     // Get the course information
@@ -70,14 +69,14 @@ router.post('/user', function(req, res, next) {
     }
 
     async.parallel( promises, function( err, result ) {
-      res.send( data );
+      res.status( 200 ).send( data );
     });
 
   });
 });
 
 router.post('/addStudents', function(req, res, next) {
-  res.send("info/addStudents");
+  res.status( 200 ).send("info/addStudents");
 
   var receivers = req.body.students;
   var title = req.body.title;
@@ -102,15 +101,15 @@ router.post('/addStudents', function(req, res, next) {
 });
 
 router.post('/addclass', function(req, res, next) {
-  res.send("info/addclass");
+  res.status( 200 ).send("info/addclass");
 });
 
 router.post('/storesyl', function(req, res, next) {
-  res.send("info/storesyl");
+  res.status( 200 ).send("info/storesyl");
 });
 
 router.post('/getsyl', function(req, res, next) {
-  res.send("info/getsyl");
+  res.status( 200 ).send("info/getsyl");
 });
 
 module.exports = router;
