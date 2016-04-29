@@ -6,12 +6,11 @@
     .controller('AssignmentsController', AssignmentsController);
 
   /** @ngInject */
-  function AssignmentsController(GradeService) {
+  function AssignmentsController(GradeService, $log) {
     var vm = this;
     vm.showDetails = false;
     vm.activeCourse = function() { return GradeService.getActiveCourse()};
     vm.addAssignment = function(assignmentName) { GradeService.addAssignment(vm.activeCourse(), "Enter Description", assignmentName)};
-
 
     vm.activeAssignment = function() { return GradeService.getActiveAssignment(); };
     vm.setActiveAssignment = function(id) { GradeService.setActiveAssignment(id); };
@@ -25,28 +24,28 @@
     vm.SendModifiedDueDate = function(assignment)
     {
       //$$placeholder - due date for assignment has been changed
-      console.log("SendModifiedDueDate: " + assignment.name + " - " + assignment.dueDate);
+      $log.log("SendModifiedDueDate: " + assignment.name + " - " + assignment.dueDate);
     };
 
     vm.SendModifiedGrade = function(assignment, student)
     {
       //$$placeholder - grade for student on assignment has been changed
-      console.log("SendModifiedGrade: " + student.name + " on " + assignment.name + " " + student.assignmentGrades[assignment.id]);
+      $log.log("SendModifiedGrade: " + student.name + " on " + assignment.name + " " + student.assignmentGrades[assignment.id]);
     };
     vm.SendModifiedPoints = function(assignment)
     {
       //$$placeholder - points for assignment have been modified
-      console.log("SendModifiedPoints: " + assignment.name + " - " + assignment.points);
+      $log.log("SendModifiedPoints: " + assignment.name + " - " + assignment.points);
     };
     vm.SendModifiedDescription = function(assignment)
     {
       //$$placeholder - descriptions of assignment has been modified
-      console.log("SendModifiedDescription: " + assignment.name + " - " + assignment.description);
+      $log.log("SendModifiedDescription: " + assignment.name + " - " + assignment.description);
     };
     vm.SendModifiedAssignmentName = function(assignment)
     {
       //$$placeholder - name of assignment has been modified
-      console.log("SendModifiedAssignmentName: " + assignment.name);
+      $log.log("SendModifiedAssignmentName: " + assignment.name);
     };
 
     vm.getGradeIndex = function(percent)

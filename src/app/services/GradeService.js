@@ -102,6 +102,12 @@
           dueDate: new Date(),
           gradeArray: [0,0,0,0,0] //for graph display
         };
+        t.gradeArray[4]= course.students.length;  //initialize to all F (for graph)
+        for (var i = 0; i < course.students.length;++i)
+        {
+          course.students[i].assignmentGrades.push(0);
+          course.students[i].oldAssignmentGrades.push(0);
+        }
         course.assignments.push(t);
       };
 
