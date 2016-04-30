@@ -99,14 +99,14 @@
          return new Date(year,month,day);
       };
 
-      this.addAssignment = function(course, description_, assignmentName)
+      this.addAssignment = function(course, description_, assignmentName, _points)
       {
         var t = {
           name: assignmentName,
           description: description_,
           datepickerOpen: false,    // assignment menu usage
           id: course.assignments.length,
-          points: 500,
+          points: _points,
           type: "Test",
           dueDate: this.randomDate(),
           gradeArray: [0,0,0,0,0] //for graph display
@@ -127,7 +127,7 @@
         var c = this.addCourse("CS" + (460+i).toString());
         for (var j = 0; j < 5; ++j)
         {
-          this.addAssignment(c, "Enter Description","Assignment " + j.toString());
+          this.addAssignment(c, "Enter Description","Assignment " + j.toString(), 500);
         }
 
         for (var k = 0; k < 30; ++k)

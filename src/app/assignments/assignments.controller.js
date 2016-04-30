@@ -6,11 +6,10 @@
     .controller('AssignmentsController', AssignmentsController);
 
   /** @ngInject */
-  function AssignmentsController(GradeService, $log) {
+  function AssignmentsController(GradeService, $log, $uibModal) {
     var vm = this;
     vm.showDetails = false;
     vm.activeCourse = function() { return GradeService.getActiveCourse()};
-    vm.addAssignment = function(assignmentName) { GradeService.addAssignment(vm.activeCourse(), "Enter Description", assignmentName)};
 
     vm.activeAssignment = function() { return GradeService.getActiveAssignment(); };
     vm.setActiveAssignment = function(id) { GradeService.setActiveAssignment(id); };
@@ -21,6 +20,26 @@
         vm.showDetails = true;
     };
 
+    vm.submitAssignmentChange = function(assignment)
+    {
+
+    };
+    vm.submitNewAssignment = function(assignment)
+    {
+
+    };
+
+
+  vm.openAddAssignment = function (size) {
+
+    $uibModal.open({
+      animation: true,
+      templateUrl: 'app/AddAssignment/AddAssignmentModal.html',
+      controller: 'AddAssignmentModalController',
+      controllerAs: 'AddAssignmentModalController',
+      size: size
+    })
+  };
     vm.SendModifiedDueDate = function(assignment)
     {
       //$$placeholder - due date for assignment has been changed

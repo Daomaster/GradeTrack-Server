@@ -10,7 +10,7 @@
           <div class="assignments-header">
             <div class="assignments-coursename">{{assignments.activeCourse().name}}</div>
           </div>
-          <button class="btn btn-positive assignments-addassignmentbutton" ng-click="assignments.addAssignment('Enter Name')">Add Assignment</button>
+          <button class="btn btn-positive assignments-addassignmentbutton" ng-click="assignments.openAddAssignment('lg')">Add Assignment</button>
           <div class="assignmentName-background">
             <ul class="assignments-assignmentlist">
               <li ng-repeat="assignment in assignments.activeCourse().assignments">
@@ -61,12 +61,10 @@
               Points:
               <input type="number" min="0" ng-model="assignments.activeAssignment().points" ng-blur="assignments.SendModifiedPoints(assignments.activeAssignment())">
             </span>
-            <!--<span style="margin-top:6px; float:right; margin-right:32px;">
-              Type:
-              <select ng-model="assignments.activeAssignment().type">
-                <option ng-repeat="weight in assignments.activeCourse().weights">{{weight.name}}</option>
-              </select>
-            </span>-->
+
+            <span style="margin-top:1px; float:right; margin-right:32px;">
+              <button class="btn btn-sm btn-primary">Submit</button>
+            </span>
           </div>
 
           <hr class="rightbox-divider" />
