@@ -28,8 +28,6 @@
 
       $http.post("http://localhost:3000/api/auth/signup", userInfo);
 
-      console.log(userInfo);
-
       $uibModalInstance.dismiss('cancel');
     };
     vm.close = function()

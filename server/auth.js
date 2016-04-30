@@ -28,16 +28,16 @@ router.post('/signup', function(req, res, next) {
         config.baseRef.child("users/EnAddr").child(enEmail).set(username,success);
       }
       else {
-        res.send("Failed: User Exists");
+        res.status(500).send('Failed');
       }
     }
     else {
-      res.send("Failed: User Exists");
+      res.status(500).send('Failed');
     }
   });
 
   var success = function() {
-    res.send("Success");
+    res.status(200).send("Success");
   }
 
 
@@ -49,26 +49,31 @@ router.post('/signin', function(req, res, next) {
   // Not then error out
   // Exists
   // Check if the password matches
-  var username = "daoyun";
-  var password = "unlv@123";
+  var username = req.body.username;
+  var password = req.body.password;
   password = new Buffer(password).toString('base64');
+  if (username != null || username != '') {
+    config.baseRef.child("users").once("value", function(snapshot) {
+      var userExist = snapshot.child(username).exists();
+      if (userExist) {
+          config.baseRef.child("users"+"/"+username).once("value", function(snapshot) {
+            if (password == snapshot.val().password) {
+              res.status(200).send("Success");
+            }
+            else {
+              res.status(500).send('Failed');
+            }
+          });
+      }
+      else {
+        res.status(500).send('Failed');
+      }
+    });
+  }
+  else {
+    res.status(500).send('Failed');
+  }
 
-  config.baseRef.child("users").once("value", function(snapshot) {
-    var userExist = snapshot.child(username).exists();
-    if (userExist) {
-        config.baseRef.child("users"+"/"+username).once("value", function(snapshot) {
-          if (password == snapshot.val().password) {
-            res.send("Success");
-          }
-          else {
-            res.send("Failed");
-          }
-        });
-    }
-    else {
-      res.send("Failed");
-    }
-  });
 
 });
 
