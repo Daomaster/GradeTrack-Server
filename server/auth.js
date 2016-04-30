@@ -17,17 +17,25 @@ router.post('/signup', function(req, res, next) {
   // Check if the username is registered
   // Check if the email is registered
   // Then push the username to the firebase
-
-  config.baseRef.child("users").on("value", function(snapshot) {
-    var userExist = snapshot.child("davism").exists();
-    if (userExist) {
-      res.send("User exists");
+  var username = "daoyun";
+  var emailAdr = "daoyun@mockup.com";
+  var enEmail = new Buffer(emailAdr).toString('base64');
+  config.baseRef.child("users").once("value", function(snapshot) {
+    var userExist = snapshot.child(username).exists();
+    var emailExist = snapshot.child("EnAddr/"+enEmail).exists();
+    if (!userExist) {
+      if (!emailExist) {
+        res.send("Good to go");
+      }
+      else {
+        res.send("User Exists");
+      }
     }
     else {
-      res.send("Good to go");
+      res.send("User Exists");
     }
-
   });
+
 
 
 });
