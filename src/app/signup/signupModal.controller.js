@@ -15,12 +15,12 @@
     vm.firstName = "";
     vm.lastName = "";
     vm.studentID = 0;
-    vm.login = function()
+    vm.signup = function()
     {
       //$$placeholder for login
       //  use vm.username, vm.password
       //  receive teacher json, put in gradeservice
-
+  console.log(vm.type);
 
 
       GradeService.postLogin(); //set default values
