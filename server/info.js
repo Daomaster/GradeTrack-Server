@@ -158,8 +158,8 @@ router.post('/addassign', function(req, res, next) {
         assignment.due = temp;
       }
 
-      courseRef.child( "public/assignments" ).push( assignment );
-      res.status( 200 ).send( "Success" );
+      var assignmentId = courseRef.child( "public/assignments" ).push( assignment );
+      res.status( 200 ).send( assignmentId.key() );
     }
   });
 });
