@@ -45,7 +45,31 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/signin', function(req, res, next) {
-  res.send("auth/signin");
+  // Check if the username exist
+  // Not then error out
+  // Exists
+  // Check if the password matches
+  var username = "daoyun";
+  var password = "unlv@123";
+  password = new Buffer(password).toString('base64');
+
+  config.baseRef.child("users").once("value", function(snapshot) {
+    var userExist = snapshot.child(username).exists();
+    if (userExist) {
+        config.baseRef.child("users"+"/"+username).once("value", function(snapshot) {
+          if (password == snapshot.val().password) {
+            res.send("Success");
+          }
+          else {
+            res.send("Failed");
+          }
+        });
+    }
+    else {
+      res.send("Failed");
+    }
+  });
+
 });
 
 module.exports = router;
