@@ -90,6 +90,15 @@
         }
         course.students.push(t);
       };
+
+      this.randomDate = function()
+      {
+        var year = 2016;
+        var month = 1 + Math.random() * 4; //jan-may
+        var day = 1 + Math.random() * 30;
+         return new Date(year,month,day);
+      };
+
       this.addAssignment = function(course, description_, assignmentName)
       {
         var t = {
@@ -99,7 +108,7 @@
           id: course.assignments.length,
           points: 500,
           type: "Test",
-          dueDate: new Date(),
+          dueDate: this.randomDate(),
           gradeArray: [0,0,0,0,0] //for graph display
         };
         t.gradeArray[4]= course.students.length;  //initialize to all F (for graph)
