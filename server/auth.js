@@ -4,35 +4,16 @@ var router = express.Router();
 
 /* GET the data from ID. */
 router.post('/signup', function(req, res, next) {
-  // Sample data
-  // davism{
-  //  email: "davism@mockup.com"
-  //  firstName: "Michael",
-  //  lastName: "Davis",
-  //  password: "davism",
-  //  schoolId: "000000025",
-  //  schoolIpeds: 1,
-  //  type: "instructor"
-  //   }
-  // Check if the username is registered
-  // Check if the email is registered
-  // Then push the username to the firebase
-  var username = "daoyun";
-  var emailAdr = "daoyun@mockup.com";
-  var enEmail = new Buffer(emailAdr).toString('base64');
-  var userType = "student";
-  var userId = "1000000099";
-  var fName = "Daoyun";
-  var lName = "Zeng";
-  var pwd = "unlv@123"
-  var enPwd = new Buffer(pwd).toString('base64');
+  var enEmail = new Buffer(req.body.email).toString('base64');
+  var enPwd = new Buffer(req.body.password).toString('base64');
+  var username = req.body.username;
 
   var userInfo = {
-    email: emailAdr,
-    firstName: fName,
-    lastName: lName,
+    email: req.body.email,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     password: enPwd,
-    type: userType,
+    type: req.body.type,
     courses:{
 
     }

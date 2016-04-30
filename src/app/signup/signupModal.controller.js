@@ -6,7 +6,7 @@
     .controller('signupModalController', signupModalController);
 
   /** @ngInject */
-  function signupModalController(GradeService, $scope, $uibModalInstance) {
+  function signupModalController(GradeService, $http, $scope, $uibModalInstance) {
     var vm = this;
     vm.type = "";
     vm.email = "";
@@ -17,15 +17,19 @@
     vm.studentID = 0;
     vm.signup = function()
     {
-      //$$placeholder for login
-      //  use vm.username, vm.password
-      //  receive teacher json, put in gradeservice
-  console.log(vm.type);
+      var userInfo = {
+        username: vm.username,
+        email: vm.email,
+        firstName: vm.firstName,
+        lastName: vm.lastName,
+        password: vm.password,
+        type: vm.type
+      };
 
+      $http.post("http://localhost:3000/api/auth/signup", userInfo);
 
-      GradeService.postLogin(); //set default values
+      console.log(userInfo);
 
-      GradeService.loggedIn = true;
       $uibModalInstance.dismiss('cancel');
     };
     vm.close = function()
