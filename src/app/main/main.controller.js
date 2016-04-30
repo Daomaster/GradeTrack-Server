@@ -47,6 +47,17 @@
         size: size
       });
     };
+    vm.openSignup = function (size) {
+
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'app/signup/signupModal.html',
+        controller: 'signupModalController',
+        controllerAs: 'signupModalController',
+        size: size
+      });
+    };
+
     vm.openAddClass = function (size) {
 
       $uibModal.open({
