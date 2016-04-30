@@ -18,7 +18,7 @@
                   <div class="assignments-assignmentname">
 
                     <label for="assignmentInput"></label>
-                    <input maxlength="20" id="assignmentInput" type="text" style="position:absolute; width:calc(100% - 260px); vertical-align:middle; height:40px; margin-top:0px;  background:none; border:none;" ng-model="assignment.name" ng-click="assignments.clickAssignment(assignment.id)" />
+                    <input maxlength="20" id="assignmentInput" class="leftside-assignmentname-input" type="text"  ng-model="assignment.name" ng-click="assignments.clickAssignment(assignment.id)" ng-blur="assignments.SendModifiedAssignmentName(assignment)" />
                   </div>
 
                   <div class="calendarWrapper">
@@ -40,7 +40,7 @@
 
 
           <div class="rightbox-Header">
-            <input maxlength="20" size="20" id="assignmentInput" type="text" ng-model="assignments.activeAssignment().name" />
+            <input maxlength="20" size="20" id="assignmentInput" type="text" ng-model="assignments.activeAssignment().name" ng-blur="assignments.SendModifiedAssignmentName(assignments.activeAssignment())" />
             <a href="" ng-click="assignments.showDetails=false">x</a>
           </div>
 
@@ -48,7 +48,7 @@
             <h4>Description</h4>
           </div>
           <div class="rightbox-descriptioninput">
-            <textarea ng-model="assignments.activeAssignment().description" maxlength="1000"></textarea>
+            <textarea ng-model="assignments.activeAssignment().description" ng-blur="assignments.SendModifiedDescription(assignments.activeAssignment())" maxlength="1000"></textarea>
           </div>
           <div class="rightbox-piechart">
             <canvas height="100%" width="100%" id="pie" class="chart chart-pie"
@@ -59,7 +59,7 @@
           <div class="rightbox-pointswrapper">
             <span>
               Points:
-              <input type="number" min="0" ng-model="assignments.activeAssignment().points">
+              <input type="number" min="0" ng-model="assignments.activeAssignment().points" ng-blur="assignments.SendModifiedPoints(assignments.activeAssignment())">
             </span>
             <!--<span style="margin-top:6px; float:right; margin-right:32px;">
               Type:
@@ -80,7 +80,9 @@
                   <input type="number" min="0"
                          ng-model="student.assignmentGrades[assignments.activeAssignment().id]",
                          ng-focus="student.oldAssignmentGrades[assignments.activeAssignment().id] = student.assignmentGrades[assignments.activeAssignment().id]"
-                         ng-blur="assignments.changeGradeArray(assignments.activeAssignment(), student)">
+                         ng-blur="assignments.changeGradeArray(assignments.activeAssignment(), student); assignments.SendModifiedGrade(assignments.activeAssignment(), student)"
+
+                  >
                 </div>
               </li>
             </ul>

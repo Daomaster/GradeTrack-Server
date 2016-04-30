@@ -10,7 +10,7 @@
       .when('/', {
         templateUrl: 'app/dashboard/dashboard.html',
         controller: 'DashboardController',
-        controllerAs: 'dashboard'
+        controllerAs: 'dashboardCtrl'
       })
       .when('/information', {
         templateUrl: 'app/information/information.html',

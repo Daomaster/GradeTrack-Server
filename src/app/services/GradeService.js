@@ -15,6 +15,14 @@
 
       this.courses=[];
 
+      this.postLogin = function()
+      {
+        this.currentCourseID = 0;
+        this.currentAssignmentID = 0;
+        if (this.courses.length > 0)
+          this.activeCourse = this.courses[0];
+      };
+
       this.addCourse = function(name_)             // add data as it becomes needed
       {
         var c =
@@ -50,13 +58,21 @@
       this.currentCourseID = 0;
       this.getActiveCourse = function() { return this.courses[this.currentCourseID]};
       this.setActiveCourse = function(id) {
-        this.currentCourseID = id;
-        this.currentAssignmentID = 0; // reset for safety
+      this.currentCourseID = id;
+      this.currentAssignmentID = 0; // reset for safety
       };
       this.currentAssignmentID = 0;
       this.getActiveAssignment = function() { return this.getActiveCourse().assignments[this.currentAssignmentID]; };
       this.setActiveAssignment = function(id) { this.currentAssignmentID = id; };
 
+      this.purgeData = function() // for use on logout
+      {
+        this.lastName = "";
+        this.firstName = "";
+        this.courses = [];
+        this.gradeAverageArray = [];
+        this.courseNameArray = [];
+      };
 
 
       this.addStudent = function(course, name_, id_) {
@@ -74,6 +90,15 @@
         }
         course.students.push(t);
       };
+
+      this.randomDate = function()
+      {
+        var year = 2016;
+        var month = 1 + Math.random() * 4; //jan-may
+        var day = 1 + Math.random() * 30;
+         return new Date(year,month,day);
+      };
+
       this.addAssignment = function(course, description_, assignmentName)
       {
         var t = {
@@ -83,9 +108,15 @@
           id: course.assignments.length,
           points: 500,
           type: "Test",
-          dueDate: new Date(),
+          dueDate: this.randomDate(),
           gradeArray: [0,0,0,0,0] //for graph display
         };
+        t.gradeArray[4]= course.students.length;  //initialize to all F (for graph)
+        for (var i = 0; i < course.students.length;++i)
+        {
+          course.students[i].assignmentGrades.push(0);
+          course.students[i].oldAssignmentGrades.push(0);
+        }
         course.assignments.push(t);
       };
 
