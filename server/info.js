@@ -3,7 +3,8 @@ var router = express.Router();
 var mail = require('./mail.js')
 var Firebase = require( 'firebase' );
 var async = require( 'async' );
-var ref = new Firebase( 'https://grade-track.firebaseio.com/' );
+var config = require('./config.js');
+var ref = config.baseRef;
 
 router.post('/user', function(req, res, next) {
   var username = req.query.username;
