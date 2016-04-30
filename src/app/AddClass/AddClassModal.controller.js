@@ -19,7 +19,7 @@
     vm.courseName = "";
     vm.students = [];
     vm.studentString = "";
-
+    vm.description = "";
 
 
     vm.addCourseServerPackage = function()
@@ -29,7 +29,8 @@
       {
         title: vm.courseName,
         students: [],
-        instructor: ""
+        instructor: "",
+        description: vm.description
       };
 
       for (var i =0; i < vm.students.length; ++i)
