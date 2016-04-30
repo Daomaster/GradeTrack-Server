@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h1 class="modal-addClassHeader">Add Assignment</h1>
+  <a href="" class="modal-closebutton" ng-click="AddStudentModalController.close()">x</a>
+</div>
+<div class="modal-body">
+  <ul style="list-style:none;">
+
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">ASSIGNMENT NAME</div>
+      <div>
+        <input class="modal-username-input" ng-model="AddStudentModalController.assignmentName" type="text" placeholder="Assignment Name">
+      </div>
+      <div style="float:right; position:absolute; right:12px; top:20px;">
+        <div class="modal-infoheader">POINTS</div>
+        <div>
+          <input class="modal-username-input" ng-model="AddStudentModalController.points" type="number">
+        </div>
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">DESCRIPTION</div>
+      <div>
+          <textarea
+            ng-model="AddStudentModalController.assignmentDescription"
+            maxlength="1000"
+            style="  margin-top:5px; display:inline;  width:100%;  resize:none;  height:100px;">
+          </textarea>
+        </div>
+    </li>
+
+    <li style="height:20px;">
+      <button class="btn btn-primary" style="float:right;" ng-click="AddStudentModalController.addAssignment()">Add Assignment</button>
+    </li>
+  </ul>
+</div>
