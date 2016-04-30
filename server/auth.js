@@ -20,21 +20,44 @@ router.post('/signup', function(req, res, next) {
   var username = "daoyun";
   var emailAdr = "daoyun@mockup.com";
   var enEmail = new Buffer(emailAdr).toString('base64');
+  var userType = "student";
+  var userId = "1000000099";
+  var fName = "Daoyun";
+  var lName = "Zeng";
+  var pwd = "unlv@123"
+  var enPwd = new Buffer(pwd).toString('base64');
+
+  var userInfo = {
+    email: emailAdr,
+    firstName: fName,
+    lastName: lName,
+    password: enPwd,
+    type: userType,
+    courses:{
+
+    }
+  };
+
   config.baseRef.child("users").once("value", function(snapshot) {
     var userExist = snapshot.child(username).exists();
     var emailExist = snapshot.child("EnAddr/"+enEmail).exists();
     if (!userExist) {
       if (!emailExist) {
-        res.send("Good to go");
+        config.baseRef.child("users").child(username).set(userInfo);
+        config.baseRef.child("users/EnAddr").child(enEmail).set(username,success);
       }
       else {
-        res.send("User Exists");
+        res.send("Failed: User Exists");
       }
     }
     else {
-      res.send("User Exists");
+      res.send("Failed: User Exists");
     }
   });
+
+  var success = function() {
+    res.send("Success");
+  }
 
 
 
