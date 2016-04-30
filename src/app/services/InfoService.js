@@ -9,10 +9,10 @@
       // Main data.
       // Use 'this' to make public.
       // Var for private.
-      var classInfo = {
+      /*var classInfo = {
         id: 'CS 456',
         name: 'Automata and Formal Languages',
-        info: 'Regular expressions. Regular, context-free, and unrestricted grammars. Finite and pushdown autoamata. Turing machines and the halting problem; introduction to decidability.',
+        info: 'Regular expressions. Regular, context-free, and unrestricted grammars. Finite and pushdown autoamata. Turing machines and the halting problem; introduction to decidability.'
         // pre: 'CS 302 and MATH 351'
       };
 
@@ -23,7 +23,7 @@
         email:' larmore@egr.unlv.edu',
         office: ' TBEB 378B ',
         hours: 'Mon & Wed:  2:00~2:30 '
-      }
+      }*/
 
       var editInfo = false;
       var editDes = false;
