@@ -101,6 +101,69 @@ router.post('/addStudents', function(req, res, next) {
 
 });
 
+router.post('/addassign', function(req, res, next) {
+  var courseId = req.query.courseid;
+  var title = req.query.title;
+  var description = req.query.description;
+  var total = req.query.total;
+  var due = req.query.due;
+
+  if( typeof courseId  == 'undefined' || typeof title == 'undefined' ||
+      typeof description  == 'undefined' || typeof total  == 'undefined' ) {
+    res.status( 500 ).send( "Failure. Post requires courseid, title, description, total" );
+    return;
+  }
+
+  var courseRef = ref.child( "courses/" + courseId );
+  courseRef.once( "value" ).then( function( snapshot ) {
+    var course = snapshot.val();
+    if( course == null ) {
+      res.status( 500 ).send( "Failure. Course was not found." );
+      return;
+    } else {
+      // Check if the total is a number
+      if( isNaN( total ) ) {
+        res.status( 500 ).send( "Failure. Assignment total must be a number." );
+        return;
+      }
+
+      // Check that the assignment is unique
+      var assignments = course[ "public" ].assignments;
+      title = title.trim();
+      for( var key in assignments ) {
+        if( assignments[ key ].title.toUpperCase() == title.toUpperCase() ) {
+          res.status( 500 ).send( "Failure. Assignment title must be unique." );
+          return;
+        }
+      }
+      var assignment = { title : title, description : description, total : total };
+      // Get the due date
+      if( typeof due != 'undefined' && Object.keys( due ).length !== 0 ) {
+        temp = {};
+        due = JSON.parse( due );
+        for( var key in due ) {
+          switch( key.toLowerCase() ) {
+            case 'year':
+            case 'month':
+            case 'day':
+            case 'hour':
+            case 'minute':
+            case 'second':
+              temp[ key ] = due[ key ];
+              break;
+            default:
+              break;
+          }
+        }
+        assignment.due = temp;
+      }
+
+      courseRef.child( "public/assignments" ).push( assignment );
+      res.status( 200 ).send( "Success" );
+    }
+  });
+});
+
 router.post('/addclass', function(req, res, next) {
   res.status( 200 ).send("info/addclass");
 });
