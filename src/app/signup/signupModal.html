@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h1 style="margin-top:10px; text-align:center;">Sign Up</h1>
+  <a href="" class="modal-closebutton" ng-click="signupModalController.close()">x</a>
+</div>
+<div class="modal-body">
+  <ul style="list-style:none;">
+
+    <label>
+      <input type="radio" ng-model="signupModalController.type" value="instructor">
+      Instructor
+    </label><br/>
+    <label>
+      <input type="radio" ng-model="signupModalController.type" value="student">
+      Student
+    </label>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">FIRST NAME</div>
+      <div>
+        <input class="modal-username-input" type="text" ng-model="signupModalController.firstName" placeholder="">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">LAST NAME</div>
+      <div>
+        <input class="modal-username-input" type="text" ng-model="signupModalController.lastName" placeholder="">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">STUDENT ID</div>
+      <div>
+        <input class="modal-username-input" type="number" ng-model="signupModalController.studentID" placeholder="">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">USERNAME</div>
+      <div>
+        <input class="modal-username-input" type="text" ng-model="signupModalController.username" placeholder="name@company.com">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">EMAIL ADDRESS</div>
+      <div>
+        <input class="modal-username-input" type="text" ng-model="signupModalController.email" placeholder="name@company.com">
+      </div>
+    </li>
+    <li class="modal-inputwrapper">
+      <div class="modal-infoheader">PASSWORD</div>
+      <div>
+        <input class="modal-password-input" type="password" ng-model="signupModalController.password" placeholder="Password">
+      </div>
+    </li>
+    <li style="height:20px;">
+      <button class="btn btn-primary" style="float:right;" ng-click="signupModalController.login()">Log In</button>
+    </li>
+  </ul>
+</div>
