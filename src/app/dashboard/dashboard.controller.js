@@ -50,7 +50,11 @@
 
 
     // Configuration for the Timeline
-    vm.options = {};
+    vm.options = {
+      height:'150px',
+      start:'2016-01-19',
+      end: '2016-5-14'
+    };
 
 
     vm.getCourses = function() { return GradeService.courses; };
