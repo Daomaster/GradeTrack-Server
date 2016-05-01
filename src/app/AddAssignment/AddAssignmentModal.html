@@ -6,26 +6,35 @@
   <ul style="list-style:none;">
 
     <li class="modal-inputwrapper">
-      <div class="modal-infoheader">ASSIGNMENT NAME</div>
-      <div>
-        <input class="modal-username-input" ng-model="AddAssignmentModalController.assignmentName" type="text" placeholder="Assignment Name">
-      </div>
-      <div style="float:right; position:absolute; right:12px; top:20px;">
-        <div class="modal-infoheader">POINTS</div>
-        <div>
-          <input class="modal-username-input" ng-model="AddAssignmentModalController.points" type="number">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="modal-infoheader">ASSIGNMENT NAME</div>
+          <div>
+            <input class="modal-username-input" ng-model="AddAssignmentModalController.assignmentName" type="text" placeholder="Assignment Name">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="modal-infoheader">POINTS</div>
+          <div>
+            <input class="modal-username-input" ng-model="AddAssignmentModalController.points" type="number">
+          </div>
         </div>
       </div>
     </li>
     <li class="modal-inputwrapper">
-      <div class="modal-infoheader">DESCRIPTION</div>
-      <div>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="modal-infoheader">DESCRIPTION</div>
+          <div>
           <textarea
             ng-model="AddAssignmentModalController.assignmentDescription"
             maxlength="1000"
-            style="  margin-top:5px; display:inline;  width:100%;  resize:none;  height:100px;">
+            style="  margin-left:-40px; margin-top:5px; display:inline;  width:calc(100% + 40px);  resize:none;  height:100px;">
           </textarea>
+          </div>
         </div>
+      </div>
     </li>
 
     <li style="height:20px;">
