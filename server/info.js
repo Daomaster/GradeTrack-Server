@@ -164,8 +164,47 @@ router.post('/addassign', function(req, res, next) {
   });
 });
 
-router.post('/addclass', function(req, res, next) {
-  res.status( 200 ).send("info/addclass");
+router.post('/addcourse', function(req, res, next) {
+  var username = "hughes";
+  var students = ['daoyun','pw','brandon'];
+  var title = "Mock Course";
+  var description = "Mock";
+
+  var courseInfo = {
+    public: {
+      title: title,
+      description: description,
+      instructor: {},
+      pending: {}
+    }
+  };
+
+  ref.child( "users/" + username ).once( "value", function( snapshot ){
+
+    var instructorInfo = {
+      id: snapshot.val().schoolId,
+      email: snapshot.val().email,
+      firstName: snapshot.val().firstName,
+      lastName: snapshot.val().lastName
+    }
+
+    courseInfo.public.instructor = instructorInfo;
+    for (var i = 0; i < students.length; i++) {
+      courseInfo.public.pending[students[i].toString()] = false;
+    }
+
+    console.log(courseInfo);
+
+    // Push this course to the course list
+    var courseRef = new Firebase('https://grade-track.firebaseio.com/courses');
+    var courseId = courseRef.push(courseInfo).key();
+
+    // Add this course to instructor's course reference
+    config.baseRef.child("users").child(username).child("courses").child(title).set(courseId);
+    res.status( 200 ).send(courseId);
+
+  });
+
 });
 
 router.post('/storesyl', function(req, res, next) {
