@@ -13,10 +13,7 @@ router.post('/signup', function(req, res, next) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     password: enPwd,
-    type: req.body.type,
-    courses:{
-
-    }
+    type: req.body.type
   };
 
   config.baseRef.child("users").once("value", function(snapshot) {
