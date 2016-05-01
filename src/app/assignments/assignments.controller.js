@@ -20,6 +20,7 @@
         vm.showDetails = true;
     };
 
+    /*
     vm.submitAssignmentChange = function(assignment)
     {
 
@@ -28,7 +29,7 @@
     {
 
     };
-
+*/
 
   vm.openAddAssignment = function (size) {
 
