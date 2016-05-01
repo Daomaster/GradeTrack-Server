@@ -6,6 +6,9 @@
 	<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
 		<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
 			<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{vm.activeCourse().name}}</div>
+      <div>
+        <button ng-click="students.openAddStudentModal('lg')" class="btn btn-primary btn-sm" style="position:absolute; right:5px; top:2px;">Add Student</button>
+      </div>
 		</div>
 
 <div style="margin-top:10px; margin-bottom:10px; height:calc(100vh - 170px); overflow:auto; background:#FFFFFF;">
@@ -28,6 +31,7 @@
 				<td>{{student.grade}}</td>
 				<td>{{student.email}}</td>
 				<td>{{student.id}}</td>
+        <td><button class=" btn btn-danger btn-sm glyphicon glyphicon-remove" ng-click="students.removeStudent(student)"></button></td>
 			</tr>
 		</tbody>
 	</table>

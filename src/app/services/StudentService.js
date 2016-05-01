@@ -6,7 +6,7 @@
     .module('GradeTrack')
     .service('StudentService', function(){
 
-	var students = [
+	this.students = [
 		{
 			last: "Smith",
 			first: "James",
@@ -14,7 +14,7 @@
 			email: "SmithJ@unlv.nevada.edu",
 			id: "11223344"
 		},
-		
+
 		{
 			last: "Williams",
 			first: "Rebecca",
@@ -22,7 +22,7 @@
 			email: "WilliamsR@unlv.nevada.edu",
 			id: "2244553322"
 		},
-		
+
 		{
 			last: "Aster",
 			first: "Billy",
@@ -30,7 +30,7 @@
 			email: "AsterB@unlv.nevada.edu",
 			id: "43233333"
 		},
-		
+
 		{
 			last: "Bills",
 			first: "Derek",
@@ -38,7 +38,7 @@
 			email: "BillsD@unlv.nevada.edu",
 			id: "1010101010"
 		},
-		
+
 		{
 			last: "Dillan",
 			first: "Ben",
@@ -47,9 +47,9 @@
 			id: "3428237420"
 		}
 	];
-	
+
 	this.list = function() {
-		return students;
+		return this.students;
 	};
 
 	});
