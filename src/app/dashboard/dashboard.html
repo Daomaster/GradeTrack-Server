@@ -37,20 +37,20 @@
           <h1>{{course.name}}</h1>
           <h3>Students: {{ course.students.length }} </h3>
 
-          <div style="padding-bottom:10px; width:100%;">
+          <div style="padding-bottom:10px; width:110%;">
             <timeline items="dashboardCtrl.items[$index]" options="dashboardCtrl.options"></timeline>
           </div>
         </div>
         <div class="col-md-2" >
           <div class="row">
-            <div class="col-md-12" style="text-align:center; margin-left:5%">
+            <div class="col-md-12" style="text-align:right;">
               <h4>Grade breakdown</h4>
             </div>
           </div>
           <ul style="list-style:none;" >
             <li ng-repeat="i in [0,1,2,3,4]" >
               <div class="col-md-12">
-                <h5>{{dashboardCtrl.getGradeArray(course)[i].grade}}: {{dashboardCtrl.getGradeArray(course)[i].amount}} <span style="float:right">{{dashboardCtrl.getGradeArray(course)[i].amount/ course.students.length * 100 | number: 2}}%</span></h5>
+                <h5 style="float:right;">{{dashboardCtrl.getGradeArray(course)[i].grade}}: {{dashboardCtrl.getGradeArray(course)[i].amount}}</h5>
               </div>
             </li>
           </ul>
