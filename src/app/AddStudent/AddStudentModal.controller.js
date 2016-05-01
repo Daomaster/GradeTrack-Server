@@ -5,24 +5,37 @@
     .module('GradeTrack')
     .controller('AddStudentModalController', AddStudentModalController);
   /** @ngInject */
-  function AddStudentModalController(GradeService, $http, $scope, $uibModalInstance) {
+  function AddStudentModalController(GradeService, $http, $scope, $uibModalInstance, StudentService) {
     var vm = this;
 
-    vm.firstname = "";
-    
+    vm.course = GradeService.getActiveCourse();
 
-    vm.addAssignment = function()
+    vm.email = "";
+    vm.firstName = "";
+    vm.lastName = "";
+    vm.studentID = "";
+
+
+    vm.addStudent = function()
     {
-      GradeService.addAssignment(vm.course, vm.assignmentDescription, vm.assignmentName, vm.points);
+      var newStudent =
+      {
+
+        last: vm.lastName,
+        first: vm.firstName,
+        grade: "", // Switch to float?
+        email: vm.email,
+        id: vm.studentID
+      };
+
+      StudentService.students.push(newStudent);
+
       vm.close();
     };
 
 
     vm.close = function()
     {
-      vm.assignmentDescription = "";
-      vm.assignmentName = "";
-      vm.points=0;
       $uibModalInstance.dismiss('cancel');
     };
 
