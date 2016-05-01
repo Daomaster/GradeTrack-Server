@@ -35,7 +35,7 @@
 {
   border: thin solid darkgray;
   width:calc(100% + 40px);
-  height:200px;
+  height:130px;
   overflow-y:auto;
   overflow-x:hidden;
   margin-left:-40px;
@@ -43,6 +43,14 @@
 .modal-studentnameinput
 {
   width:calc(100% - 20px);
+}
+.modal-coursedescription
+{
+  margin-top:0;
+  width:calc(100% + 40px);
+  margin-left:-40px;
+  resize:none;
+  height:100px;
 }
 .modal-studentbox ul
 {
