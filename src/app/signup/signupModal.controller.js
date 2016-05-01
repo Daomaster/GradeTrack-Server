@@ -8,7 +8,7 @@
   /** @ngInject */
   function signupModalController(GradeService, $http, $scope, $uibModalInstance) {
     var vm = this;
-    vm.type = "";
+    vm.type = "student";
     vm.email = "";
     vm.username = "";
     vm.password = "";

@@ -5,48 +5,68 @@
 <div class="modal-body">
   <ul style="list-style:none;">
 
-    <label>
-      <input type="radio" ng-model="signupModalController.type" value="instructor">
-      Instructor
-    </label><br/>
-    <label>
-      <input type="radio" ng-model="signupModalController.type" value="student">
-      Student
-    </label>
     <li class="modal-inputwrapper">
-      <div class="modal-infoheader">FIRST NAME</div>
-      <div>
-        <input class="modal-username-input" type="text" ng-model="signupModalController.firstName" placeholder="">
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="modal-infoheader">FIRST NAME</div>
+          <div>
+            <input class="modal-username-input" type="text" ng-model="signupModalController.firstName" placeholder="">
+          </div>
+        </div>
+        <div class="col-md-6">
+
+          <div class="modal-infoheader">LAST NAME</div>
+          <div>
+            <input class="modal-username-input" type="text" ng-model="signupModalController.lastName" placeholder="">
+          </div>
+        </div>
       </div>
+    <li class="modal-inputwrapper">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="modal-infoheader">USERNAME</div>
+        <div>
+          <input class="modal-username-input" type="text" ng-model="signupModalController.username" placeholder="Username">
+        </div>
+      </div>
+      <div class="col-md-6">
+
+        <div class="modal-infoheader">STUDENT ID</div>
+        <div>
+          <input class="modal-username-input" type="text" ng-model="signupModalController.studentID" placeholder="">
+        </div>
+      </div>
+    </div>
     </li>
     <li class="modal-inputwrapper">
-      <div class="modal-infoheader">LAST NAME</div>
-      <div>
-        <input class="modal-username-input" type="text" ng-model="signupModalController.lastName" placeholder="">
-      </div>
-    </li>
-    <li class="modal-inputwrapper">
-      <div class="modal-infoheader">STUDENT ID</div>
-      <div>
-        <input class="modal-username-input" type="number" ng-model="signupModalController.studentID" placeholder="">
-      </div>
-    </li>
-    <li class="modal-inputwrapper">
-      <div class="modal-infoheader">USERNAME</div>
-      <div>
-        <input class="modal-username-input" type="text" ng-model="signupModalController.username" placeholder="name@company.com">
-      </div>
-    </li>
-    <li class="modal-inputwrapper">
-      <div class="modal-infoheader">EMAIL ADDRESS</div>
-      <div>
-        <input class="modal-username-input" type="text" ng-model="signupModalController.email" placeholder="name@company.com">
+      <div class="row">
+        <div class="col-md-6">
+
+          <div class="modal-infoheader">EMAIL ADDRESS</div>
+          <div>
+            <input class="modal-username-input" type="text" ng-model="signupModalController.email" placeholder="name@company.com">
+          </div>
+        </div>
+        <div class="col-md-6">
+
+          <div class="modal-infoheader">ACCOUNT TYPE</div>
+          <div style="margin-left:-40px;" class="btn-group" data-toggle="buttons">
+            <label ng-class="signupModalController.type=='student' ? 'btn btn-primary' : 'btn btn-primary active'">
+              <input type="radio" name="options" ng-model="signupModalController.type" value="instructor" autocomplete="off" checked> Instructor
+            </label>
+            <label ng-class="signupModalController.type=='student' ? 'btn btn-primary active' : 'btn btn-primary'">
+              <input type="radio" name="options" ng-model="signupModalController.type" value="student" autocomplete="off"> Student
+            </label>
+          </div>
+        </div>
       </div>
     </li>
     <li class="modal-inputwrapper">
       <div class="modal-infoheader">PASSWORD</div>
       <div>
-        <input class="modal-password-input" type="password" ng-model="signupModalController.password" placeholder="Password">
+        <input class="modal-username-input" type="password" ng-model="signupModalController.password" placeholder="Password">
       </div>
     </li>
     <li style="height:20px;">
