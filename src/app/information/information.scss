@@ -1,31 +1,19 @@
 //----------------------------
-//  main container
+//  main containers
 //----------------------------
 
 .information-main {
-  padding: 10px 10px 10px 25px;
-  transition:all linear 0.1s;
+  padding: 10px 10px 10px 10px;
   width:100%;
-  left:0;
   height:100%;
+}
+
+.information-course-area {
 
 }
 
-.information-wrapper {
-  position:absolute;
-  top:0;
-  left:0;
-  height:100%;
-  width:calc(100vw - 235px);
-  background: #FFFFFF;
-}
+.information-instructor-area {
 
-.information-full-main-area {
-  position:absolute;
-  transition:all linear 0.1s;
-  left:0;
-  width:calc((100vw - 235px));
-  height:100%;
 }
 
 // wrap header and section
@@ -38,11 +26,12 @@
 }
 
 .infoSection {
-  background-color: #e6f3ff;
-  border: 2px solid #e6e6e6;
+  //background-color: #e6f3ff;
+  //border: 2px solid #e6e6e6;
   width:100%;
   float:left;
   padding:10px;
+  margin-bottom:5px;
 }
 
 .infoSection textarea {
