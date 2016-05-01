@@ -28,7 +28,7 @@
   height:100%;
 }
 
-// wrap header and sectionand
+// wrap header and section
 .infoHeader{
   border: 2px solid gray;
   width:80%;
@@ -40,12 +40,22 @@
 .infoSection {
   background-color: #e6f3ff;
   border: 2px solid #e6e6e6;
-  width:80%;
+  width:100%;
   float:left;
-  text-align: center;
   padding:10px;
-  margin-top: 0;
-  margin-bottom:30px;
+}
+
+.infoSection textarea {
+  resize:none;
+}
+
+.infoSection label {
+  display: block;
+}
+
+.infoSection label button {
+  margin-right: 0px;
+  margin-bottom: 3px;
 }
 
 .infoButton {
