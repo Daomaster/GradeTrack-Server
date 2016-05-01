@@ -6,14 +6,19 @@
   <ul style="list-style:none;">
 
     <li class="modal-inputwrapper">
-      <div class="modal-infoheader">FIRST NAME</div>
-      <div>
-        <input class="modal-username-input" ng-model="AddStudentModalController.firstName" type="text" placeholder="First Name">
-      </div>
-      <div style="float:right; position:absolute; right:12px; top:20px;">
-        <div class="modal-infoheader">LAST NAME</div>
-        <div>
-          <input class="modal-username-input" ng-model="AddStudentModalController.lastName" type="text" placeholder="Last Name">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="modal-infoheader">FIRST NAME</div>
+          <div>
+            <input class="modal-username-input" ng-model="AddStudentModalController.firstName" type="text" placeholder="First Name">
+          </div>
+        </div>
+        <div class="col-md-6">
+
+          <div class="modal-infoheader">LAST NAME</div>
+          <div>
+            <input class="modal-username-input" ng-model="AddStudentModalController.lastName" type="text" placeholder="Last Name">
+          </div>
         </div>
       </div>
     </li>
