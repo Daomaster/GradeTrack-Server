@@ -4,17 +4,20 @@ var mail = require('./mail.js')
 var Firebase = require( 'firebase' );
 var async = require( 'async' );
 var config = require('./config.js');
-var ref = config.baseRef;
 
 router.post('/user', function(req, res, next) {
   var username = req.query.username;
 
-  ref.child( "users/" + username ).once( "value" ).then( function( userSnapshot ) {
+  if( typeof username == 'undefined' ) {
+    res.status( 500 ).send( "Failure. Username must be supplied." );
+  }
+
+  config.baseRef.child( "users/" + username ).once( "value" ).then( function( userSnapshot ) {
     var user = userSnapshot.val();
 
     // Error handling for failure to find user
     if( user == null ) {
-      res.status( 500 ).send( "Failure" );
+      res.status( 500 ).send( "Failure. User not found." );
     }
 
     var data = {};
@@ -24,22 +27,23 @@ router.post('/user', function(req, res, next) {
     data.lastName = user.lastName;
     data.firstName = user.firstName;
     data.email = user.email;
-    data.schoolId = user.schoolId;
+    data.id = user.id;
 
     // If courses is empty then just return now
     if( user.courses == null ) {
       res.status( 200 ).send( data );
+      return;
     }
 
     // Get the course information
     data.courses = [];
     var generatePromise = function( courseId ) {
       return function( callback ) {
-        ref.child( "courses/" + courseId ).once( "value", function( courseSnapshot ){
+        config.baseRef.child( "courses/" + courseId ).once( "value", function( courseSnapshot ){
           var course = courseSnapshot.val();
 
           // If the user is the course instructor then return everything
-          if( course[ "public" ].instructor.id == user.schoolId ) {
+          if( course[ "public" ].instructor.id == user.id ) {
             var temp = course[ "public" ];
             temp.students = course[ "private" ];
             temp.courseid = courseId;
@@ -47,7 +51,7 @@ router.post('/user', function(req, res, next) {
             callback( null, null );
           } else {
             var assignments = course[ "public" ].assignments;
-            var grades = course[ "private" ][ user.schoolId ].grades;
+            var grades = course[ "private" ][ user.id ].grades;
 
             for( var key in assignments ) {
               var grade = grades[ key ];
@@ -66,7 +70,7 @@ router.post('/user', function(req, res, next) {
     var promises = [];
 
     for( var key in user.courses ) {
-      promises.push( generatePromise( user.courses[ key ] ) );
+      promises.push( generatePromise( user.courses[ key ].courseId ) );
     }
 
     async.parallel( promises, function( err, result ) {
@@ -76,28 +80,56 @@ router.post('/user', function(req, res, next) {
   });
 });
 
-router.post('/addStudents', function(req, res, next) {
-  res.status( 200 ).send("info/addStudents");
+router.post('/addstudents', function(req, res, next) {
+  var emails = req.query.emails;
+  var courseId = req.query.courseid;
 
-  var receivers = req.body.students;
-  var title = req.body.title;
-  var insName = req.body.insName;
+  if( typeof emails  == 'undefined' || typeof courseId == 'undefined' ) {
+    res.status( 500 ).send( "Failure. /addstudents api requires list of student emails and a course" );
+    return;
+  }
+  
+  var courseRef = config.baseRef.child( "courses/" + courseId );
+  courseRef.once( "value" ).then( function( snapshot ) {
+    var course = snapshot.val();
+    if( course == null ) {
+      throw "Failure: Course not found.";
+    }
 
-  console.log(receivers);
+    if( typeof course.pending == 'undefined' ) {
+      for( var iter = 0, len = emails.length; iter < len; ++iter ) {
+        var email64 = new Buffer( emails[ iter ] ).toString('base64');
+        courseRef.child( "pending/" + email64 ).set( false );
+      }
+  
+      // I broke it I'm sorry
+      /*mail.transporter.sendMail({
+           from: "Gradetrack Team <noreply@gradetrack.com>",
+           bcc: emails,
+           subject: title + " Registration",
+           html:"testing"
+           "<b>Signup Confirmation</b><br /><br /><p>Your teacher "+course[ "public" ].instructor.firstName+" "+course[ "public" ].instructor.lastName+" invite your to join "++course[ "public" ].title+" :</p><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a><br />"
+        }, function(error, response){
+           if(error){
+               console.log(error);
+           }else{
+               console.log("Message sent: " + response.message);
+           }
+        });*/
+    } else {
+      for( var iter = 0, len = emails.length; iter < len; ++iter ) {
+        var email64 = new Buffer( emails[ iter ] ).toString('base64');
+        if( !( email64 in course.pending ) ) {
+          courseRef.child( "pending/" + email64 ).set( false );
+        }
+      }
+    }
+    res.status( 200 ).send( "Success" );
+  }).catch( function( e ){
+    res.status( 500 ).send( e );
+  });
 
-  mail.transporter.sendMail({
-       from: "Gradetrack Team <noreply@gradetrack.com>",
-       bcc: receivers,
-       subject: title + " Registration",
-       html:
-       "<b>Signup Confirmation</b><br /><br /><p>Your teacher "+insName+" invite your to join "+title+" :</p><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a><br />"
-    }, function(error, response){
-       if(error){
-           console.log(error);
-       }else{
-           console.log("Message sent: " + response.message);
-       }
-    });
+
 
 });
 
@@ -114,7 +146,7 @@ router.post('/addassign', function(req, res, next) {
     return;
   }
 
-  var courseRef = ref.child( "courses/" + courseId );
+  var courseRef = config.baseRef.child( "courses/" + courseId );
   courseRef.once( "value" ).then( function( snapshot ) {
     var course = snapshot.val();
     if( course == null ) {
@@ -136,11 +168,11 @@ router.post('/addassign', function(req, res, next) {
           return;
         }
       }
-      var assignment = { title : title, description : description, total : total };
+      var assignment = { title : title, description : description, maxPoint : total };
       // Get the due date
       if( typeof due != 'undefined' && Object.keys( due ).length !== 0 ) {
-        temp = {};
         due = JSON.parse( due );
+        temp = {};
         for( var key in due ) {
           switch( key.toLowerCase() ) {
             case 'year':
@@ -165,46 +197,115 @@ router.post('/addassign', function(req, res, next) {
 });
 
 router.post('/addcourse', function(req, res, next) {
-  var username = "hughes";
-  var students = ['daoyun','pw','brandon'];
-  var title = "Mock Course";
-  var description = "Mock";
+  var username = req.query.username;
+  var title = req.query.title;
+  var description = req.query.description;
 
-  var courseInfo = {
-    public: {
-      title: title,
-      description: description,
-      instructor: {},
-      pending: {}
-    }
-  };
+  if( typeof username == 'undefined' || typeof title == 'undefined' || 
+      typeof description == 'undefined' ) {
+    res.status( 500 ).send( "Failure: Requires username, title, and description" );
+    return;
+  }
 
-  ref.child( "users/" + username ).once( "value", function( snapshot ){
-
-    var instructorInfo = {
-      id: snapshot.val().schoolId,
-      email: snapshot.val().email,
-      firstName: snapshot.val().firstName,
-      lastName: snapshot.val().lastName
+  config.baseRef.child( "users/" + username ).once( "value" ).then( function( snapshot ){
+    var instructor = snapshot.val();
+    if( instructor == null ) {
+      throw "Failure: User not found";
     }
 
-    courseInfo.public.instructor = instructorInfo;
-    for (var i = 0; i < students.length; i++) {
-      courseInfo.public.pending[students[i].toString()] = false;
-    }
-
-    console.log(courseInfo);
-
-    // Push this course to the course list
-    var courseRef = new Firebase('https://grade-track.firebaseio.com/courses');
-    var courseId = courseRef.push(courseInfo).key();
-
-    // Add this course to instructor's course reference
-    config.baseRef.child("users").child(username).child("courses").child(title).set(courseId);
-    res.status( 200 ).send(courseId);
-
+    return config.baseRef.child( "courses" ).push( {
+      "public" : {
+        title: title,
+        description: description,
+        instructor: {
+          id : instructor.id,
+          email : instructor.email,
+          firstName : instructor.firstName,
+          lastName : instructor.lastName
+        }
+      }
+    }).then( function( courseId ){
+      config.baseRef.child( "users/" + username ).child( "courses" ).push({
+        courseId : courseId.key(),
+        title : title
+      });
+      res.status( 200 ).send( courseId.key() );
+    });
+  }).catch( function( e ) {
+    res.status( 500 ).send( e );
   });
 
+});
+
+router.get('/enrollstudent', function(req, res, next) {
+  var courseId = req.query.courseid;
+  var username = req.query.username;
+  var user;
+  var course;
+  // call sign-in
+  // if failure sign-up
+  // get user email
+
+  var courseRef = config.baseRef.child( "courses/" + courseId );
+  var userRef = config.baseRef.child( "users/" + username );
+
+
+  userRef.once( "value" ).then( function( userSnapshot ) {
+    user = userSnapshot.val();
+    if( user == null ) {
+      throw "Failure. User not found.";
+    }
+  }).then( function() {
+    courseRef.once( "value" ).then( function( courseSnapshot ) {
+      course = courseSnapshot.val();
+      if( course == null ) {
+        throw "Failure. Course not found.";
+      }
+    }).then( function() {
+      var email = new Buffer( user.email ).toString('base64');
+      if( email in course.pending ) {
+        if( course.pending[ email ] == true ) {
+          res.status( 500 ).send( "Failure: User is already enrolled in course" );
+        } else {
+          courseRef.child( "pending/" + email ).set( true );
+
+          var student = {};
+
+          if( typeof course[ "public" ].students == 'undefined' ) {
+            courseRef.child( "public/students/0" ).update( {
+              firstName : user.firstName,
+              lastName : user.lastName
+            });
+          } else {
+            courseRef.child( "public/students/" + course[ "public" ].students.length ).update( {
+              firstName : user.firstName,
+              lastName : user.lastName
+            });
+          }
+
+          courseRef.child( "private/" + user.id ).update({
+            email : user.email,
+            id : user.id,
+            firstName : user.firstName,
+            lastName : user.lastName
+          });
+
+          userRef.child( "courses" ).push({
+            courseId : courseId,
+            title : course[ "public" ].title
+          });
+
+          res.status( 200 ).send( "added" );
+        }
+      } else {
+        res.status( 500 ).send( "Failure: User not able to register for course." );
+      }
+    }).catch( function( e ) {
+      res.status( 500 ).send( e );
+    });
+  }).catch( function( e ){
+    res.status( 500 ).send( e );
+  });
 });
 
 router.post('/storesyl', function(req, res, next) {

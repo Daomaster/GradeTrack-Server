@@ -36,9 +36,6 @@ router.post('/signup', function(req, res, next) {
   var success = function() {
     res.status(200).send("Success");
   }
-
-
-
 });
 
 router.post('/signin', function(req, res, next) {

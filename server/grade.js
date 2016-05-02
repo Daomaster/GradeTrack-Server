@@ -3,7 +3,6 @@ var router = express.Router();
 require( 'firebase' );
 require( 'async' );
 var config = require('./config.js');
-var ref = config.baseRef;
 
 var Field = Object.freeze( {
   FirstName : "FirstName",
@@ -19,99 +18,156 @@ var Field = Object.freeze( {
   Blank : "Blank"
 } );
 
-/* GET the data from ID. */
 router.post('/update', function(req, res, next) {
   var courseId = req.query.courseid;
   var assignmentId = req.query.assignmentid;
-  var students = JSON.parse( req.query.student );
+  var students = req.query.students;
 
-  var courseRef = ref.child( "courses/" + courseId );
+  if( typeof courseId == 'undefined' || typeof assignmentId == 'undefined' ||
+      typeof students == 'undefined' ) {
+    res.status( 500 ).send( "Failure. Course and assignment ids must be given and students be listed" );
+    return;
+  }
+  var students = JSON.parse( students );
+  var courseRef = config.baseRef.child( "courses/" + courseId );
   courseRef.once( "value" ).then( function( snapshot ) {
     var course = snapshot.val();
 
     // Checks if the course exists
     if( course == null ) {
-      res.status( 500 ).send( "invalid courseid" );
+      res.status( 500 ).send( "Failure. Invalid course id." );
+      return;
     }
-
     // Checks if the assignment exists
     var assignment;
     if( assignmentId in course[ "public" ].assignments ) {
       assignment = course[ "public" ].assignments[ assignmentId ];
     } else {
-      res.status( 500 ).send( "invalid assignmentid" );
+      res.status( 500 ).send( "Failure. Invalid assignment id." );
+      return;
     }
-
+console.log( assignment );
     // Check if student exists
     for( var iter = 0, length = students.length; iter < length; ++iter ) {
       if( !( students[ iter ].studentid in course[ "private" ] ) ) {
-        res.status( 500 ).send( "invalid studentid" );
+        res.status( 500 ).send( "Failure. Invalid student id." );
+        return;
       }
     }
-//res.status( 500 ).send( "Incomplete" );
 
-    for( var iter = 0, length = students.length; iter < length; ++iter ) {
+    var earnedChange = 0;
+    var totalChange = 0;
+
+    for( var iter = 0, len = students.length; iter < len; ++iter ) {
       var studentId = students[ iter ].studentid;
       var grade = students[ iter ].grade;
       var student = course[ "private" ][ studentId ];
+      var studentRef = courseRef.child( "private/" + studentId );
 
       // Gets the assignments oldvalue
       var oldGrade;
-      if( assignmentId in student.grades ) {
+      if( typeof student.grades != 'undefined' && assignmentId in student.grades ) {
           oldGrade = student.grades[ assignmentId ];
       }
 
-      // If it is not a number
-      if( isNaN( grade ) ) {
-        // Find assignments index in csvFormat
-        var csvFormat = course.csvFormat;
-        if( typeof( csvFormat ) != undefined ) {
-          var header = csvFormat.header;
-          for( var col = 0; col < header.length; ++col ) {
-            if( header[ col ].type == Field.Assignment && header[ col ].key == assignmentId ) {
-              courseRef.child( "csvFormat/notes/" + studentId + "/" + col ).set( grade );
-            }
-          }
-        }
-        // Update the csv
-        if( !isNaN( oldGrade ) ) {
-          courseRef.child( "private/" + studentId + "/grades/" + assignmentId ).set( null );
-          var difference = parseInt( oldGrade );
-          courseRef.child( "private/" + studentId + "/total" ).set( parseInt( course[ "private" ][ studentId ].total ) - parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
-          courseRef.child( "public/assignments/" + assignmentId + "/total" ).set( parseInt( course[ "public" ].assignments[ assignmentId ].total ) - parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
-          courseRef.child( "public/total" ).set( parseInt( course[ "public" ].total ) - parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
-          courseRef.child( "private/" + studentId + "/earned" ).set( parseInt( course[ "private" ][ studentId ].earned ) - difference );
-          courseRef.child( "public/assignments/" + assignmentId + "/earned" ).set( parseInt( course[ "public" ].assignments[ assignmentId ].earned ) - difference );
-          courseRef.child( "public/earned" ).set( parseInt( course[ "public" ].earned ) - difference );
-        }
-      } else {
-        grade = parseInt( grade );
-        if( isNaN( oldGrade ) ) {
-          // Find assignments index in csvFormat
-          var csvFormat = course.csvFormat;
-          var header = csvFormat.header;
-          for( var col = 0; col < header.length; ++col ) {
-            if( header[ col ].type == Field.Assignment && header[ col ].key == assignmentId ) {
-              courseRef.child( "csvFormat/notes/" + studentId + "/" + col ).set( null );
-              break;
-            }
-          }
-          oldGrade = 0;
-          courseRef.child( "private/" + studentId + "/total" ).set( parseInt( course[ "private" ][ studentId ].total ) + parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
-          courseRef.child( "public/assignments/" + assignmentId + "/total" ).set( parseInt( course[ "public" ].assignments[ assignmentId ].total ) + parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
-          courseRef.child( "public/total" ).set( parseInt( course[ "public" ].total ) + parseInt( course[ "public" ].assignments[ assignmentId ].maxPoint ) );
+      // Text to text
+      if( isNaN( grade ) && isNaN( oldGrade ) ) {
+        studentRef.child( "grades/" + assignmentId ).set( grade );
+      // Grade added
+      } else if( !isNaN( grade ) && isNaN( oldGrade ) ) {
+        // If this is the first grade
+        if( typeof student.earned == 'undefined' ) {
+          var earned = grade;
+          var total = parseInt( assignment.maxPoint );
+          studentRef.child( "grades/" + assignmentId ).set( grade );
+          studentRef.child( "earned" ).set( earned );
+          studentRef.child( "total" ).set( total );
+
+          earnedChange += earned;
+          totalChange += total;
+        // If there are other grades
         } else {
-          oldGrade = parseInt( oldGrade );
+          var earned = parseInt( grade ) + parseInt( student.earned );
+          var total = parseInt( assignment.maxPoint ) + parseInt( student.total );
+          studentRef.child( "grades/" + assignmentId ).set( grade );
+          studentRef.child( "earned" ).set( earned );
+          studentRef.child( "total" ).set( total );
+
+          earnedChange += grade - student.earned;
+          totalChange += total;
         }
-        grade = parseInt( grade );
-        var difference = parseInt( grade ) - oldGrade;
-        courseRef.child( "private/" + studentId + "/grades/" + assignmentId ).set( grade );
-        courseRef.child( "private/" + studentId + "/earned" ).set( parseInt( course[ "private" ][ studentId ].earned ) + difference );
-        courseRef.child( "public/assignments/" + assignmentId + "/earned" ).set( parseInt( course[ "public" ].assignments[ assignmentId ].earned ) + difference );
-        courseRef.child( "public/earned" ).set( parseInt( course[ "public" ].earned ) + difference );
+      // Grade removed
+      } else if( isNaN( grade ) && !isNaN( oldGrade ) ) {
+        // Remove the old grade
+        var total = parseInt( student.total ) - parseInt( assignment.maxPoint );
+        // If the total dropped to zero then remove the grades
+        if( total == 0 ) {
+          studentRef.child( "grades/" + assignmentId ).set( grade );
+          studentRef.child( "earned" ).remove();
+          studentRef.child( "total" ).remove();
+        } else {
+          var earned = parseInt( student.earned ) - parseInt( oldGrade );
+          studentRef.child( "grades/" + assignmentId ).set( grade );
+          studentRef.child( "earned" ).set( earned );
+          studentRef.child( "total" ).set( total );
+        }
+
+        earnedChange -= oldGrade;
+        totalChange -= parseInt( assignment.maxPoint );
+      // Grade changed
+      } else {
+        var earned = parseInt( student.earned ) - parseInt( oldGrade ) + parseInt( grade );
+        studentRef.child( "grades/" + assignmentId ).set( grade );
+        studentRef.child( "earned" ).set( earned );
+
+        earnedChange += grade - oldGrade;
       }
     }
-    res.status( 200 ).send( "Success" );
+
+    // Update the assignment average
+    var total;
+    var earned;
+    var assignmentRef = courseRef.child( "public/assignments/" + assignmentId );
+    if( typeof assignment.total == 'undefined' ) {
+      if( totalChange > 0 ) {
+        assignmentRef.child( "earned" ).set( earnedChange );
+        assignmentRef.child( "total" ).set( totalChange );
+      }
+    } else {
+      total = parseInt( assignment.total ) + totalChange;
+      // If the total dropped to zero then remove the grades
+      if( total == 0 ) {
+        assignmentRef.child( "earned" ).remove();
+        assignmentRef.child( "total" ).remove();
+      } else {
+        earned = parseInt( assignment.earned ) + earnedChange;
+        assignmentRef.child( "earned" ).set( earned );
+        assignmentRef.child( "total" ).set( total );
+      }
+    }
+
+    // Update the course average
+    var total;
+    var earned;
+    if( typeof course.total == 'undefined' ) {
+      if( totalChange > 0 ) {
+        courseRef.child( "earned" ).set( earnedChange );
+        courseRef.child( "total" ).set( totalChange );
+      }
+    } else {
+      total = parseInt( course.total ) + totalChange;
+      // If the total dropped to zero then remove the grades
+      if( total == 0 ) {
+        courseRef.child( "earned" ).remove();
+        courseRef.child( "total" ).remove();
+      } else {
+        earned = parseInt( course.earned ) + earnedChange;
+        courseRef.child( "earned" ).set( earned );
+        courseRef.child( "total" ).set( total );
+      }
+    }
+
+    res.status( 200 ).send( "Success." );
   });
 });
 
@@ -120,7 +176,7 @@ router.post('/importcsv', function(req, res, next) {
   
   var courseId = req.query.courseid;
   var csv = req.query.csv;
-  var courseRef = ref.child( "courses/" + courseId );
+  var courseRef = config.baseRef.child( "courses/" + courseId );
   
   var getDbCourseJson = function( courseId ) {
     return courseRef.once( "value" ).then( function( snapshot ){ 
