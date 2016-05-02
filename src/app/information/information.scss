@@ -9,11 +9,11 @@
 }
 
 .information-course-area {
-
+  height:auto;
 }
 
 .information-instructor-area {
-
+  height:auto;
 }
 
 // wrap header and section
@@ -29,17 +29,12 @@
   //background-color: #e6f3ff;
   //border: 2px solid #e6e6e6;
   width:100%;
-  float:left;
   padding:10px;
   margin-bottom:5px;
 }
 
 .infoSection textarea {
   resize:none;
-}
-
-.infoSection label {
-  display: block;
 }
 
 .infoSection label button {
