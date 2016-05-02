@@ -44,19 +44,23 @@ router.post('/user', function(req, res, next) {
 
           // If the user is the course instructor then return everything
           if( course[ "public" ].instructor.id == user.id ) {
+console.log( "instructor" );
             var temp = course[ "public" ];
             temp.students = course[ "private" ];
             temp.courseid = courseId;
             data.courses.push( temp );
             callback( null, null );
           } else {
+console.log( "student" );
             var assignments = course[ "public" ].assignments;
             var grades = course[ "private" ][ user.id ].grades;
 
-            for( var key in assignments ) {
-              var grade = grades[ key ];
-              if( grade != null ) {
-                assignments[ key ].grade = grade;
+            if( typeof grades != 'undefined' ){
+              for( var key in assignments ) {
+                var grade = grades[ key ];
+                if( grade != null ) {
+                  assignments[ key ].grade = grade;
+                }
               }
             }
             course[ "public" ].courseid = courseId;
@@ -70,10 +74,11 @@ router.post('/user', function(req, res, next) {
     var promises = [];
 
     for( var key in user.courses ) {
+console.log( user.courses[ key ].title );
       promises.push( generatePromise( user.courses[ key ].courseId ) );
     }
 
-    async.parallel( promises, function( err, result ) {
+    async.series( promises, function( err, result ) {
       res.status( 200 ).send( data );
     });
 

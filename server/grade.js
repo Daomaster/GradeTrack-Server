@@ -110,8 +110,6 @@ router.post('/update', function(req, res, next) {
     }
 
     // Update the assignment average
-console.log( earnedChange );
-console.log( totalChange );
     var assignmentRef = courseRef.child( "public/assignments/" + assignmentId );
     assignmentRef.child( "earned" ).set( parseInt( assignment.earned ) + earnedChange );
     assignmentRef.child( "total" ).set( parseInt( assignment.total ) + totalChange );
@@ -124,7 +122,6 @@ console.log( totalChange );
   });
 });
 
-////////////////////////////////////////////////////////////////////////////////
 router.post('/importcsv', function(req, res, next) {
   
   var courseId = req.query.courseid;
