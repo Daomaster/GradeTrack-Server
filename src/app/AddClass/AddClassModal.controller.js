@@ -13,6 +13,7 @@
       vm.studentString="";
       vm.courseName = "";  // reset
       vm.students = [];
+      vm.showError=false;
       $uibModalInstance.dismiss('cancel');
     };
 
@@ -21,10 +22,28 @@
     vm.studentString = "";
     vm.description = "";
 
+    vm.showError = false;
 
-    vm.addCourseServerPackage = function()
+
+    vm.createCourse = function()
     {
+      var i;
+      if (vm.courseName == "") {
+        vm.showError = true;  //class empty error
+        return; // empty class error
+      }
 
+
+      var course = GradeService.addCourse(vm.courseName);
+      for (i = 0; i < vm.students.length; ++i)
+      {
+        GradeService.addStudent(course, vm.students[i].name, 0);
+      }
+
+
+
+
+      //format for post
       var c =
       {
         title: vm.courseName,
@@ -33,13 +52,14 @@
         description: vm.description
       };
 
-      for (var i =0; i < vm.students.length; ++i)
+      for (i =0; i < vm.students.length; ++i)
       {
         c.students.push(vm.students[i].name);
       }
       c.instructor = GradeService.firstName + " " + GradeService.lastName;
 
-      // do stuff
+
+      //send
       $http.post("http://localhost:3000/api/info/addstudents", {
         title: c.title,
         students: c.students,
@@ -47,19 +67,13 @@
       });
 
 
-    };
 
-    vm.createCourse = function()
-    {
-      if (vm.courseName == "") return; // empty class error
-      var course = GradeService.addCourse(vm.courseName);
-      for (var i = 0; i < vm.students.length; ++i)
-      {
-        GradeService.addStudent(course, vm.students[i].name, 0);
-      }
-      vm.addCourseServerPackage();
+
+
       vm.close();
     };
+
+
     vm.addStudent = function(name_)
     {
       var student =

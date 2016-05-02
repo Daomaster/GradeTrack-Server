@@ -11,6 +11,7 @@
           <div class="modal-infoheader">ASSIGNMENT NAME</div>
           <div>
             <input class="modal-username-input" ng-model="AddAssignmentModalController.assignmentName" type="text" placeholder="Assignment Name">
+            <span ng-show="AddAssignmentModalController.showError" class="modal-errortext">Enter an assignment name</span>
           </div>
         </div>
         <div class="col-md-6">

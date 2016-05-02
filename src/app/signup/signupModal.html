@@ -12,6 +12,7 @@
           <div class="modal-infoheader">FIRST NAME</div>
           <div>
             <input class="modal-username-input" type="text" ng-model="signupModalController.firstName" placeholder="">
+            <span class="modal-errortext">{{signupModalController.errorText.first}}</span>
           </div>
         </div>
         <div class="col-md-6">
@@ -19,6 +20,7 @@
           <div class="modal-infoheader">LAST NAME</div>
           <div>
             <input class="modal-username-input" type="text" ng-model="signupModalController.lastName" placeholder="">
+            <span class="modal-errortext">{{signupModalController.errorText.last}}</span>
           </div>
         </div>
       </div>
@@ -29,6 +31,7 @@
         <div class="modal-infoheader">USERNAME</div>
         <div>
           <input class="modal-username-input" type="text" ng-model="signupModalController.username" placeholder="Username">
+          <span class="modal-errortext">{{signupModalController.errorText.username}}</span>
         </div>
       </div>
       <div class="col-md-6">
@@ -36,6 +39,7 @@
         <div class="modal-infoheader">STUDENT ID</div>
         <div>
           <input class="modal-username-input" type="text" ng-model="signupModalController.studentID" placeholder="">
+          <span class="modal-errortext">{{signupModalController.errorText.id}}</span>
         </div>
       </div>
     </div>
@@ -47,6 +51,7 @@
           <div class="modal-infoheader">EMAIL ADDRESS</div>
           <div>
             <input class="modal-username-input" type="text" ng-model="signupModalController.email" placeholder="name@company.com">
+            <span class="modal-errortext">{{signupModalController.errorText.email}}</span>
           </div>
         </div>
         <div class="col-md-6">
@@ -67,6 +72,7 @@
       <div class="modal-infoheader">PASSWORD</div>
       <div>
         <input class="modal-username-input" type="password" ng-model="signupModalController.password" placeholder="Password">
+        <span class="modal-errortext">{{signupModalController.errorText.password}}</span>
       </div>
     </li>
     <li style="height:20px;">

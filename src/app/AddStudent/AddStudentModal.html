@@ -11,6 +11,7 @@
           <div class="modal-infoheader">FIRST NAME</div>
           <div>
             <input class="modal-username-input" ng-model="AddStudentModalController.firstName" type="text" placeholder="First Name">
+            <span class="modal-errortext">{{AddStudentModalController.errorText.first}}</span>
           </div>
         </div>
         <div class="col-md-6">
@@ -18,6 +19,7 @@
           <div class="modal-infoheader">LAST NAME</div>
           <div>
             <input class="modal-username-input" ng-model="AddStudentModalController.lastName" type="text" placeholder="Last Name">
+            <span class="modal-errortext">{{AddStudentModalController.errorText.last}}</span>
           </div>
         </div>
       </div>
@@ -27,12 +29,14 @@
       <div class="modal-infoheader">STUDENT ID</div>
       <div>
         <input class="modal-username-input" ng-model="AddStudentModalController.studentID" type="text" placeholder="Student ID">
+        <span class="modal-errortext">{{AddStudentModalController.errorText.id}}</span>
       </div>
     </li>
     <li class="modal-inputwrapper">
       <div class="modal-infoheader">STUDENT EMAIL</div>
       <div>
         <input class="modal-username-input" ng-model="AddStudentModalController.email" type="text" placeholder="name@institution.edu">
+        <span class="modal-errortext">{{AddStudentModalController.errorText.email}}</span>
       </div>
     </li>
 
