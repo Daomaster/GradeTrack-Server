@@ -168,7 +168,7 @@ router.post('/addassign', function(req, res, next) {
           return;
         }
       }
-      var assignment = { title : title, description : description, maxPoint : total };
+      var assignment = { earned : 0, total : 0, title : title, description : description, maxPoint : total };
       // Get the due date
       if( typeof due != 'undefined' && Object.keys( due ).length !== 0 ) {
         due = JSON.parse( due );
@@ -215,6 +215,8 @@ router.post('/addcourse', function(req, res, next) {
 
     return config.baseRef.child( "courses" ).push( {
       "public" : {
+        earned : 0,
+        total : 0,
         title: title,
         description: description,
         instructor: {
@@ -287,7 +289,9 @@ router.get('/enrollstudent', function(req, res, next) {
             email : user.email,
             id : user.id,
             firstName : user.firstName,
-            lastName : user.lastName
+            lastName : user.lastName,
+            earned : 0,
+            total : 0
           });
 
           userRef.child( "courses" ).push({

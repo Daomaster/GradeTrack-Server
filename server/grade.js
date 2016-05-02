@@ -28,8 +28,13 @@ router.post('/update', function(req, res, next) {
     res.status( 500 ).send( "Failure. Course and assignment ids must be given and students be listed" );
     return;
   }
-  var students = JSON.parse( students );
+
+  for( var iter = 0, length = students.length; iter < length; ++iter ) {
+    students[ iter ] = JSON.parse( students[ iter ] );
+  }
+
   var courseRef = config.baseRef.child( "courses/" + courseId );
+
   courseRef.once( "value" ).then( function( snapshot ) {
     var course = snapshot.val();
 
@@ -46,7 +51,7 @@ router.post('/update', function(req, res, next) {
       res.status( 500 ).send( "Failure. Invalid assignment id." );
       return;
     }
-console.log( assignment );
+
     // Check if student exists
     for( var iter = 0, length = students.length; iter < length; ++iter ) {
       if( !( students[ iter ].studentid in course[ "private" ] ) ) {
@@ -75,42 +80,22 @@ console.log( assignment );
         studentRef.child( "grades/" + assignmentId ).set( grade );
       // Grade added
       } else if( !isNaN( grade ) && isNaN( oldGrade ) ) {
-        // If this is the first grade
-        if( typeof student.earned == 'undefined' ) {
-          var earned = grade;
-          var total = parseInt( assignment.maxPoint );
-          studentRef.child( "grades/" + assignmentId ).set( grade );
-          studentRef.child( "earned" ).set( earned );
-          studentRef.child( "total" ).set( total );
+        var earned = parseInt( grade ) + parseInt( student.earned );
+        var total = parseInt( assignment.maxPoint ) + parseInt( student.total );
+        studentRef.child( "grades/" + assignmentId ).set( grade );
+        studentRef.child( "earned" ).set( earned );
+        studentRef.child( "total" ).set( total );
 
-          earnedChange += earned;
-          totalChange += total;
-        // If there are other grades
-        } else {
-          var earned = parseInt( grade ) + parseInt( student.earned );
-          var total = parseInt( assignment.maxPoint ) + parseInt( student.total );
-          studentRef.child( "grades/" + assignmentId ).set( grade );
-          studentRef.child( "earned" ).set( earned );
-          studentRef.child( "total" ).set( total );
-
-          earnedChange += grade - student.earned;
-          totalChange += total;
-        }
+        earnedChange += parseInt( grade );
+        totalChange += parseInt( assignment.maxPoint );
       // Grade removed
       } else if( isNaN( grade ) && !isNaN( oldGrade ) ) {
         // Remove the old grade
         var total = parseInt( student.total ) - parseInt( assignment.maxPoint );
-        // If the total dropped to zero then remove the grades
-        if( total == 0 ) {
-          studentRef.child( "grades/" + assignmentId ).set( grade );
-          studentRef.child( "earned" ).remove();
-          studentRef.child( "total" ).remove();
-        } else {
-          var earned = parseInt( student.earned ) - parseInt( oldGrade );
-          studentRef.child( "grades/" + assignmentId ).set( grade );
-          studentRef.child( "earned" ).set( earned );
-          studentRef.child( "total" ).set( total );
-        }
+        var earned = parseInt( student.earned ) - parseInt( oldGrade );
+        studentRef.child( "grades/" + assignmentId ).set( grade );
+        studentRef.child( "earned" ).set( earned );
+        studentRef.child( "total" ).set( total );
 
         earnedChange -= oldGrade;
         totalChange -= parseInt( assignment.maxPoint );
@@ -125,47 +110,15 @@ console.log( assignment );
     }
 
     // Update the assignment average
-    var total;
-    var earned;
+console.log( earnedChange );
+console.log( totalChange );
     var assignmentRef = courseRef.child( "public/assignments/" + assignmentId );
-    if( typeof assignment.total == 'undefined' ) {
-      if( totalChange > 0 ) {
-        assignmentRef.child( "earned" ).set( earnedChange );
-        assignmentRef.child( "total" ).set( totalChange );
-      }
-    } else {
-      total = parseInt( assignment.total ) + totalChange;
-      // If the total dropped to zero then remove the grades
-      if( total == 0 ) {
-        assignmentRef.child( "earned" ).remove();
-        assignmentRef.child( "total" ).remove();
-      } else {
-        earned = parseInt( assignment.earned ) + earnedChange;
-        assignmentRef.child( "earned" ).set( earned );
-        assignmentRef.child( "total" ).set( total );
-      }
-    }
+    assignmentRef.child( "earned" ).set( parseInt( assignment.earned ) + earnedChange );
+    assignmentRef.child( "total" ).set( parseInt( assignment.total ) + totalChange );
 
     // Update the course average
-    var total;
-    var earned;
-    if( typeof course.total == 'undefined' ) {
-      if( totalChange > 0 ) {
-        courseRef.child( "earned" ).set( earnedChange );
-        courseRef.child( "total" ).set( totalChange );
-      }
-    } else {
-      total = parseInt( course.total ) + totalChange;
-      // If the total dropped to zero then remove the grades
-      if( total == 0 ) {
-        courseRef.child( "earned" ).remove();
-        courseRef.child( "total" ).remove();
-      } else {
-        earned = parseInt( course.earned ) + earnedChange;
-        courseRef.child( "earned" ).set( earned );
-        courseRef.child( "total" ).set( total );
-      }
-    }
+    courseRef.child( "public/earned" ).set( parseInt( course[ "public" ].earned ) + earnedChange );
+    courseRef.child( "public/total" ).set( parseInt( course[ "public" ].total ) + totalChange );
 
     res.status( 200 ).send( "Success." );
   });
