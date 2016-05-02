@@ -34,112 +34,119 @@
 					<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{information.instName()}}</div>
 				</div>
 				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
-					<div style="padding: 5px;">
-  					<div class="infoSection">
-							<!--form inputs for name, email, phone, and office hours-->
-              <!--TODO: Stylize to center and align office/hours-->
-              <form class="form-inline">
-                <div class="form-group" style="text-align:center; width:100%;">
-                    <label style="float:left;" for="profName">Name</label>
-                    <input type="text" class="form-control" id="profName" placeholder="{{information.instName()}}">
-                </div>
-              </form>
+					<div class="infoSection">
+						<!--form inputs for name, email, phone, and office hours-->
+						<table class="table table-bordered" style="margin-bottom:0px;"> <!--Not sure why I need this style here-->
+              <tr><td>
+								<form class="form-inline">
+	                <div class="form-group" style="text-align:center; width:100%;">
+	                    <label style="float:left;" for="profName">Name</label>
+	                    <input type="text" class="form-control" id="profName" placeholder="{{information.instName()}}">
+	                </div>
+              	</form>
+							</td></tr>
 
-              <form class="form-inline">
-                <div class="form-group" style="text-align:center; width:100%;">
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
                     <label style="float:left;" for="profEmail">Email</label>
-                    <input type="text" class="form-control" id="profEmail" placeholder="{{information.instaName()}}@unlv.edu">
-                </div>
-              </form>
+                    <input type="text" class="form-control" id="profEmail" placeholder="{{information.email()}}">
+              		</div>
+            		</form>
+							</td></tr>
 
-              <form class="form-inline">
-                <div class="form-group" style="text-align:center; width:100%;">
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
                     <label style="float:left;" for="profName">Phone</label>
                     <input style="margin-left:-7px;" type="text" class="form-control" id="profPhone" placeholder="(555) 555-5555">
-                </div>
-              </form>
+                	</div>
+            		</form>
+							</td></tr>
 
-              <form class="form-inline">
-                <div class="form-group" style="text-align:center; width:100%;">
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
                     <label style="float:left;" for="profOffice">Office Hours</label>
                     <input style="margin-left:-49px;" type="text" class="form-control" id="profOffice" placeholder="TBE-B 212">
-                </div>
-              </form>
+                	</div>
+              	</form>
 
-              <form class="form-inline">
-                <div class="form-group" style="text-align:center; width:100%;">
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
                     <input style="margin-left:37px;" type="text" class="form-control" id="profHours" placeholder="Monday 2:00 - 3:00pm">
-                </div>
-              </form>
+                	</div>
+              	</form>
+							</td></tr>
+						</table>
 
-              <!--OLD STUFF-->
-              <!-- Section for Instructor -->
-                <!--<section class="col-xs-9">
-                  <div class="infoHeader">
-                    <h3> Instructor Information
+            <!--OLD STUFF-->
+            <!-- Section for Instructor -->
+              <!--<section class="col-xs-9">
+                <div class="infoHeader">
+                  <h3> Instructor Information
+                  <lable>
+                    <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable2()">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                  </lable>
+                  </h3>
+                </div>
+
+                <div class="infoSection">
+                  <label>
+                    <ul class="list-group">
+                      <br>
+                      <li class="list-group-item">
+                        Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Phone: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo">
+                                 <input type="text" value="{{profile.hours}}" ng-disabled="!editInfo"><br>
+                      </li>-->
+                                <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
+                  <!--</label>
+                </div>
+              </section>-->
+
+              <!-- Section for TA   (the bottom not works yet)-->
+              <!--<section class="col-xs-9">
+
+                <div class="infoHeader">
+                  <h3> Teacher's Assistant
                     <lable>
-                      <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable2()">
-                      <span class="glyphicon glyphicon-edit"></span>
+                      <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+                        <span class="glyphicon glyphicon-plus"></span>
                       </button>
                     </lable>
-                    </h3>
+                  </h3>
+                </div>
+
+                <div class="infoSection" ng-show="!ShowTab">
+                  <lable>
+                    <ul class="list-group">
+                      <br>
+                      <li class="list-group-item">
+                        Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                    </lable>
                   </div>
+                </div>
+              </section>-->
 
-                  <div class="infoSection">
-                    <label>
-                      <ul class="list-group">
-                        <br>
-                        <li class="list-group-item">
-                          Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
-                        </li>
-                        <br>
-                        <li class="list-group-item">
-                          Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-                        </li>
-                        <br>
-                        <li class="list-group-item">
-                          Phone: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-                        </li>
-                        <br>
-                        <li class="list-group-item">
-                          Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo">
-                                   <input type="text" value="{{profile.hours}}" ng-disabled="!editInfo"><br>
-                        </li>-->
-                                  <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
-                    <!--</label>
-                  </div>
-                </section>-->
-
-                <!-- Section for TA   (the bottom not works yet)-->
-                <!--<section class="col-xs-9">
-
-                  <div class="infoHeader">
-                    <h3> Teacher's Assistant
-                      <lable>
-                        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
-                          <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                      </lable>
-                    </h3>
-                  </div>
-
-                  <div class="infoSection" ng-show="!ShowTab">
-                    <lable>
-                      <ul class="list-group">
-                        <br>
-                        <li class="list-group-item">
-                          Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
-                        </li>
-                        <br>
-                        <li class="list-group-item">
-                          Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-                        </li>
-                      </lable>
-                    </div>
-                  </div>
-                </section>-->
-
-  					</div>
 					</div>
 				</div>
 			</div>
