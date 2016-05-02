@@ -126,6 +126,12 @@ router.post('/importcsv', function(req, res, next) {
   
   var courseId = req.query.courseid;
   var csv = req.query.csv;
+
+  if( typeof courseId == 'undefined' || typeof csv == 'undefined' ) {
+    res.status( 500 ).send( "Failure. Course and csv must be given." );
+    return;
+  }
+  
   var courseRef = config.baseRef.child( "courses/" + courseId );
   
   var getDbCourseJson = function( courseId ) {
@@ -309,19 +315,17 @@ var getType = function( cell ) {
             break;
           case Field.Assignment:
             // If it is an number
-            if( RegExp( /^-?\d*\.?\d*$/ ).test( student[ col ] ) ) {
+            if( !isNaN( student[ col ] ) ) {
               if( student[ col ] != "" ) {
                 var assignment = header[ col ].key;
                 grades[ assignment ] = parseInt( student[ col ] );
                 studentEarned += parseInt( student[ col ] );
-                studentTotal += assignments[ assignment ].maxPoint;
+                studentTotal += parseInt( assignments[ assignment ].maxPoint );
                 assignEarned[ assignment ] += parseInt( student[ col ] );
-                assignTotal[ assignment ] += assignments[ assignment ].maxPoint;
+                assignTotal[ assignment ] += parseInt( assignments[ assignment ].maxPoint );
               }
-            } else {
-              csvFormat.notes[ id ][ col ] = student[ col ];
-              break;
             }
+            break;
         }
       }
       courseRef.child( "private/" + id + "/grades" ).set( grades );
@@ -336,13 +340,13 @@ var getType = function( cell ) {
         var key = header[ col ].key;
         courseEarned += assignEarned[ key ];
         courseTotal += assignTotal[ key ];
-        courseRef.child( "public/assignments/" + key + "/earned" ).set( parseInt( assignEarned[ key ] ) );
-        courseRef.child( "public/assignments/" + key + "/total" ).set( parseInt( assignTotal[ key ] ) );
+        courseRef.child( "public/assignments/" + key + "/earned" ).set( assignEarned[ key ] );
+        courseRef.child( "public/assignments/" + key + "/total" ).set( assignTotal[ key ] );
       }
     }
 
-    courseRef.child( "public/earned" ).set( parseInt( courseEarned ) );
-    courseRef.child( "public/total" ).set( parseInt( courseTotal ) );
+    courseRef.child( "public/earned" ).set( courseEarned );
+    courseRef.child( "public/total" ).set( courseTotal );
 
     courseRef.child( "csvFormat" ).set( csvFormat );
   }
