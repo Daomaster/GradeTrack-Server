@@ -4,16 +4,32 @@ var router = express.Router();
 
 /* GET the data from ID. */
 router.post('/signup', function(req, res, next) {
-  var enEmail = new Buffer(req.body.email).toString('base64');
-  var enPwd = new Buffer(req.body.password).toString('base64');
-  var username = req.body.username;
+  var email = req.query.email;
+  var pwd = req.query.password;
+  var username = req.query.username;
+  var firstName = req.query.firstname;
+  var lastName = req.query.lastname;
+  var type = req.query.type;
+  var id = req.query.id;
+
+  if( typeof email == 'undefined' || typeof pwd == 'undefined' || 
+      typeof firstName == 'undefined' || typeof username == 'undefined' || 
+      typeof lastName == 'undefined' || typeof type == 'undefined' ||
+      typeof id == 'undefined' ) {
+    res.status(500).send('Failed. Must input id, email, password, username, first and last name, and type.');
+    return;
+  }
+
+  var enEmail = new Buffer(email).toString('base64');
+  var enPwd = new Buffer(pwd).toString('base64');
 
   var userInfo = {
-    email: req.body.email,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
     password: enPwd,
-    type: req.body.type
+    type: type,
+    id : id
   };
 
   config.baseRef.child("users").once("value", function(snapshot) {
@@ -43,8 +59,14 @@ router.post('/signin', function(req, res, next) {
   // Not then error out
   // Exists
   // Check if the password matches
-  var username = req.body.username;
-  var password = req.body.password;
+  var username = req.query.username;
+  var password = req.query.password;
+
+  if( typeof username == 'undefined' || typeof password == 'undefined' ) {
+    res.status(500).send('Failed. Must input username and password.');
+    return;
+  }
+
   password = new Buffer(password).toString('base64');
   if (username != null || username != '') {
     config.baseRef.child("users").once("value", function(snapshot) {
