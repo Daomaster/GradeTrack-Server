@@ -6,7 +6,7 @@ var async = require( 'async' );
 var config = require('./config.js');
 
 router.post('/user', function(req, res, next) {
-  var username = req.query.username;
+  var username = req.body.username;
 
   if( typeof username == 'undefined' ) {
     res.status( 500 ).send( "Failure. Username must be supplied." );
