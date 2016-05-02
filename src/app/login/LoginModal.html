@@ -9,18 +9,18 @@
       <div>
         <input class="modal-password-input" type="text" ng-model="LoginModalController.username" placeholder="name@company.com">
 
-        <span ng-show="LoginModalController.errorUsername" class="modal-errortext" style="margin-left:-40px;">Enter a username</span>
+        <span class="modal-errortext" style="margin-left:-40px;">{{LoginModalController.errorText.username}}</span>
       </div>
     </li>
     <li class="modal-inputwrapper">
       <div class="modal-infoheader">PASSWORD</div>
       <div>
         <input class="modal-password-input" type="password" ng-model="LoginModalController.password" placeholder="Password">
-        <span ng-show="LoginModalController.errorPassword" class="modal-errortext" style="margin-left:-40px;">Enter a password</span>
+        <span class="modal-errortext" style="margin-left:-40px;">{{LoginModalController.errorText.password}}</span>
       </div>
     </li>
     <li style="height:20px;">
-      <span ng-show="LoginModalController.errorLogin" class="modal-errortext" style="position:absolute; left:15px; bottom:20px;">Invalid Login</span> <button class="btn btn-primary" style="float:right;" ng-click="LoginModalController.login()">Log In</button>
+      <span class="modal-errortext" style="position:absolute; left:15px; bottom:20px;">{{LoginModalController.errorText.login}}</span> <button class="btn btn-primary" style="float:right;" ng-click="LoginModalController.login()">Log In</button>
     </li>
   </ul>
 </div>

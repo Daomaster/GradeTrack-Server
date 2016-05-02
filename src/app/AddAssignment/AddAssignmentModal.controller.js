@@ -12,12 +12,13 @@
     vm.assignmentDescription = "";
     vm.assignmentName = "";
     vm.points = 0;
-    vm.showError = false;
+    vm.errorText = "";
     vm.addAssignment = function()
     {
+      vm.errorText = "";
       if (vm.assignmentName == "")
       {
-        vm.showError = true;
+        vm.errorText = "Enter an assignment name";
         return;
       }
 
@@ -42,7 +43,6 @@
       vm.assignmentDescription = "";
       vm.assignmentName = "";
       vm.points=0;
-      vm.showError = false;
       $uibModalInstance.dismiss('cancel');
     };
 

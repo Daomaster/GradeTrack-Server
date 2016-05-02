@@ -22,14 +22,15 @@
     vm.studentString = "";
     vm.description = "";
 
-    vm.showError = false;
+    vm.errorText = "";
 
 
     vm.createCourse = function()
     {
+      vm.errorText = "";
       var i;
       if (vm.courseName == "") {
-        vm.showError = true;  //class empty error
+        vm.errorText = "Enter a course name";  //class empty error
         return; // empty class error
       }
 

@@ -9,7 +9,7 @@
       <div class="modal-infoheader">COURSE NAME</div>
       <div>
         <input class="modal-username-input" ng-model="AddClassModalController.courseName" type="text" placeholder="Course Name">
-        <span ng-show="AddClassModalController.showError" class="modal-errortext">Enter a course name</span>
+        <span class="modal-errortext">{{AddClassModalController.errorText}}</span>
       </div>
     </li>
     <li class="modal-inputwrapper">

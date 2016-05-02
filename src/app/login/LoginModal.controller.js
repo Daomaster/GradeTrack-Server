@@ -11,32 +11,35 @@
     vm.username = "";
     vm.password = "";
 
-    vm.errorPassword = false;
-    vm.errorUsername = false;
-    vm.errorLogin = false;
 
-    vm.setErrorsOff = function()
+    vm.errorText =
     {
-      vm.errorPassword = false;
-      vm.errorUsername = false;
-      vm.errorLogin = false;
+      password: "",
+      username: "",
+      login: ""
+    };
+
+
+    vm.checkInputErrors = function()
+    {
+      vm.errorText.password = vm.errorText.username = vm.errorText.login = "";
+
+      var error = false;
+      if (vm.username == "") {    // blank username field
+        vm.errorText.username = "Enter a username";
+        error=true;
+      }
+      if (vm.password == "") {    // blank password field
+        vm.errorText.password = "Enter a password";
+        error=true;
+      }
+      return error;          // don't attempt login
     };
 
 
     vm.login = function()
     {
-      vm.setErrorsOff();          // for multiple failed logins
-
-      var error = false;
-      if (vm.username == "") {    // blank username field
-        vm.errorUsername = true;
-        error=true;
-      }
-      if (vm.password == "") {    // blank password field
-        vm.errorPassword = true;
-        error=true;
-      }
-      if (error) return;          // don't attempt login
+      if (vm.checkInputErrors()) return; // input error
 
 
       var loginInfo = {
@@ -57,7 +60,7 @@
 
         function errorCallback() {
           //on Error
-          vm.errorLogin = true;     // show invalid login message
+          vm.errorText.login = "Invalid login"
 
         }
       );
@@ -68,7 +71,6 @@
     };
     vm.close = function()
     {
-      vm.errorPassword = vm.errorUsername = vm.errorLogin = false;
       $uibModalInstance.dismiss('cancel');
     };
 
