@@ -90,7 +90,7 @@ router.post('/addstudents', function(req, res, next) {
     res.status( 500 ).send( "Failure. /addstudents api requires list of student emails and a course" );
     return;
   }
-  
+
   var courseRef = config.baseRef.child( "courses/" + courseId );
   courseRef.once( "value" ).then( function( snapshot ) {
     var course = snapshot.val();
@@ -103,21 +103,22 @@ router.post('/addstudents', function(req, res, next) {
         var email64 = new Buffer( emails[ iter ] ).toString('base64');
         courseRef.child( "pending/" + email64 ).set( false );
       }
-  
+
       // I broke it I'm sorry
-      /*mail.transporter.sendMail({
+      mail.transporter.sendMail({
            from: "Gradetrack Team <noreply@gradetrack.com>",
            bcc: emails,
-           subject: title + " Registration",
-           html:"testing"
-           "<b>Signup Confirmation</b><br /><br /><p>Your teacher "+course[ "public" ].instructor.firstName+" "+course[ "public" ].instructor.lastName+" invite your to join "++course[ "public" ].title+" :</p><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a><br />"
+           subject: course[ "public" ].title + " Registration",
+           html:
+           "<b>Signup Confirmation</b><br /><br /><p>Your teacher "+course[ "public" ].instructor.firstName+" "+course[ "public" ].instructor.lastName+" invite your to join "+course[ "public" ].title+" :</p><br /><a href='http://localhost:3000/api/grade/exportcsv'>Click Here</a><br />"
         }, function(error, response){
            if(error){
                console.log(error);
            }else{
                console.log("Message sent: " + response.message);
            }
-        });*/
+        });
+
     } else {
       for( var iter = 0, len = emails.length; iter < len; ++iter ) {
         var email64 = new Buffer( emails[ iter ] ).toString('base64');
@@ -203,7 +204,7 @@ router.post('/addcourse', function(req, res, next) {
   var title = req.query.title;
   var description = req.query.description;
 
-  if( typeof username == 'undefined' || typeof title == 'undefined' || 
+  if( typeof username == 'undefined' || typeof title == 'undefined' ||
       typeof description == 'undefined' ) {
     res.status( 500 ).send( "Failure: Requires username, title, and description" );
     return;
