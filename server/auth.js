@@ -12,8 +12,8 @@ router.post('/signup', function(req, res, next) {
   var type = req.query.type;
   var id = req.query.id;
 
-  if( typeof email == 'undefined' || typeof pwd == 'undefined' || 
-      typeof firstName == 'undefined' || typeof username == 'undefined' || 
+  if( typeof email == 'undefined' || typeof pwd == 'undefined' ||
+      typeof firstName == 'undefined' || typeof username == 'undefined' ||
       typeof lastName == 'undefined' || typeof type == 'undefined' ||
       typeof id == 'undefined' ) {
     res.status(500).send('Failed. Must input id, email, password, username, first and last name, and type.');
@@ -59,8 +59,8 @@ router.post('/signin', function(req, res, next) {
   // Not then error out
   // Exists
   // Check if the password matches
-  var username = req.query.username;
-  var password = req.query.password;
+  var username = req.body.username;
+  var password = req.body.password;
 
   if( typeof username == 'undefined' || typeof password == 'undefined' ) {
     res.status(500).send('Failed. Must input username and password.');
@@ -74,7 +74,7 @@ router.post('/signin', function(req, res, next) {
       if (userExist) {
           config.baseRef.child("users"+"/"+username).once("value", function(snapshot) {
             if (password == snapshot.val().password) {
-              res.status(200).send("Success");
+              res.status(200).send(username);
             }
             else {
               res.status(500).send('Failed');
