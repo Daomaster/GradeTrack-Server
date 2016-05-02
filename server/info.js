@@ -44,14 +44,12 @@ router.post('/user', function(req, res, next) {
 
           // If the user is the course instructor then return everything
           if( course[ "public" ].instructor.id == user.id ) {
-console.log( "instructor" );
             var temp = course[ "public" ];
             temp.students = course[ "private" ];
             temp.courseid = courseId;
             data.courses.push( temp );
             callback( null, null );
           } else {
-console.log( "student" );
             var assignments = course[ "public" ].assignments;
             var grades = course[ "private" ][ user.id ].grades;
 
@@ -74,7 +72,6 @@ console.log( "student" );
     var promises = [];
 
     for( var key in user.courses ) {
-console.log( user.courses[ key ].title );
       promises.push( generatePromise( user.courses[ key ].courseId ) );
     }
 
