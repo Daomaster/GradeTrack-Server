@@ -7,9 +7,12 @@
     .service('GradeService', function(){
 
 
-      this.loggedIn = true;
+      this.loggedIn = false;
       this.lastName = "Prof";
       this.firstName = "name";
+      this.email = "";
+      this.username = "";
+      this.userID = "";
 
       this.gradeAverageArray = []; // needed for dashboard graphing
       this.courseNameArray = [];
@@ -29,9 +32,11 @@
         var c =
         {
           name : name_,
-          expanded : false,
+          description: "",
+          serverID: "",       //for db
+          expanded : false,   // internal use
           average: Math.round((Math.random() * 50 + 50) * 100) / 100, //random 50-100, 2 decimals
-          id : this.courses.length,
+          id : this.courses.length, //internal use
           assignments: [],
           students: [],
           weights: [
@@ -75,10 +80,25 @@
         this.courseNameArray = [];
       };
 
+      this.serverIDtoAssignmentID = function(course, key)
+      {
+        console.log(course);
+        for (var i = 0; i < course.assignments.length; ++i)
+        {
+          console.log(course.assignments[i].serverID + "==" + key);
+          if (course.assignments[i].serverID == key)
+            return i;
+        }
+        console.log("err");
+        return -1;
+      };
 
       this.addStudent = function(course, name_, id_) {
         var t = {
           name: name_,
+          firstName: "",
+          lastName: "",
+          email: "",
           studentID: id_,
           id: course.students.length,
           assignmentGrades: [],
@@ -90,6 +110,7 @@
           t.oldAssignmentGrades.push(0);
         }
         course.students.push(t);
+        return t;
       };
 
       this.randomDate = function()
@@ -108,6 +129,7 @@
           datepickerOpen: false,    // assignment menu usage
           id: course.assignments.length,
           points: _points,
+          serverID: "",
           type: "Test",
           dueDate: this.randomDate(),
           gradeArray: [0,0,0,0,0] //for graph display
@@ -119,27 +141,9 @@
           course.students[i].oldAssignmentGrades.push(0);
         }
         course.assignments.push(t);
+        return t;
       };
 
-
-      //random data
-      for (var i = 0; i < 5; ++i)
-      {
-        var c = this.addCourse("CS" + (460+i).toString());
-        for (var j = 0; j < 5; ++j)
-        {
-          this.addAssignment(c, "Enter Description","Assignment " + j.toString(), 500);
-        }
-
-        for (var k = 0; k < 30; ++k)
-        {
-          this.addStudent(c, "Student " + k.toString(), 1000000+ j);
-        }
-        for (var l = 0; l < 5; ++l)
-        {
-          c.assignments[l].gradeArray[4] = c.students.length; //initial all to F
-        }
-      }
 
 
 

@@ -41,32 +41,6 @@
       size: size
     })
   };
-    vm.SendModifiedDueDate = function(assignment)
-    {
-      //$$placeholder - due date for assignment has been changed
-      $log.log("SendModifiedDueDate: " + assignment.name + " - " + assignment.dueDate);
-    };
-
-    vm.SendModifiedGrade = function(assignment, student)
-    {
-      //$$placeholder - grade for student on assignment has been changed
-      $log.log("SendModifiedGrade: " + student.name + " on " + assignment.name + " " + student.assignmentGrades[assignment.id]);
-    };
-    vm.SendModifiedPoints = function(assignment)
-    {
-      //$$placeholder - points for assignment have been modified
-      $log.log("SendModifiedPoints: " + assignment.name + " - " + assignment.points);
-    };
-    vm.SendModifiedDescription = function(assignment)
-    {
-      //$$placeholder - descriptions of assignment has been modified
-      $log.log("SendModifiedDescription: " + assignment.name + " - " + assignment.description);
-    };
-    vm.SendModifiedAssignmentName = function(assignment)
-    {
-      //$$placeholder - name of assignment has been modified
-      $log.log("SendModifiedAssignmentName: " + assignment.name);
-    };
 
     vm.getGradeIndex = function(percent)
     {
