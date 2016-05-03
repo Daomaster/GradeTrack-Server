@@ -4,27 +4,15 @@
 
   angular
     .module('GradeTrack')
-    .service('InfoService', function(){
+    .service('InfoService', function() {
+      // ==========
+      // firebase data
+      // ==========
+      
 
-      // Main data.
-      // Use 'this' to make public.
-      // Var for private.
-      /*var classInfo = {
-        id: 'CS 456',
-        name: 'Automata and Formal Languages',
-        info: 'Regular expressions. Regular, context-free, and unrestricted grammars. Finite and pushdown autoamata. Turing machines and the halting problem; introduction to decidability.'
-        // pre: 'CS 302 and MATH 351'
-      };
-
-      var profile = {
-        firstName:' Lawrence ',
-        lastName:' Larmore ',
-        phone: '702-895-1096',
-        email:' larmore@egr.unlv.edu',
-        office: ' TBEB 378B ',
-        hours: 'Mon & Wed:  2:00~2:30 '
-      }*/
-
+      // ==========
+      // UI data
+      // ==========
       var editInfo = false;
       var editDes = false;
       var showTab = false;

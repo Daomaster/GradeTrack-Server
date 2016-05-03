@@ -1,108 +1,162 @@
-<div ng-controller="InformationController as vm" style="height:100%; width:100%">
+<div style="width:100%; height:100%;">
 
-<div class="information-wrapper">
-	<div class="information-full-main-area">
+	<div class="information-course-area">
+
 		<div class="information-main">
-	<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
-		<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
-			<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{vm.activeCourse().name}}</div>
+			<div style="float:right; margin-bottom:5px;">
+				<button type="button" class="btn btn-primary" ng-click="information.fillSyllabus()">Fill Syllabus</button>
+			</div>
+
+			<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
+				<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
+					<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{information.activeCourse().name}}</div>
+				</div>
+				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
+  				<div class="infoSection">
+    				<label for="classInfo" style="display: block;">
+							<div style="margin-bottom: -26px;">
+								Description
+							</div>
+							<button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
+      					<span class="glyphicon glyphicon-edit"></span>
+      				</button>
+						</label>
+						<div style="padding-left: 85px;">
+    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!editDes">{{information.activeCourse().description}}</textarea>
+						</div>
+    				<!--<input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()">-->
+  			</div>
+			</div>
 		</div>
+	</div>
+</div>
 
-<div style="margin-top:10px; margin-bottom:10px; height:calc(100vh - 170px); overflow:auto; background:#FFFFFF;">
-	<!-- Main content -->
+	<!--instructor area-->
+	<div class="information-instructor-area">
+		<div class="information-main">
+			<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
+				<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
+					<div style="padding-top:4px; padding-left:10px;font-size:20px;">Professor Information</div>
+				</div>
+				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
+					<div class="infoSection">
+						<!--form inputs for name, email, phone, and office hours-->
 
-  <!-- Information Area -->
+						<!--<table class="table table-bordered" style="margin-bottom:0px;">
+              <tr><td>
+								<form class="form-inline">
+	                <div class="form-group" style="text-align:center; width:100%;">
+	                    <label style="float:left;" for="profName">Name</label>
+	                    <input type="text" class="form-control" id="profName" placeholder="{{information.instName}}">
+	                </div>
+              	</form>
+							</td></tr>
 
-<!-- Section of class information  -->
-  <section>
-  <div class="col-xs-9">
-    <div class="infoHeader">
-      <h3> Class {{classInfo.id}} - {{classInfo.name}}
-        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
-          <span class="glyphicon glyphicon-edit"> </span>
-        </button>
-      </h3>
-    </div>
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
+                    <label style="float:left;" for="profEmail">Email</label>
+                    <input type="text" class="form-control" id="profEmail" placeholder="{{information.email}}">
+              		</div>
+            		</form>
+							</td></tr>
 
-    <div class="infoSection">
-      <label>Desption:</label>
-        <br>
-      <textarea id = "classInfo" rows = "8" cols = "100" ng-disabled="!editDes">{{classInfo.info}}</textarea>
-      <br>
-      <br>
-      <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()"> -->
-    </div>
-  </div>
-  </section>
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
+                    <label style="float:left;" for="profName">Phone</label>
+                    <input style="margin-left:-7px;" type="text" class="form-control" id="profPhone" placeholder="{{information.phone}}">
+                	</div>
+            		</form>
+							</td></tr>
 
-<!-- Section for Instructor -->
-  <section class="col-xs-9">
-    <div class="infoHeader">
-      <h3> Instructor Information
-      <lable>
-        <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable2()">
-        <span class="glyphicon glyphicon-edit"></span>
-        </button>
-      </lable>
-      </h3>
-    </div>
+							<tr><td>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
+                    <label style="float:left;" for="profOffice">Office Hours</label>
+                    <input style="margin-left:-49px;" type="text" class="form-control" id="profOffice" placeholder="TBE-B 212">
+                	</div>
+              	</form>
 
-    <div class="infoSection">
-      <label>
-        <ul class="list-group">
-          <br>
-          <li class="list-group-item">
-            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
-          </li>
-          <br>
-          <li class="list-group-item">
-            Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-          </li>
-          <br>
-          <li class="list-group-item">
-            Phone: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-          </li>
-          <br>
-          <li class="list-group-item">
-            Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo">
-                     <input type="text" value="{{profile.hours}}" ng-disabled="!editInfo"><br>
-          </li>
-                    <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
-      </label>
-    </div>
-  </section>
+              	<form class="form-inline">
+                	<div class="form-group" style="text-align:center; width:100%;">
+                    <input style="margin-left:37px;" type="text" class="form-control" id="profHours" placeholder="Monday 2:00 - 3:00pm">
+                	</div>
+              	</form>
+							</td></tr>
+						</table>-->
 
-  <!-- Section for TA   (the bottom not works yet)-->
-  <section class="col-xs-9">
+            <!--OLD STUFF-->
+            <!-- Section for Instructor -->
+              <!--<section class="col-xs-9">
+                <div class="infoHeader">
+                  <h3> Instructor Information
+                  <lable>
+                    <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable2()">
+                    <span class="glyphicon glyphicon-edit"></span>
+                    </button>
+                  </lable>
+                  </h3>
+                </div>
 
-    <div class="infoHeader">
-      <h3> Teacher's Assistant
-        <lable>
-          <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
-            <span class="glyphicon glyphicon-plus"></span>
-          </button>
-        </lable>
-      </h3>
-    </div>
+                <div class="infoSection">
+                  <label>
+                    <ul class="list-group">
+                      <br>
+                      <li class="list-group-item">
+                        Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Phone: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Office Houes: <input type="text" value="{{profile.office}}" ng-disabled="!editInfo">
+                                 <input type="text" value="{{profile.hours}}" ng-disabled="!editInfo"><br>
+                      </li>-->
+                                <!-- <input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable2()"> -->
+                  <!--</label>
+                </div>
+              </section>-->
 
-    <div class="infoSection" ng-show="!ShowTab">
-      <lable>
-        <ul class="list-group">
-          <br>
-          <li class="list-group-item">
-            Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
-          </li>
-          <br>
-          <li class="list-group-item">
-            Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
-          </li>
-        </lable>
-      </div>
-    </div>
-  </section>
+              <!-- Section for TA   (the bottom not works yet)-->
+              <!--<section class="col-xs-9">
 
- </div>
- </div>
- </div>
- </div>
+                <div class="infoHeader">
+                  <h3> Teacher's Assistant
+                    <lable>
+                      <button type="button" class="btn btn-default infoButton" ng-click="toggleDisable3()">
+                        <span class="glyphicon glyphicon-plus"></span>
+                      </button>
+                    </lable>
+                  </h3>
+                </div>
+
+                <div class="infoSection" ng-show="!ShowTab">
+                  <lable>
+                    <ul class="list-group">
+                      <br>
+                      <li class="list-group-item">
+                        Name: <input type="text" value="{{profile.firstName}}{{profile.lastName}} " ng-disabled="!editInfo"><br>
+                      </li>
+                      <br>
+                      <li class="list-group-item">
+                        Email: <input type="text" value="{{profile.email}}" ng-disabled="!editInfo"><br>
+                      </li>
+                    </lable>
+                  </div>
+                </div>
+              </section>-->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 </div>

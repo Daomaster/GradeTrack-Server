@@ -11,7 +11,12 @@
 
     vm.activeCourse = function() { return GradeService.getActiveCourse() };
 
-    // TODO: Connections to service
+    vm.instName = GradeService.lastName + " " + GradeService.firstName;
+    vm.email = GradeService.email;
+    vm.phone = GradeService.phone;
 
+    vm.genPDF = function () {
+      
+    };
   }
 })();

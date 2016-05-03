@@ -1,34 +1,22 @@
 //----------------------------
-//  main container
+//  main containers
 //----------------------------
 
 .information-main {
-  padding: 10px 10px 10px 25px;
-  transition:all linear 0.1s;
+  padding: 10px 10px 0px 10px;
   width:100%;
-  left:0;
-  height:100%;
-
-}
-
-.information-wrapper {
-  position:absolute;
-  top:0;
-  left:0;
-  height:100%;
-  width:calc(100vw - 235px);
-  background: #FFFFFF;
-}
-
-.information-full-main-area {
-  position:absolute;
-  transition:all linear 0.1s;
-  left:0;
-  width:calc((100vw - 235px));
   height:100%;
 }
 
-// wrap header and sectionand
+.information-course-area {
+  height:auto;
+}
+
+.information-instructor-area {
+  height:auto;
+}
+
+// wrap header and section
 .infoHeader{
   border: 2px solid gray;
   width:80%;
@@ -38,14 +26,20 @@
 }
 
 .infoSection {
-  background-color: #e6f3ff;
-  border: 2px solid #e6e6e6;
-  width:80%;
-  float:left;
-  text-align: center;
+  //background-color: #e6f3ff;
+  //border: 2px solid #e6e6e6;
+  width:100%;
   padding:10px;
-  margin-top: 0;
-  margin-bottom:30px;
+  //margin-bottom:0px;
+}
+
+.infoSection textarea {
+  resize:none;
+}
+
+.infoSection label button {
+  margin-right: 0px;
+  margin-bottom: 3px;
 }
 
 .infoButton {
