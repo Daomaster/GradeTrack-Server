@@ -14,9 +14,10 @@
     vm.instName = GradeService.lastName + " " + GradeService.firstName;
     vm.email = GradeService.email;
     vm.phone = GradeService.phone;
+    vm.officeHours = GradeService.officeHours;
 
     vm.genPDF = function () {
-      
+
     };
   }
 })();
