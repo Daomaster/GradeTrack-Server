@@ -5,7 +5,7 @@
     .module('GradeTrack')
     .controller('AddStudentModalController', AddStudentModalController);
   /** @ngInject */
-  function AddStudentModalController(GradeService, $http, $scope, $uibModalInstance, StudentService) {
+  function AddStudentModalController(GradeService, $http, $scope, $uibModalInstance) {
     var vm = this;
 
     vm.course = GradeService.getActiveCourse();
@@ -92,21 +92,31 @@
       if (vm.isInputError()) return; // invalid input
 
 
+      /*
       var newStudent =
       {
-
         last: vm.lastName,
         first: vm.firstName,
-        grade: "", // Switch to float?
+        course: vm.course
         email: vm.email,
         id: vm.studentID
-      };
+      }; */
 
-      StudentService.students.push(newStudent);
 
+
+
+      vm.postAdd(); // on successful student add
       vm.close();
     };
 
+    vm.postAdd = function()
+    {
+      var student = GradeService.addStudent(vm.course, vm.firstName + " " + vm.lastName, vm.studentID);
+      student.firstName = vm.firstName;
+      student.lastName = vm.lastName;
+      student.grade = 0;
+      student.email = vm.email;
+    };
 
     vm.close = function()
     {

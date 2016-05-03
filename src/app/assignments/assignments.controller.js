@@ -31,6 +31,31 @@
     };
 */
 
+    vm.submitAssignmentChanges = function(assignment, course)
+    {
+      console.log("-- submit assignment change --");
+      console.log(assignment);
+      console.log(course);
+      console.log("------------------------------");
+      /*
+      data:
+      assignment.name         // name
+      assignment.description  // descrip
+      assignment.points       // total
+      assignment.serverID     // firebase key
+      assignment.dueDate      // due date (JS Date object)
+
+      grades:
+      for (var i = 0; i < course.students.length; ++i)
+      {
+        course.students[i].studentID;                       // for identification?
+        course.students[i].assignmentGrades[assignment.id]; // points earned on assignment i
+      }
+       */
+
+
+    };
+
   vm.openAddAssignment = function (size) {
 
     $uibModal.open({
