@@ -38,7 +38,7 @@
           <h3>Students: {{ course.students.length }} </h3>
 
           <div style="padding-bottom:10px; width:110%;">
-            <timeline items="dashboardCtrl.items[$index]" options="dashboardCtrl.options"></timeline>
+            <timeline items="dashboardCtrl.items()[$index]" options="dashboardCtrl.options"></timeline>
           </div>
         </div>
         <div class="col-md-2" >

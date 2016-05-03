@@ -21,11 +21,46 @@
 
       this.postLogin = function()
       {
+        this.loadTimelineData();
         this.currentCourseID = 0;
         this.currentAssignmentID = 0;
         if (this.courses.length > 0)
           this.activeCourse = this.courses[0];
       };
+
+
+      this.visArray = [];
+
+      this.loadTimelineData = function()
+      {
+        this.visArray = [];
+        for (var i = 0; i < this.courses.length; ++i)
+        {
+          this.visArray.push(this.createVisTimelineData(this.courses[i]));
+        }
+      };
+
+
+      this.createVisTimelineData = function(course)
+      {
+        var data = [];
+        for (var i = 0; i < course.assignments.length; ++i)
+        {
+          var date = course.assignments[i].dueDate;
+          var dateString = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+          var assign = {
+            id:i+1,
+            content: course.assignments[i].name,
+            start: dateString
+          };
+          data.push(assign);
+        }
+        return new vis.DataSet(data);
+      };
+
+
+
+
 
       this.addCourse = function(name_)             // add data as it becomes needed
       {

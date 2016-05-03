@@ -24,29 +24,8 @@
     };
 
 
-    vm.createVisTimelineData = function(course)
-    {
-      var data = [];
-      for (var i = 0; i < course.assignments.length; ++i)
-      {
-        var date = course.assignments[i].dueDate;
-        var dateString = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
-        var assign = {
-          id:i+1,
-          content: course.assignments[i].name,
-          start: dateString
-        };
-        data.push(assign);
-      }
-      return new vis.DataSet(data);
-    };
-
-    vm.items = [];
-
-    for (var i = 0; i < GradeService.courses.length; ++i)
-    {
-      vm.items.push(vm.createVisTimelineData(GradeService.courses[i]));
-    }
+    GradeService.loadTimelineData(); // for successive loads
+    vm.items = function() { return GradeService.visArray; };
 
 
     // Configuration for the Timeline
