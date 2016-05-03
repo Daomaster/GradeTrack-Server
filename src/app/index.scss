@@ -50,6 +50,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 .header-bar {
   background-color: #3F51B5;
+  border-bottom-color: #3f51b5;
 }
 
 .header-text {
@@ -94,9 +95,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   text-decoration:none;
   border: thin solid #000000;
 }
-.sidebar-courses li a:active{
-  background:red;
-}
+
 .sidebar-courses li a:hover {
   background:#28324a;
   color:white;
