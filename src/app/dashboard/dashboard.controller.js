@@ -12,7 +12,7 @@
 
     vm.series = ['Series A'];
 
-    vm.professorName = GradeService.firstName + " " + GradeService.lastName;
+    vm.professorName = function() { return GradeService.firstName + " " + GradeService.lastName; };
     vm.studentsEnrolled = function()
     {
       var answer = 0;

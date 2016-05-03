@@ -71,7 +71,7 @@
               <li>
               <div class="" uib-dropdown style="margin-top:14px; margin-right:10px; font-size:18px; text-decoration:none;">
                 <a href="" class="dropdown-toggle" style="color:darkgray; text-decoration:none;" uib-dropdown-toggle>
-                  {{vm.firstName}} {{vm.lastName}} <span class="glyphicon glyphicon-user"></span>
+                  {{vm.lastName()}} {{vm.firstName()}}  <span class="glyphicon glyphicon-user"></span>
                 </a>
                 <ul class="uib-dropdown-menu" style="z-index:-1;" role="menu">
                   <li><a href="#/" ng-click="vm.logout();">Sign out</a></li>
