@@ -10,6 +10,13 @@
 .assignments-addassignmentbutton
 {
   margin-top:10px;
+  background:#f4d06f;
+  border:#000000;
+  color:black;
+}
+.assignments-addassignmentbutton:active{
+  background: orange;
+  color: red;
 }
 .assignments-assignmentlist li
 {
@@ -29,6 +36,7 @@
 .calendarWrapper button
 {
   height:34px;
+  background:#d1c4e9;
 }
 .calendarInput
 {
@@ -41,7 +49,7 @@
 }
 .rightbox-Header
 {
-  background:#d4e4fa;
+  background:#91b4d5;
   border-bottom:thin solid #000000;
   height:35px;
   margin-left:-10px;
@@ -81,9 +89,10 @@
 {
   width:99%;
   margin-bottom:10px;
-  background:#FFFFFF;
+  background:#f9fbe7;
   height:calc(100vh - 380px);
   overflow:auto;
+  box-shadow: 10px 10px 5px #888888;
 }
 .rightbox-gradesarea ul
 {
@@ -163,7 +172,8 @@
   overflow-x:hidden;
   border-radius:10px;
   border:thin solid #000000;
-  background:#e9eef5;
+  background:#e1f5fe;
+  color:#000000;
   position:relative;
   left:0;
   width:100%;
@@ -194,7 +204,8 @@
   margin-bottom:10px;
   height:calc(100vh - 170px);
   overflow:auto;
-  background:#FFFFFF;
+  background:#ffffff;
+  box-shadow: 10px 10px 5px #888888;
 }
 .assignments-coursename
 {
@@ -209,7 +220,7 @@
   border-radius:10px;
   padding-left:10px;
   padding-right:10px;
-  background:#e9eef5;
+  background:#e1f5fe;
   border:thin solid #000000;
   position:relative;
   left:0;
@@ -219,7 +230,7 @@
 }
 .assignments-header
 {
-  background:#d4e4fa;
+  background:#91b4d5;
   border-bottom:thin solid #000000;
   height:35px;
   margin-left:-10px;
