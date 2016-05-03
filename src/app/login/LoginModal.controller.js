@@ -107,7 +107,6 @@
               {
                 var assign = course.assignments[key];
                 var a = GradeService.addAssignment(c, assign.description, assign.title, assign.total);
-                console.log(key);
                 a.serverID = key;
                 a.dueDate = new Date(assign.due.year + "-" + assign.due.month + "-" + assign.due.day);
                 a.gradeArray[4] = course.students.length;  //start f
@@ -128,7 +127,6 @@
                   var ind = GradeService.serverIDtoAssignmentID(c, k);
                   s.assignmentGrades[ind]=s.oldAssignmentGrades[ind] = parseInt(student.grades[k],10);
 
-                  console.log(c.assignments[ind]);
                   var thisPercent = 0;
                   if (c.assignments[ind].points != 0)
                     thisPercent = parseInt(student.grades[k],10) / c.assignments[ind].points;
@@ -157,7 +155,7 @@
         },
         function errorCallback() {
           //on Error
-          console.log("Invalid");
+          vm.errorText.login = "Invalid login";
 
         });
 

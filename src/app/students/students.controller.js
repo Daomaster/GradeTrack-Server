@@ -9,8 +9,11 @@
   function StudentsController(StudentService, GradeService, $uibModal) {
     var vm = this;
 
-    vm.list = function() { return StudentService.list(); };
+    vm.list = function() { return  GradeService.getActiveCourse().students; };
     vm.activeCourse = function() { return GradeService.getActiveCourse() };
+
+    vm.overallGrade = function(student) { return GradeService.getOverallGrade(student, vm.activeCourse());};
+
 
     vm.removeStudent = function(student)
     {

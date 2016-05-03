@@ -117,15 +117,30 @@
 
       this.serverIDtoAssignmentID = function(course, key)
       {
-        console.log(course);
         for (var i = 0; i < course.assignments.length; ++i)
         {
-          console.log(course.assignments[i].serverID + "==" + key);
           if (course.assignments[i].serverID == key)
             return i;
         }
-        console.log("err");
         return -1;
+      };
+
+      this.getOverallGrade = function(student, course)    // for now
+      {
+        var total = 0;
+        var i;
+        if (student.assignmentGrades.length < 1) return 0;
+        for (i = 0; i < student.assignmentGrades.length; ++i)
+          total += student.assignmentGrades[i];
+
+        var possible = 0;
+          for (i = 0; i < course.assignments.length;++i)
+          {
+            possible += course.assignments[i].points;
+          }
+        if (possible == 0)
+          return 0;
+        return total / possible * 100;
       };
 
       this.addStudent = function(course, name_, id_) {
