@@ -148,10 +148,7 @@
         }
       }
 
-
-
       this.activeCourse = this.courses[0];
-
     });
 
 })();

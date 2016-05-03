@@ -8,7 +8,7 @@
       // ==========
       // firebase data
       // ==========
-      
+
 
       // ==========
       // UI data
@@ -34,12 +34,12 @@
         return editInfo;
       }
 
-      this.editInfoStatus = function () {
-        return editInfo;
+      this.editDesStatus = function () {
+        return editDes;
       }
 
-      this.editInfoStatus = function () {
-        return editInfo;
+      this.showTabStatus = function () {
+        return showTab;
       }
 	});
 

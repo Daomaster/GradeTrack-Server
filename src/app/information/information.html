@@ -17,14 +17,15 @@
 							<div style="margin-bottom: -26px;">
 								Description
 							</div>
-							<button type="button" class="btn btn-default infoButton" ng-click="toggleDisable1()">
+							<button type="button" class="btn btn-default infoButton" ng-click="information.toggleDisable1()">
       					<span class="glyphicon glyphicon-edit"></span>
       				</button>
 						</label>
 						<div style="padding-left: 85px;">
-    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!editDes">{{information.activeCourse().description}}</textarea>
+    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!information.editDesStatus()">{{information.activeCourse().description}}</textarea>
 						</div>
     				<!--<input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()">-->
+						<button type="button" class="btn btn-primary" ng-disabled="!information.editDesStatus()" ng-click="information.submitNewDesc()">Submit</button>
   			</div>
 			</div>
 		</div>
