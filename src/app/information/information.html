@@ -40,6 +40,33 @@
 				</div>
 				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
 					<div class="infoSection">
+						<table class="table" style="margin-bottom: -10px;">
+							<tbody>
+								<tr>
+									<th>Name</th>
+									<td>{{information.instName}}</td>
+								</tr>
+
+								<tr>
+									<th>Email</th>
+									<td>{{information.email}}</td>
+								</tr>
+
+								<tr>
+									<th>Phone</th>
+									<td>{{information.phone}}</td>
+								</tr>
+
+								<tr>
+									<th>Office Hours</th>
+									<td>
+										{{information.officeHours.office}}<br>
+										{{information.officeHours.time}}
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
 						<!--form inputs for name, email, phone, and office hours-->
 
 						<!--<table class="table table-bordered" style="margin-bottom:0px;">
