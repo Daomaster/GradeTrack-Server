@@ -1,7 +1,12 @@
 <div style="width:100%; height:100%;">
 
 	<div class="information-course-area">
+
 		<div class="information-main">
+			<div style="float:right; margin-bottom:5px;">
+				<button type="button" class="btn btn-primary" ng-click="information.fillSyllabus()">Fill Syllabus</button>
+			</div>
+
 			<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
 				<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
 					<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{information.activeCourse().name}}</div>
@@ -17,7 +22,7 @@
       				</button>
 						</label>
 						<div style="padding-left: 85px;">
-    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!editDes">Sample</textarea>
+    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!editDes">{{information.activeCourse().description}}</textarea>
 						</div>
     				<!--<input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()">-->
   			</div>
@@ -31,17 +36,18 @@
 		<div class="information-main">
 			<div style="overflow:hidden; border-radius:10px; padding-left:10px; padding-right:10px; background:#e9eef5; border:thin solid #000000; position:relative; left:0; width:100%; top:0; height:100%;">
 				<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
-					<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{information.instName()}}</div>
+					<div style="padding-top:4px; padding-left:10px;font-size:20px;">Professor Information</div>
 				</div>
 				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
 					<div class="infoSection">
 						<!--form inputs for name, email, phone, and office hours-->
-						<table class="table table-bordered" style="margin-bottom:0px;"> <!--Not sure why I need this style here-->
+
+						<!--<table class="table table-bordered" style="margin-bottom:0px;">
               <tr><td>
 								<form class="form-inline">
 	                <div class="form-group" style="text-align:center; width:100%;">
 	                    <label style="float:left;" for="profName">Name</label>
-	                    <input type="text" class="form-control" id="profName" placeholder="{{information.instName()}}">
+	                    <input type="text" class="form-control" id="profName" placeholder="{{information.instName}}">
 	                </div>
               	</form>
 							</td></tr>
@@ -50,7 +56,7 @@
               	<form class="form-inline">
                 	<div class="form-group" style="text-align:center; width:100%;">
                     <label style="float:left;" for="profEmail">Email</label>
-                    <input type="text" class="form-control" id="profEmail" placeholder="{{information.email()}}">
+                    <input type="text" class="form-control" id="profEmail" placeholder="{{information.email}}">
               		</div>
             		</form>
 							</td></tr>
@@ -59,7 +65,7 @@
               	<form class="form-inline">
                 	<div class="form-group" style="text-align:center; width:100%;">
                     <label style="float:left;" for="profName">Phone</label>
-                    <input style="margin-left:-7px;" type="text" class="form-control" id="profPhone" placeholder="(555) 555-5555">
+                    <input style="margin-left:-7px;" type="text" class="form-control" id="profPhone" placeholder="{{information.phone}}">
                 	</div>
             		</form>
 							</td></tr>
@@ -78,7 +84,7 @@
                 	</div>
               	</form>
 							</td></tr>
-						</table>
+						</table>-->
 
             <!--OLD STUFF-->
             <!-- Section for Instructor -->

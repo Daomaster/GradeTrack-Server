@@ -4,7 +4,8 @@
 
   angular
     .module('GradeTrack')
-    .service('InfoService', function(){
+    .service('InfoService', function() {
+
 
       // Main data.
       // Use 'this' to make public.

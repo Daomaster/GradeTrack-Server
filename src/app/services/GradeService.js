@@ -9,6 +9,12 @@
       this.loggedIn = true;
       this.lastName = "Prof";
       this.firstName = "name";
+      this.email = this.lastName + this.firstName[0] + "@unlv.edu";
+      this.phone = "(555) 555-5555";
+      this.officeHours = {
+        office: "TBE-B 212",
+        time: "Monday 2 - 3PM" // Change to Date object later
+      };
 
       this.gradeAverageArray = []; // needed for dashboard graphing
       this.courseNameArray = [];
@@ -23,7 +29,7 @@
           this.activeCourse = this.courses[0];
       };
 
-      this.addCourse = function(name_)             // add data as it becomes needed
+      this.addCourse = function(name_, description_)             // add data as it becomes needed
       {
         var c =
         {
@@ -33,6 +39,7 @@
           id : this.courses.length,
           assignments: [],
           students: [],
+          description: description_,
           weights: [
             {
               name: "Test",
@@ -124,7 +131,7 @@
       //random data
       for (var i = 0; i < 5; ++i)
       {
-        var c = this.addCourse("CS" + (460+i).toString());
+        var c = this.addCourse("CS" + (460+i).toString(), "Description for CS" + (460 + i).toString());
         for (var j = 0; j < 5; ++j)
         {
           this.addAssignment(c, "Enter Description","Assignment " + j.toString());
