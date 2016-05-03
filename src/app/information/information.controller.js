@@ -6,7 +6,7 @@
     .controller('InformationController', InformationController);
 
   /** @ngInject */
-  function InformationController(InfoService, GradeService, StudentService) {
+  function InformationController(InfoService, GradeService) {
     var vm = this;
 
     vm.activeCourse = function() { return GradeService.getActiveCourse() };
@@ -15,10 +15,8 @@
     vm.email = GradeService.email;
     vm.phone = GradeService.phone;
 
-    vm.fillSyllabus = function () {
-      // Use GradeService
-      // description is at GradeService.getActiveCourse().description
+    vm.genPDF = function () {
       
-    }
+    };
   }
 })();
