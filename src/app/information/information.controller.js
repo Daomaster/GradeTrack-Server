@@ -28,6 +28,7 @@
         //GradeService.getActiveCourse().tempDescription = GradeService.getActiveCourse().description;
       }
 
+
       InfoService.toggleDisable1();
     }
 
@@ -56,8 +57,16 @@
       GradeService.getActiveCourse().description = GradeService.getActiveCourse().tempDescription;
     }
 
-    vm.genPDF = function () {
+    vm.fillSyllabus = function () {
 
+      //console.log(document.querySelector("classInfo").textContent);
+      templateUrl:'app/information/syllabus.html'
+      console.log(document.getElementsById('p1'));
+
+
+      //var doc = new jsPDF('p', 'pt', 'letter');
+      //var text0 = document.getElementsByTagName("p")[0].textContent;
+      //doc.save('Syllabus.pdf');
     };
   }
 })();
