@@ -175,6 +175,7 @@ router.post('/addassign', function(req, res, next) {
       var assignment = { earned : 0, total : 0, title : title, description : description, maxPoint : total };
       // Get the due date
       if( typeof due != 'undefined' && Object.keys( due ).length !== 0 ) {
+        due = JSON.parse( due );
         temp = {};
         for( var key in due ) {
           switch( key.toLowerCase() ) {
