@@ -27,7 +27,6 @@
 
     vm.createSuccess = function(key)
     {
-      console.log(key);
 
       var course = GradeService.addCourse(vm.courseName);
       course.serverID = key;

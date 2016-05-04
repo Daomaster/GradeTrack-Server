@@ -137,11 +137,11 @@ router.post('/addstudents', function(req, res, next) {
 });
 
 router.post('/addassign', function(req, res, next) {
-  var courseId = req.query.courseid;
-  var title = req.query.title;
-  var description = req.query.description;
-  var total = req.query.total;
-  var due = req.query.due;
+  var courseId = req.body.courseid;
+  var title = req.body.title;
+  var description = req.body.description;
+  var total = req.body.total;
+  var due = req.body.due;
 
   if( typeof courseId  == 'undefined' || typeof title == 'undefined' ||
       typeof description  == 'undefined' || typeof total  == 'undefined' ) {

@@ -25,7 +25,7 @@
                     <button type="button" class="btn btn-default" ng-click="assignment.datepickerOpen=true"><i class="glyphicon glyphicon-calendar"></i></button>
                   </div>
                   <div class="calendarInput">
-                    <input type="text" class="form-control" uib-datepicker-popup="fullDate" ng-model="assignment.dueDate" is-open="assignment.datepickerOpen" datepicker-options="dateOptions" datepicker-append-to-body="true" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <input type="text" datepicker-append-to-body="true" class="form-control" uib-datepicker-popup="fullDate" ng-model="assignment.dueDate" is-open="assignment.datepickerOpen" datepicker-options="{zIndexOffset: 5000}" datepicker-append-to-body="true" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                   </div>
                 </div>
               </li>
