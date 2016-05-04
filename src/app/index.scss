@@ -5,9 +5,13 @@
 $navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
-
-
-
+.navbar-brand{
+  color:#ffffff !important;
+}
+.navbar-default{
+  background: #3f51b5 !important;
+  border-bottom-color: #3f51b5 !important;
+}
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -54,7 +58,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 }
 
 .header-text {
-  color: black;
+  color: white;
 }
 
 
