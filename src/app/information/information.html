@@ -191,62 +191,47 @@
 
 </div>
 <!-- SYLLABUS FORMATTING -->
-<div ng-hide ="true">
-<div id = "center">
-	<center>
-		<p id = "p1">{{vm.activeCourse().name}}</P>
-		<p>Spring 2016</p> <!--p>{{vm.term}}</p> // not working -->
-		<p>{{vm.instName}}</p>
-		<p>{{vm.email}}</p>
-		<p>{{vm.officeHours.office}}</p>
-		<p>{{vm.officeHours.time}}</P>
-		<p>{{vm.phone}}</p>
-	</center>
-</div>
+<div ng-controller="InformationController as vm" ng-hide ="false">
+	<div id = "center">
+		<center>
+			<p id = "p1">{{vm.activeCourse().name}}</P>
+				<p>Spring 2016</p>
+				<p>{{vm.instName}}</p>
+				<p>{{vm.email}}</p>
+				<p>{{vm.officeHours.office}}</p>
+				<p>{{vm.officeHours.time}}</P>
+					<p>{{vm.phone}}</p>
+		</center>
+	</div>
 
-<div id = "syllabusBody" align = "left">
-<h3>Course Description</h3>
-<p>{{vm.activeCourse().description}}</p>
+	<div id = "syllabusBody" align = "left">
+		<h3>Course Description</h3>
+		<p>{{vm.activeCourse().description}}</p>
 
-<h3>Textbook</h3>
-{{vm.textbook}}
+		<h3>Textbook</h3>
+		<p>Wild Monofix Field Guide</p>
 
-<h3>Course Objectives</h3>
-<p>{{vm.objectives}}</p>
+		<h3>Course Objectives</h3>
+		<p>Student will do someting. Student will not do something. Student will pull their hair in frustration.</p>
 
-<h3>Grading Criteria</h3>
-</div><!-- END syllabusBody -->
+		<h3>Grading Criteria</h3>
 
-<!-- START TABLE -->
-<div id ="gradeTable">
-<table id = "gradeCriteria">
-	<tr ng-repeat="(item, value) in syllabus.gradeCriteria">
-		<td>{{value.title}}</td>
-		<td>{{value.weight}}</td>
-
-	</tr>
-
-</table>
-</div>
+		<!-- START TABLE -->
+		<ul>
+  		<li>Test: 50%</li>
+  		<li>Homework: 20%</li>
+  		<li>Quiz: 20%</li>
+			<li>Classwork: 10%</li>
+			<li>Extra-credit: 5%</li>
+		</ul>
+		<div id ="gradeTable">
+	</div>
 <!-- END TABLE -->
-<div id = "scheduleHeader">
-<h3>Course Schedule (subject to change)</h3>
-<!-- START TABLE -->
-</div>
-<table id = "schedule">
-<tr>
-	<th>Date</th>
-	<th>Topics</th>
-</tr>
-<tr ng-repeat="(item, value) in syllabus.schedule">
-	<td>{{value.month}} {{value.date}}</td>
-	<td>{{value.message}}</td>
-</tr>
-</table>
-<!-- END TABLE -->
+
 <div id ="unlvPolicies">
 <h3>UNLV Policies</h3>
-<!--p>{{syllabus.unlvPolicies}}</p-->
+
 <p>Academic Misconduct - Academic integrity is a legitimate concern for every member of the campus community; all share in upholding the fundamental values of honesty, trust, respect, fairness, responsibility and professionalism. By choosing to join the UNLV community, students accept the expectations of the Academic Misconduct Policy and are encouraged when faced with choices to always take the ethical path. Students enrolling in UNLV assume the obligation to conduct themselves in a manner compatible with UNLV's function as an educational institution. An example of academic misconduct is plagiarism. Plagiarism is using the words or ideas of another, from the Internet or any source, without proper citation of the sources. See the Student Academic Misconduct Policy (approved December 9, 2005) located at: http://studentconduct.unlv.edu/misconduct/policy.html.</p>
+</div>
 </div>
 </div>

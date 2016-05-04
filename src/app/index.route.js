@@ -18,7 +18,7 @@
         controllerAs: 'information'
       })
       .when('/assignments', {
-        templateUrl: 'app/information/syllabus.html',
+        templateUrl: 'app/assignments/assignments.html',
         controller: 'AssignmentsController',
         controllerAs: 'assignments'
       })
