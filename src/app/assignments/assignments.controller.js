@@ -6,7 +6,7 @@
     .controller('AssignmentsController', AssignmentsController);
 
   /** @ngInject */
-  function AssignmentsController(GradeService, $log, $uibModal) {
+  function AssignmentsController(GradeService, $log, $uibModal, $http) {
     var vm = this;
     vm.showDetails = false;
     vm.activeCourse = function() { return GradeService.getActiveCourse()};
@@ -20,38 +20,40 @@
         vm.showDetails = true;
     };
 
-    /*
-    vm.submitAssignmentChange = function(assignment)
-    {
-
-    };
-    vm.submitNewAssignment = function(assignment)
-    {
-
-    };
-*/
 
     vm.submitAssignmentChanges = function(assignment, course)
     {
-      console.log("-- submit assignment change --");
-      console.log(assignment);
-      console.log(course);
-      console.log("------------------------------");
-      /*
-      data:
-      assignment.name         // name
-      assignment.description  // descrip
-      assignment.points       // total
-      assignment.serverID     // firebase key
-      assignment.dueDate      // due date (JS Date object)
 
-      grades:
+      var assignInfo = {
+        courseid: course.serverID,
+        assignmentid: assignment.serverID,
+        students: []
+      };
+
       for (var i = 0; i < course.students.length; ++i)
       {
-        course.students[i].studentID;                       // for identification?
-        course.students[i].assignmentGrades[assignment.id]; // points earned on assignment i
+        var s = {
+          studentid: course.students[i].studentID,
+          grade: course.students[i].assignmentGrades[assignment.id]
+        };
+        assignInfo.students.push(s);
       }
-       */
+
+      $http.post("http://localhost:3000/api/grade/update", assignInfo).then(
+        function successCallback() {
+
+          console.log("Grades updated");
+
+        },
+
+        function errorCallback() {
+          //on Error
+          console.log("update failed");
+
+
+
+        }
+      );
 
 
     };

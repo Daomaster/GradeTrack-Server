@@ -14,6 +14,7 @@
     vm.points = 0;
     vm.dueDate = new Date();
     vm.datepickerOpen = false;
+    vm.errorText = "";
 
     vm.createSuccess = function(key)
     {
@@ -21,7 +22,8 @@
       assign.serverID = key;
     };
 
-    vm.errorText = "";
+
+
     vm.addAssignment = function()
     {
       vm.errorText = "";
@@ -31,19 +33,16 @@
         return;
       }
 
-/*
-      var courseId = req.body.courseid;
-      var title = req.body.title;
-      var description = req.body.description;
-      var total = req.body.total;
-      var due = req.body.due; */
-
 
 
       var due = {
         year: vm.dueDate.getYear(),
         month: vm.dueDate.getMonth(),
-        day: vm.dueDate.getDate()
+        day: vm.dueDate.getDate(),
+        hour: 0,
+        minute: 0,
+        second: 0
+
       };
 
       $http.post("http://localhost:3000/api/info/addassign",
