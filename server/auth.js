@@ -4,13 +4,13 @@ var router = express.Router();
 
 /* GET the data from ID. */
 router.post('/signup', function(req, res, next) {
-  var email = req.query.email;
-  var pwd = req.query.password;
-  var username = req.query.username;
-  var firstName = req.query.firstname;
-  var lastName = req.query.lastname;
-  var type = req.query.type;
-  var id = req.query.id;
+  var email = req.body.email;
+  var pwd = req.body.password;
+  var username = req.body.username;
+  var firstName = req.body.firstname;
+  var lastName = req.body.lastname;
+  var type = req.body.type;
+  var id = req.body.id;
 
   if( typeof email == 'undefined' || typeof pwd == 'undefined' ||
       typeof firstName == 'undefined' || typeof username == 'undefined' ||
@@ -77,17 +77,17 @@ router.post('/signin', function(req, res, next) {
               res.status(200).send(username);
             }
             else {
-              res.status(500).send('Failed');
+              res.status(500).send('Failed. Incorrect username or password.');
             }
           });
       }
       else {
-        res.status(500).send('Failed');
+        res.status(500).send('Failed. Incorrect username or password.');
       }
     });
   }
   else {
-    res.status(500).send('Failed');
+    res.status(500).send('Failed. Username is empty.');
   }
 
 

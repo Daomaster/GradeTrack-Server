@@ -19,18 +19,14 @@ var Field = Object.freeze( {
 } );
 
 router.post('/update', function(req, res, next) {
-  var courseId = req.query.courseid;
-  var assignmentId = req.query.assignmentid;
-  var students = req.query.students;
+  var courseId = req.body.courseid;
+  var assignmentId = req.body.assignmentid;
+  var students = req.body.students;
 
   if( typeof courseId == 'undefined' || typeof assignmentId == 'undefined' ||
       typeof students == 'undefined' ) {
     res.status( 500 ).send( "Failure. Course and assignment ids must be given and students be listed" );
     return;
-  }
-
-  for( var iter = 0, length = students.length; iter < length; ++iter ) {
-    students[ iter ] = JSON.parse( students[ iter ] );
   }
 
   var courseRef = config.baseRef.child( "courses/" + courseId );
@@ -60,6 +56,7 @@ router.post('/update', function(req, res, next) {
       }
     }
 
+    var update = {};
     var earnedChange = 0;
     var totalChange = 0;
 
@@ -67,7 +64,8 @@ router.post('/update', function(req, res, next) {
       var studentId = students[ iter ].studentid;
       var grade = students[ iter ].grade;
       var student = course[ "private" ][ studentId ];
-      var studentRef = courseRef.child( "private/" + studentId );
+      //var studentRef = courseRef.child( "private/" + studentId );
+      var studentDir = "private/" + studentId;
 
       // Gets the assignments oldvalue
       var oldGrade;
@@ -77,14 +75,15 @@ router.post('/update', function(req, res, next) {
 
       // Text to text
       if( isNaN( grade ) && isNaN( oldGrade ) ) {
-        studentRef.child( "grades/" + assignmentId ).set( grade );
+        update[ studentDir + "/grades/" + assignmentId ] = grade;
       // Grade added
       } else if( !isNaN( grade ) && isNaN( oldGrade ) ) {
         var earned = parseInt( grade ) + parseInt( student.earned );
         var total = parseInt( assignment.maxPoint ) + parseInt( student.total );
-        studentRef.child( "grades/" + assignmentId ).set( grade );
-        studentRef.child( "earned" ).set( earned );
-        studentRef.child( "total" ).set( total );
+
+        update[ studentDir + "/grades/" + assignmentId ] = grade;
+        update[ studentDir + "/earned" ] = earned;
+        update[ studentDir + "/total" ] = total;
 
         earnedChange += parseInt( grade );
         totalChange += parseInt( assignment.maxPoint );
@@ -93,30 +92,30 @@ router.post('/update', function(req, res, next) {
         // Remove the old grade
         var total = parseInt( student.total ) - parseInt( assignment.maxPoint );
         var earned = parseInt( student.earned ) - parseInt( oldGrade );
-        studentRef.child( "grades/" + assignmentId ).set( grade );
-        studentRef.child( "earned" ).set( earned );
-        studentRef.child( "total" ).set( total );
+
+        update[ studentDir + "/grades/" + assignmentId ] = grade;
+        update[ studentDir + "/earned" ] = earned;
+        update[ studentDir + "/total" ] = total;
 
         earnedChange -= oldGrade;
         totalChange -= parseInt( assignment.maxPoint );
       // Grade changed
       } else {
         var earned = parseInt( student.earned ) - parseInt( oldGrade ) + parseInt( grade );
-        studentRef.child( "grades/" + assignmentId ).set( grade );
-        studentRef.child( "earned" ).set( earned );
+
+        update[ studentDir + "/grades/" + assignmentId ] = grade;
+        update[ studentDir + "/earned" ] = earned;
 
         earnedChange += grade - oldGrade;
       }
     }
 
-    // Update the assignment average
-    var assignmentRef = courseRef.child( "public/assignments/" + assignmentId );
-    assignmentRef.child( "earned" ).set( parseInt( assignment.earned ) + earnedChange );
-    assignmentRef.child( "total" ).set( parseInt( assignment.total ) + totalChange );
-
-    // Update the course average
-    courseRef.child( "public/earned" ).set( parseInt( course[ "public" ].earned ) + earnedChange );
-    courseRef.child( "public/total" ).set( parseInt( course[ "public" ].total ) + totalChange );
+    var assignmentDir = "public/assignments/" + assignmentId;
+    update[ assignmentDir + "/earned" ] = parseInt( assignment.earned ) + earnedChange;
+    update[ assignmentDir + "/total" ] = parseInt( assignment.total ) + totalChange;
+    update[ "public/earned" ] = parseInt( course[ "public" ].earned ) + earnedChange;
+    update[ "public/total" ] = parseInt( course[ "public" ].total ) + totalChange;
+    courseRef.update( update );
 
     res.status( 200 ).send( "Success." );
   });
@@ -124,8 +123,8 @@ router.post('/update', function(req, res, next) {
 
 router.post('/importcsv', function(req, res, next) {
   
-  var courseId = req.query.courseid;
-  var csv = req.query.csv;
+  var courseId = req.body.courseid;
+  var csv = req.body.csv;
 
   if( typeof courseId == 'undefined' || typeof csv == 'undefined' ) {
     res.status( 500 ).send( "Failure. Course and csv must be given." );

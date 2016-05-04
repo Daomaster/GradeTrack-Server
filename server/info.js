@@ -83,8 +83,9 @@ router.post('/user', function(req, res, next) {
 });
 
 router.post('/addstudents', function(req, res, next) {
-  var emails = req.query.emails;
-  var courseId = req.query.courseid;
+console.log( req.body );
+  var emails = req.body.emails;
+  var courseId = req.body.courseid;
 
   if( typeof emails  == 'undefined' || typeof courseId == 'undefined' ) {
     res.status( 500 ).send( "Failure. /addstudents api requires list of student emails and a course" );
@@ -137,11 +138,11 @@ router.post('/addstudents', function(req, res, next) {
 });
 
 router.post('/addassign', function(req, res, next) {
-  var courseId = req.query.courseid;
-  var title = req.query.title;
-  var description = req.query.description;
-  var total = req.query.total;
-  var due = req.query.due;
+  var courseId = req.body.courseid;
+  var title = req.body.title;
+  var description = req.body.description;
+  var total = req.body.total;
+  var due = req.body.due;
 
   if( typeof courseId  == 'undefined' || typeof title == 'undefined' ||
       typeof description  == 'undefined' || typeof total  == 'undefined' ) {
@@ -200,9 +201,10 @@ router.post('/addassign', function(req, res, next) {
 });
 
 router.post('/addcourse', function(req, res, next) {
-  var username = req.query.username;
-  var title = req.query.title;
-  var description = req.query.description;
+console.log( req.body );
+  var username = req.body.username;
+  var title = req.body.title;
+  var description = req.body.description;
 
   if( typeof username == 'undefined' || typeof title == 'undefined' ||
       typeof description == 'undefined' ) {
@@ -245,6 +247,11 @@ router.post('/addcourse', function(req, res, next) {
 router.get('/enrollstudent', function(req, res, next) {
   var courseId = req.query.courseid;
   var username = req.query.username;
+
+  if( typeof courseId == 'undefined' || typeof username == 'undefined' ) {
+    res.status( 500 ).send( "Failure: Input requires courseid and username." );
+  }
+
   var user;
   var course;
   // call sign-in
