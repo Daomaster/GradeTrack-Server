@@ -39,7 +39,7 @@
         assignInfo.students.push(s);
       }
 
-      $http.post("http://http://grade-server.herokuapp.com/api/grade/update", assignInfo).then(
+      $http.post("https://grade-server.herokuapp.com/api/grade/update", assignInfo).then(
         function successCallback() {
 
           $log.log("Grades updated");
