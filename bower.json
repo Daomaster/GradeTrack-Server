@@ -18,7 +18,7 @@
     "angular": "~1.5.3",
     "angular-chart.js": "^0.8.8",
     "vis": "^4.16.1",
-    "jspdf": "^1.2.61",
+    "jspdf": "bower-jspdf#^1.2.0",
     "jspdf-autotable": "^2.0.24"
   },
   "devDependencies": {
