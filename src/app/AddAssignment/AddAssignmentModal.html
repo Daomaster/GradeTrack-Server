@@ -22,6 +22,24 @@
         </div>
       </div>
     </li>
+    <li>
+      <div class="modal-infoheader">DUE DATE</div>
+      <div class="row">
+        <div class="col-md-6" style="margin-left:-40px;">
+
+          <div class="input-group">
+            <input type="text" class="form-control" datepicker-popup="fullDate" ng-model="AddAssignmentModalController.dueDate"
+                   is-open="AddAssignmentModalController.datepickerOpen" ng-required="true" close-text="Close" />
+
+              <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="AddAssignmentModalController.datepickerOpen=true">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </button>
+              </span>
+          </div>
+        </div>
+      </div>
+    </li>
     <li class="modal-inputwrapper">
       <div class="row">
         <div class="col-md-12">

@@ -27,11 +27,11 @@
 
 		<tbody>
 			<tr ng-repeat="student in students.list()">
-				<td>{{student.last}}</td>
-				<td>{{student.first}}</td>
-				<td>{{student.grade}}</td>
+				<td>{{student.lastName}}</td>
+				<td>{{student.firstName}}</td>
+				<td>{{students.overallGrade(student) | number:2 }}%</td>
 				<td>{{student.email}}</td>
-				<td>{{student.id}}</td>
+				<td>{{student.studentID}}</td>
         <td><button class=" btn btn-danger btn-sm glyphicon glyphicon-remove students-removebutton" ng-click="students.removeStudent(student)"></button></td>
 			</tr>
 		</tbody>

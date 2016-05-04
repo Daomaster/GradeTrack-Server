@@ -122,7 +122,7 @@ router.post('/update', function(req, res, next) {
 });
 
 router.post('/importcsv', function(req, res, next) {
-  
+
   var courseId = req.body.courseid;
   var csv = req.body.csv;
 
@@ -130,11 +130,11 @@ router.post('/importcsv', function(req, res, next) {
     res.status( 500 ).send( "Failure. Course and csv must be given." );
     return;
   }
-  
+
   var courseRef = config.baseRef.child( "courses/" + courseId );
-  
+
   var getDbCourseJson = function( courseId ) {
-    return courseRef.once( "value" ).then( function( snapshot ){ 
+    return courseRef.once( "value" ).then( function( snapshot ){
       if( snapshot.val() == null ) {
         return undefined;
       } else {
@@ -142,7 +142,7 @@ router.post('/importcsv', function(req, res, next) {
       }
     });
   }
-  
+
   var getCsvArray = function( csv ) {
     csv = csv.split( "\n" );
     for( var row = 0; row < csv.length; ++row ) {
@@ -153,7 +153,7 @@ router.post('/importcsv', function(req, res, next) {
     }
     return csv;
   }
-  
+
 var getType = function( cell ) {
   var type = 0;
 
@@ -184,7 +184,7 @@ var getType = function( cell ) {
 
   return type;
 }
-  
+
   // Reasons for rejection
   // Unheaded cell
   // missing students from course
@@ -255,7 +255,7 @@ var getType = function( cell ) {
       }
     }
 
-    // Check if no rows have dangling cells and that every row has an unique 
+    // Check if no rows have dangling cells and that every row has an unique
     // and valid id
     var courseIds = Object.keys( courseJson[ "private" ] );
     for( var row = 1; row < courseArray.length; ++row ) {
@@ -350,7 +350,7 @@ var getType = function( cell ) {
     courseRef.child( "csvFormat" ).set( csvFormat );
   }
 
-  getDbCourseJson( courseId ).then( function( course ){ 
+  getDbCourseJson( courseId ).then( function( course ){
     if( course === undefined ) {
       res.status( 500 ).send( "Course does not exist" );
       return;
@@ -366,7 +366,7 @@ var getType = function( cell ) {
       res.status( 200 ).send( "success" );
     }
   });
-  
+
 });
 
 router.post('/exportcsv', function(req, res, next) {

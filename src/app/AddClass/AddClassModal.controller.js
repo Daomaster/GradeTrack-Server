@@ -25,26 +25,17 @@
     vm.errorText = "";
 
 
-    vm.createCourse = function()
+    vm.createSuccess = function(key)
     {
-      vm.errorText = "";
-      var i;
-      if (vm.courseName == "") {
-        vm.errorText = "Enter a course name";  //class empty error
-        return; // empty class error
-      }
-
 
       var course = GradeService.addCourse(vm.courseName);
+      course.description = course.tempDescription = vm.description;
+      course.serverID = key;
+      var i;
       for (i = 0; i < vm.students.length; ++i)
       {
         GradeService.addStudent(course, vm.students[i].name, 0);
       }
-
-
-
-
-      //format for post
       var c =
       {
         title: vm.courseName,
@@ -52,26 +43,52 @@
         instructor: "",
         description: vm.description
       };
-
       for (i =0; i < vm.students.length; ++i)
       {
         c.students.push(vm.students[i].name);
       }
       c.instructor = GradeService.firstName + " " + GradeService.lastName;
-
-
       //send
+      /*
       $http.post("http://localhost:3000/api/info/addstudents", {
         title: c.title,
         students: c.students,
         insName: c.instructor
-      });
+      })*/
+    };
+
+    vm.createCourse = function()
+    {
+      vm.errorText = "";
+      if (vm.courseName == "") {
+        vm.errorText = "Enter a course name";  //class empty error
+        return; // empty class error
+      }
 
 
 
+      $http.post("http://localhost:3000/api/info/addcourse",
+        {
+          username: GradeService.username,
+          title: vm.courseName,
+          description: vm.description
+        }
+      ).then(
+        function successCallback(res) {
 
+          vm.createSuccess(res.data);
+          $uibModalInstance.dismiss('cancel');
 
-      vm.close();
+          vm.close();
+        },
+
+        function errorCallback() {
+          //on Error
+         // console.log("error");
+
+        }
+      );
+
     };
 
 

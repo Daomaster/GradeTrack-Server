@@ -18,14 +18,14 @@
                   <div class="assignments-assignmentname">
 
                     <label for="assignmentInput"></label>
-                    <input maxlength="20" id="assignmentInput" class="leftside-assignmentname-input" type="text"  ng-model="assignment.name" ng-click="assignments.clickAssignment(assignment.id)" ng-blur="assignments.SendModifiedAssignmentName(assignment)" />
+                    <input maxlength="20" id="assignmentInput" class="leftside-assignmentname-input" type="text"  ng-model="assignment.name" ng-click="assignments.clickAssignment(assignment.id)" />
                   </div>
 
                   <div class="calendarWrapper">
                     <button type="button" class="btn btn-default" ng-click="assignment.datepickerOpen=true"><i class="glyphicon glyphicon-calendar"></i></button>
                   </div>
                   <div class="calendarInput">
-                    <input type="text" class="form-control" uib-datepicker-popup="fullDate" ng-model="assignment.dueDate" is-open="assignment.datepickerOpen" datepicker-options="dateOptions" datepicker-append-to-body="true" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <input type="text" datepicker-append-to-body="true" class="form-control" uib-datepicker-popup="fullDate" ng-model="assignment.dueDate" is-open="assignment.datepickerOpen" datepicker-options="{zIndexOffset: 5000}" datepicker-append-to-body="true" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                   </div>
                 </div>
               </li>
@@ -40,7 +40,7 @@
 
 
           <div class="rightbox-Header">
-            <input maxlength="20" size="20" id="assignmentInput" type="text" ng-model="assignments.activeAssignment().name" ng-blur="assignments.SendModifiedAssignmentName(assignments.activeAssignment())" />
+            <input maxlength="20" size="20" id="assignmentInput" type="text" ng-model="assignments.activeAssignment().name"  />
             <a href="" ng-click="assignments.showDetails=false">x</a>
           </div>
 
@@ -48,7 +48,7 @@
             <h4>Description</h4>
           </div>
           <div class="rightbox-descriptioninput">
-            <textarea ng-model="assignments.activeAssignment().description" ng-blur="assignments.SendModifiedDescription(assignments.activeAssignment())" maxlength="1000"></textarea>
+            <textarea ng-model="assignments.activeAssignment().description"  maxlength="1000"></textarea>
           </div>
           <div class="rightbox-piechart">
             <canvas height="100%" width="100%" id="pie" class="chart chart-pie"
@@ -59,11 +59,11 @@
           <div class="rightbox-pointswrapper">
             <span>
               Points:
-              <input type="number" min="0" ng-model="assignments.activeAssignment().points" ng-blur="assignments.SendModifiedPoints(assignments.activeAssignment())">
+              <input type="number" min="0" ng-model="assignments.activeAssignment().points">
             </span>
 
             <span style="margin-top:1px; float:right; margin-right:32px;">
-              <button class="btn btn-sm btn-primary">Submit</button>
+              <button class="btn btn-sm btn-primary"  ng-click="assignments.submitAssignmentChanges(assignments.activeAssignment(), assignments.activeCourse());">Submit</button>
             </span>
           </div>
 

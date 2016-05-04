@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-md-6">
 
-          <h1 style="">Welcome, {{dashboardCtrl.professorName}}</h1>
+          <h1 style="">Welcome, {{dashboardCtrl.professorName()}}</h1>
           <ul>
             <li><h3>Classes managed: {{dashboardCtrl.getCourses().length}}</h3></li>
             <li><h3>Total students enrolled: {{dashboardCtrl.studentsEnrolled()}}</h3></li>
@@ -38,7 +38,7 @@
           <h3>Students: {{ course.students.length }} </h3>
 
           <div style="padding-bottom:10px; width:110%;">
-            <timeline items="dashboardCtrl.items[$index]" options="dashboardCtrl.options"></timeline>
+            <timeline items="dashboardCtrl.items()[$index]" options="dashboardCtrl.options"></timeline>
           </div>
         </div>
         <div class="col-md-2" >

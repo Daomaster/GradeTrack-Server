@@ -70,8 +70,8 @@
     };
 
     vm.activeTab = vm.tabs[0];
-    vm.lastName = GradeService.firstName;
-    vm.firstName = GradeService.lastName;
+    vm.lastName = function() { return GradeService.firstName; };
+    vm.firstName = function() { return GradeService.lastName; };
     vm.courses = function() { return GradeService.courses; };
     vm.getActiveCourse = function(){return GradeService.getActiveCourse(); };
     vm.setActiveCourse = function(id) {GradeService.setActiveCourse(id); };

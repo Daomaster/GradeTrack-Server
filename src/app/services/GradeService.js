@@ -7,15 +7,17 @@
     .service('GradeService', function(){
 
 
-      this.loggedIn = true;
+      this.loggedIn = false;
       this.lastName = "Prof";
       this.firstName = "name";
-      this.email = this.lastName + this.firstName[0] + "@unlv.edu";
       this.phone = "(555) 555-5555";
       this.officeHours = {
         office: "TBE-B 212",
         time: "Monday 2 - 3PM" // Change to Date object later
       };
+      this.email = "";
+      this.username = "";
+      this.userID = "";
 
       this.gradeAverageArray = []; // needed for dashboard graphing
       this.courseNameArray = [];
@@ -24,24 +26,60 @@
 
       this.postLogin = function()
       {
+        this.loadTimelineData();
         this.currentCourseID = 0;
         this.currentAssignmentID = 0;
         if (this.courses.length > 0)
           this.activeCourse = this.courses[0];
       };
 
-      this.addCourse = function(name_, description_)             // add data as it becomes needed
+
+      this.visArray = [];
+
+      this.loadTimelineData = function()
+      {
+        this.visArray = [];
+        for (var i = 0; i < this.courses.length; ++i)
+        {
+          this.visArray.push(this.createVisTimelineData(this.courses[i]));
+        }
+      };
+
+
+      this.createVisTimelineData = function(course)
+      {
+        var data = [];
+        for (var i = 0; i < course.assignments.length; ++i)
+        {
+          var date = course.assignments[i].dueDate;
+          var dateString = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+          var assign = {
+            id:i+1,
+            content: course.assignments[i].name,
+            start: dateString
+          };
+          data.push(assign);
+        }
+        return new vis.DataSet(data);
+      };
+
+
+
+
+
+      this.addCourse = function(name_)             // add data as it becomes needed
       {
         var c =
         {
           name : name_,
-          expanded : false,
+          description: "",
+          serverID: "",       //for db
+          expanded : false,   // internal use
           average: Math.round((Math.random() * 50 + 50) * 100) / 100, //random 50-100, 2 decimals
-          id : this.courses.length,
+          id : this.courses.length, //internal use
           assignments: [],
           students: [],
-          description: description_,
-          tempDescription: description_,
+          tempDescription: "",
           weights: [
             {
               name: "Test",
@@ -83,10 +121,40 @@
         this.courseNameArray = [];
       };
 
+      this.serverIDtoAssignmentID = function(course, key)
+      {
+        for (var i = 0; i < course.assignments.length; ++i)
+        {
+          if (course.assignments[i].serverID == key)
+            return i;
+        }
+        return -1;
+      };
+
+      this.getOverallGrade = function(student, course)    // for now
+      {
+        var total = 0;
+        var i;
+        if (student.assignmentGrades.length < 1) return 0;
+        for (i = 0; i < student.assignmentGrades.length; ++i)
+          total += student.assignmentGrades[i];
+
+        var possible = 0;
+          for (i = 0; i < course.assignments.length;++i)
+          {
+            possible += course.assignments[i].points;
+          }
+        if (possible == 0)
+          return 0;
+        return total / possible * 100;
+      };
 
       this.addStudent = function(course, name_, id_) {
         var t = {
           name: name_,
+          firstName: "",
+          lastName: "",
+          email: "",
           studentID: id_,
           id: course.students.length,
           assignmentGrades: [],
@@ -98,6 +166,7 @@
           t.oldAssignmentGrades.push(0);
         }
         course.students.push(t);
+        return t;
       };
 
       this.randomDate = function()
@@ -116,6 +185,7 @@
           datepickerOpen: false,    // assignment menu usage
           id: course.assignments.length,
           points: _points,
+          serverID: "",
           type: "Test",
           dueDate: this.randomDate(),
           gradeArray: [0,0,0,0,0] //for graph display
@@ -127,27 +197,11 @@
           course.students[i].oldAssignmentGrades.push(0);
         }
         course.assignments.push(t);
+        return t;
       };
 
 
-      //random data
-      for (var i = 0; i < 5; ++i)
-      {
-        var c = this.addCourse("CS" + (460+i).toString(), "Description for CS" + (460 + i).toString());
-        for (var j = 0; j < 5; ++j)
-        {
-          this.addAssignment(c, "Enter Description","Assignment " + j.toString(), 500);
-        }
 
-        for (var k = 0; k < 30; ++k)
-        {
-          this.addStudent(c, "Student " + k.toString(), 1000000+ j);
-        }
-        for (var l = 0; l < 5; ++l)
-        {
-          c.assignments[l].gradeArray[4] = c.students.length; //initial all to F
-        }
-      }
 
       this.activeCourse = this.courses[0];
     });
