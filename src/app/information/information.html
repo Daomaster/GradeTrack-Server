@@ -22,7 +22,7 @@
       				</button>
 						</label>
 						<div style="padding-left: 85px;">
-    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!information.editDesStatus()" ng-modal="{{information.tempDescription}}"></textarea>
+    					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!information.editDesStatus()" ng-model="information.activeCourse().tempDescription"></textarea>
 						</div>
     				<!--<input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()">-->
 						<button type="button" class="btn btn-primary" ng-disabled="!information.editDesStatus()" ng-click="information.submitNewDesc()">Submit</button>

@@ -41,6 +41,7 @@
           assignments: [],
           students: [],
           description: description_,
+          tempDescription: description_,
           weights: [
             {
               name: "Test",

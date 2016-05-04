@@ -15,9 +15,14 @@
     vm.email = GradeService.email;
     vm.phone = GradeService.phone;
     vm.officeHours = GradeService.officeHours;
-    vm.tempDescription = GradeService.activeCourse().description;
 
     vm.toggleDisable1 = function() {
+      if (InfoService.editDesStatus()) {
+        // They're getting rid of their changes
+        // So reset tempDescription
+        GradeService.getActiveCourse().tempDescription = GradeService.getActiveCourse().description;
+      }
+
       InfoService.toggleDisable1();
     }
 
@@ -43,7 +48,7 @@
 
     vm.submitNewDesc = function() {
       InfoService.toggleDisable1();
-      GradeService.getActiveCourse().description = tempDescription;
+      GradeService.getActiveCourse().description = GradeService.getActiveCourse().tempDescription;
     }
 
     vm.genPDF = function () {
