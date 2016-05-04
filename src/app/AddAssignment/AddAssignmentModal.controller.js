@@ -45,7 +45,7 @@
 
       };
 
-      $http.post("http://localhost:3000/api/info/addassign",
+      $http.post("http://http://grade-server.herokuapp.com/api/info/addassign",
         {
           courseid : vm.course.serverID,
           title: vm.assignmentName,

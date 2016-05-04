@@ -49,7 +49,7 @@
 
 
 
-    $http.post("http://localhost:3000/api/auth/signin", loginInfo).then(
+    $http.post("http://http://grade-server.herokuapp.com/api/auth/signin", loginInfo).then(
       function successCallback() {
 
         vm.postLogin(loginInfo.username);
@@ -76,7 +76,7 @@
       var user = {
         username: usr
       };
-      $http.post("http://localhost:3000/api/info/user", user).then(
+      $http.post("http://http://grade-server.herokuapp.com/api/info/user", user).then(
         function successCallback(res) {
 
           if (!vm.dataSet) // debounce

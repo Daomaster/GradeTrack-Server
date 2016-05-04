@@ -50,7 +50,7 @@
       c.instructor = GradeService.firstName + " " + GradeService.lastName;
       //send
       /*
-      $http.post("http://localhost:3000/api/info/addstudents", {
+      $http.post("http://http://grade-server.herokuapp.com/api/info/addstudents", {
         title: c.title,
         students: c.students,
         insName: c.instructor
@@ -67,7 +67,7 @@
 
 
 
-      $http.post("http://localhost:3000/api/info/addcourse",
+      $http.post("http://http://grade-server.herokuapp.com/api/info/addcourse",
         {
           username: GradeService.username,
           title: vm.courseName,

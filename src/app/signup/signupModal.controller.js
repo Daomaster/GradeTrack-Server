@@ -133,7 +133,7 @@
       };
 
 
-      $http.post("http://localhost:3000/api/auth/signup", userInfo);
+      $http.post("http://http://grade-server.herokuapp.com/api/auth/signup", userInfo);
 
       $uibModalInstance.dismiss('cancel');
     };
