@@ -20,7 +20,12 @@
       if (InfoService.editDesStatus()) {
         // They're getting rid of their changes
         // So reset tempDescription
-        GradeService.getActiveCourse().tempDescription = GradeService.getActiveCourse().description;
+        var courses = GradeService.courses;
+        for (var i = 0; i < courses.length; i++) {
+          courses[i].tempDescription = courses[i].description;
+        }
+
+        //GradeService.getActiveCourse().tempDescription = GradeService.getActiveCourse().description;
       }
 
       InfoService.toggleDisable1();

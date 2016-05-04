@@ -1,4 +1,4 @@
-<div style="width:100%; height:100%;">
+<div style="width:100%; height:100%; overflow-x: hidden">
 
 	<div class="information-course-area">
 
@@ -11,8 +11,10 @@
 				<div style="background:#d4e4fa; border-bottom:thin solid #000000;  height:35px; margin-left:-10px; margin-right:-10px;">
 					<div style="padding-top:4px; padding-left:10px;font-size:20px;">{{information.activeCourse().name}}</div>
 				</div>
+
 				<div style="margin-top:10px; margin-bottom:10px; overflow:auto; background:#FFFFFF;">
   				<div class="infoSection">
+
     				<label for="classInfo" style="display: block;">
 							<div style="margin-bottom: -26px;">
 								Description
@@ -21,10 +23,10 @@
       					<span class="glyphicon glyphicon-edit"></span>
       				</button>
 						</label>
-						<div style="padding-left: 85px;">
     					<textarea class="form-control" id="classInfo" rows = "8" ng-disabled="!information.editDesStatus()" ng-model="information.activeCourse().tempDescription"></textarea>
-						</div>
     				<!--<input type="submit" ng-disabled="!editInfo" ng-click="toggleDisable1()">-->
+						<br>
+
 						<button type="button" class="btn btn-primary" ng-disabled="!information.editDesStatus()" ng-click="information.submitNewDesc()">Submit</button>
   			</div>
 			</div>

@@ -3,17 +3,19 @@
 //----------------------------
 
 .information-main {
-  padding: 10px 10px 0px 10px;
+  padding: 10px 10px 10px 10px;
   width:100%;
   height:100%;
 }
 
 .information-course-area {
-  height:auto;
+  //height:auto;
+  width:100%;
 }
 
 .information-instructor-area {
-  height:auto;
+  //height:auto;
+  width:100%;
 }
 
 // wrap header and section
@@ -30,6 +32,7 @@
   //border: 2px solid #e6e6e6;
   width:100%;
   padding:10px;
+  //border:1px solid;
   //margin-bottom:0px;
 }
 
