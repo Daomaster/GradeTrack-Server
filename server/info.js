@@ -200,9 +200,9 @@ router.post('/addassign', function(req, res, next) {
 });
 
 router.post('/addcourse', function(req, res, next) {
-  var username = req.query.username;
-  var title = req.query.title;
-  var description = req.query.description;
+  var username = req.body.username;
+  var title = req.body.title;
+  var description = req.body.description;
 
   if( typeof username == 'undefined' || typeof title == 'undefined' ||
       typeof description == 'undefined' ) {

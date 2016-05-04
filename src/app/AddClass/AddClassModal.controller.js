@@ -25,6 +25,38 @@
     vm.errorText = "";
 
 
+    vm.createSuccess = function(key)
+    {
+      console.log(key);
+
+      var course = GradeService.addCourse(vm.courseName);
+      course.serverID = key;
+      var i;
+      for (i = 0; i < vm.students.length; ++i)
+      {
+        GradeService.addStudent(course, vm.students[i].name, 0);
+      }
+      var c =
+      {
+        title: vm.courseName,
+        students: [],
+        instructor: "",
+        description: vm.description
+      };
+      for (i =0; i < vm.students.length; ++i)
+      {
+        c.students.push(vm.students[i].name);
+      }
+      c.instructor = GradeService.firstName + " " + GradeService.lastName;
+      //send
+      /*
+      $http.post("http://localhost:3000/api/info/addstudents", {
+        title: c.title,
+        students: c.students,
+        insName: c.instructor
+      })*/
+    };
+
     vm.createCourse = function()
     {
       vm.errorText = "";
@@ -35,43 +67,29 @@
       }
 
 
-      var course = GradeService.addCourse(vm.courseName);
-      for (i = 0; i < vm.students.length; ++i)
-      {
-        GradeService.addStudent(course, vm.students[i].name, 0);
-      }
 
+      $http.post("http://localhost:3000/api/info/addcourse",
+        {
+          username: GradeService.username,
+          title: vm.courseName,
+          description: vm.description
+        }
+      ).then(
+        function successCallback(res) {
 
+          vm.createSuccess(res.data);
+          $uibModalInstance.dismiss('cancel');
 
+          vm.close();
+        },
 
-      //format for post
-      var c =
-      {
-        title: vm.courseName,
-        students: [],
-        instructor: "",
-        description: vm.description
-      };
+        function errorCallback() {
+          //on Error
+          console.log("error");
 
-      for (i =0; i < vm.students.length; ++i)
-      {
-        c.students.push(vm.students[i].name);
-      }
-      c.instructor = GradeService.firstName + " " + GradeService.lastName;
+        }
+      );
 
-
-      //send
-      $http.post("http://localhost:3000/api/info/addstudents", {
-        title: c.title,
-        students: c.students,
-        insName: c.instructor
-      });
-
-
-
-
-
-      vm.close();
     };
 
 
