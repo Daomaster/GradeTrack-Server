@@ -51,3 +51,7 @@ Run it on the local node server
 ```bash
 $ npm start
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Daomaster/gradetrack-server/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
